@@ -1,6 +1,6 @@
 import { defineConfig } from "twrangler"
 
-const BACKEND_NAME = "remix-hono-turbo-example-backend"
+const BACKEND_NAME = "remix-hono-turbo-backend"
 
 type BackendConfigOptions = {
   main: string
