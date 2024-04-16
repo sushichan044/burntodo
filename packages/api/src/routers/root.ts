@@ -1,10 +1,6 @@
-import { getRouter } from "../server"
+import { Hono } from "hono"
 
-const rootRouter = getRouter().get("/", (c) => {
-  if (c.get("isRateLimited")) {
-    return c.json({ error: "Rate limited" }, { status: 429 })
-  }
-
+const rootRouter = new Hono().get("/", (c) => {
   return c.text("Hello, Hono!3")
 })
 
