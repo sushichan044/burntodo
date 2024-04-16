@@ -1,4 +1,4 @@
-name = "remix-hono-turbo-example-frontend"
+name = "remix-hono-turbo-frontend"
 pages_build_output_dir = "build/client"
 
 [[services]]
