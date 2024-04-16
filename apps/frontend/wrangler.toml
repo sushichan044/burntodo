@@ -1,6 +1,9 @@
 name = "remix-hono-turbo-frontend"
 pages_build_output_dir = "build/client"
 
+[vars]
+NODE_VERSION = "20"
+
 [[services]]
 binding = "BACKEND"
 service = "remix-hono-turbo-backend"
