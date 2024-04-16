@@ -6,8 +6,6 @@ services = [
     { binding = "BACKEND", service = "remix-hono-turbo-backend" },
 ]
 
-
-
 [vars]
 NODE_VERSION = "20"
-NODE_ENV = "production"
+API_MODE = "production"

@@ -8,7 +8,7 @@ const getApi = () => {
   const basePath = "http://localhost:8787"
   //@ts-expect-error type of 1st-arg does not match...
   const fetchOptions: Parameters<typeof apiClientFactory>["1"] =
-    process.env.NODE_ENV === "production"
+    env.API_MODE === "production"
       ? { fetch: env.BACKEND.fetch.bind(env.BACKEND) }
       : undefined
 
