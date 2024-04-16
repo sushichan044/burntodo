@@ -1,3 +1,6 @@
+name = "remix-hono-turbo-example-frontend"
+pages_build_output_dir = "build/client"
+
 services = [
     { binding = "BACKEND", service = "remix-hono-turbo-example-backend" }
 ]
