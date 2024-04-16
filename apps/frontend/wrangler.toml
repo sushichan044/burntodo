@@ -1,5 +1,6 @@
 name = "remix-hono-turbo-frontend"
-pages_build_output_dir = "build/client"
+pages_build_output_dir = "./build/client"
+compatibility_date = "2024-04-16"
 
 [vars]
 NODE_VERSION = "20"
