@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "scripts": {
+    "prepare": "twrangler build",
+    "dev": "twrangler build && wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts"
+  },
+  "dependencies": {
+    "@repo/api": "workspace:^"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240403.0",
+    "@repo/typescript-config": "workspace:^",
+    "twrangler": "^0.0.7",
+    "wrangler": "^3.47.0"
+  }
+}
