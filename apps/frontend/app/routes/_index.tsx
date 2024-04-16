@@ -1,6 +1,4 @@
-import { getApi } from "../../lib/api"
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
-import { useLoaderData } from "@remix-run/react"
+import type { MetaFunction } from "@remix-run/cloudflare"
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,18 +10,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export async function loader(args: LoaderFunctionArgs) {
-  const api = getApi(args.context)
-  const res = await api.hello
-    .$get()
-    .then((res) => res.text())
-    .catch((err) => err.toString())
-  return { message: res }
-}
-
 export default function Index() {
-  const data = useLoaderData<typeof loader>()
-
   return (
     <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
       <h1>Welcome to Remix (with Vite and Cloudflare)</h1>
@@ -43,8 +30,6 @@ export default function Index() {
           </a>
         </li>
       </ul>
-      <h2>Message from the API:</h2>
-      <pre>{data.message}</pre>
     </div>
   )
 }
