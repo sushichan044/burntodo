@@ -1,3 +1,3 @@
 services = [
-    { binding = "BACKEND", service = "backend" }
+    { binding = "BACKEND", service = "remix-hono-turbo-example-backend" }
 ]
