@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 
 export async function loader(args: LoaderFunctionArgs) {
   const api = getApi(args.context)
-  const res = await api.index
+  const res = await api.hello
     .$get()
     .then((res) => res.text())
     .catch((err) => err.toString())

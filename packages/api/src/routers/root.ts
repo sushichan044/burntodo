@@ -1,7 +1,8 @@
 import { Hono } from "hono"
+import { HonoConfig } from "../server"
 
-const rootRouter = new Hono().get("/", (c) => {
-  return c.text("Hello, Hono!3")
+const rootRouter = new Hono<HonoConfig>().get("/hello", (c) => {
+  return c.text("Hello, men!")
 })
 
 export default rootRouter

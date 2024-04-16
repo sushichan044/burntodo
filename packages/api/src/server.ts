@@ -15,14 +15,10 @@ type HonoConfig = {
   }
 }
 
-const getRouter = (params?: ConstructorParameters<typeof Hono>) =>
-  new Hono<HonoConfig>(...(params ?? []))
-
-const app = getRouter()
+const app = new Hono<HonoConfig>()
 
 const routes = app.route("/", rootRouter)
 type HonoRoutes = typeof routes
 
-export { getRouter }
 export type { HonoConfig, HonoRoutes }
 export default app
