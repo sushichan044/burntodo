@@ -6,8 +6,7 @@ services = [
     { binding = "BACKEND", service = "remix-hono-turbo-backend" },
 ]
 
-[build]
-command = "pnpm run build:cloudflare"
+
 
 [vars]
 NODE_VERSION = "20"
