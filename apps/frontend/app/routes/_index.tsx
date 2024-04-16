@@ -17,7 +17,7 @@ export async function loader(args: LoaderFunctionArgs) {
   const res = await api.index
     .$get()
     .then((res) => res.text())
-    .catch((err) => String(err))
+    .catch((err) => err.toString())
   return { message: res }
 }
 

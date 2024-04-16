@@ -8,7 +8,6 @@ type HonoConfig = {
 const app = new Hono<HonoConfig>()
 
 const routes = app.route("/", rootRouter)
-
 export type HonoRoutes = typeof routes
 
 export default app
