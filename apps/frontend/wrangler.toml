@@ -1,9 +1,9 @@
 name = "remix-hono-turbo-frontend"
 pages_build_output_dir = "./build/client"
 compatibility_date = "2024-04-16"
-services = [
-    { binding = "BACKEND", service = "remix-hono-turbo-backend" },
-]
+# services = [
+#     { binding = "BACKEND", service = "remix-hono-turbo-backend" },
+# ]
 
 [vars]
 NODE_VERSION = "20"
