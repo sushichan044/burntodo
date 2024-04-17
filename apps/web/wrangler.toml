@@ -1,9 +1,11 @@
-name = "remix-hono-turbo-frontend"
-pages_build_output_dir = "./build/client"
+name = "remix-hono-turbo-web"
+pages_build_output_dir = ".vercel/output/static"
 compatibility_date = "2024-04-16"
+compatibility_flags = [ "nodejs_compat" ]
 services = [
     { binding = "BACKEND", service = "remix-hono-turbo-backend", environment = "production" },
 ]
 
 [vars]
 NODE_VERSION = "20"
+API_MODE = "production"

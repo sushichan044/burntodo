@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "scripts": {
-    "prepare": "twrangler build",
+    "predev": "twrangler build",
     "dev": "twrangler build && wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts"
   },
