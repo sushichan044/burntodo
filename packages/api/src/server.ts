@@ -1,5 +1,8 @@
 import { Hono } from "hono"
 import rootRouter from "./routers/root"
+import { cors } from "hono/cors"
+import { csrf } from "hono/csrf"
+import { secureHeaders } from "hono/secure-headers"
 
 // import {
 //   type CloudflareRateLimit,
@@ -16,6 +19,7 @@ type HonoConfig = {
 }
 
 const app = new Hono<HonoConfig>()
+app.use(cors(), csrf(), secureHeaders())
 
 const routes = app.route("/", rootRouter)
 type HonoRoutes = typeof routes
