@@ -1,7 +1,6 @@
-import { Hono } from "hono"
-import { HonoConfig } from "../server"
+import { createHono } from "../server"
 
-const rootRouter = new Hono<HonoConfig>().get("/hello", (c) => {
+const rootRouter = createHono().get("/hello", (c) => {
   return c.text("Hello, men2!")
 })
 
