@@ -6,6 +6,9 @@ services = [
     { binding = "BACKEND", service = "remix-hono-turbo-backend", environment = "production" },
 ]
 
+[placement]
+mode = "smart"
+
 [vars]
 NODE_VERSION = "20"
 API_MODE = "production"
