@@ -1,7 +1,7 @@
 import { createHono } from "../hono"
 
 import { todo } from "../db/schemas"
-import { TodoSelect, TodoInsert, todoInsertSchema } from "../db/schemas/zod"
+import { TodoInsert, todoInsertSchema } from "../db/schemas/zod"
 import { zValidator } from "@hono/zod-validator"
 
 class TodoDBMap {
