@@ -1,1 +1,1 @@
-export { apiServer as default } from "@repo/api"
+export { default } from "@repo/api/server"

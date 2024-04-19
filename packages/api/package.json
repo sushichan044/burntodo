@@ -1,13 +1,18 @@
 {
   "name": "@repo/api",
   "exports": {
-    ".": "./src/index.ts",
-    "./twrangler": "./src/twrangler.ts"
+    "./twrangler": "./src/twrangler.ts",
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts",
+    "./schema/zod": "./src/db/schemas/zod.ts"
   },
   "dependencies": {
+    "@hono/zod-validator": "^0.2.1",
     "@libsql/client": "^0.6.0",
     "drizzle-orm": "^0.30.8",
-    "hono": "^4.2.4"
+    "drizzle-zod": "^0.5.1",
+    "hono": "^4.2.4",
+    "zod": "^3.22.5"
   },
   "peerDependencies": {
     "@cloudflare/workers-types": "^4.20240403.0",

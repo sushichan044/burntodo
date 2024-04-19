@@ -6,7 +6,8 @@
     "deploy": "wrangler deploy --minify src/index.ts"
   },
   "dependencies": {
-    "@repo/api": "workspace:^"
+    "@repo/api": "workspace:^",
+    "hono": "^4.2.4"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240403.0",
