@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+body {
+  min-block-size: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+@supports (min-block-size: 100dvh) {
+  body {
+    min-block-size: 100vh;
+  }
+}
+
+main {
+  flex: 1;
+}

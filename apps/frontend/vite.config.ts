@@ -4,9 +4,16 @@ import {
 } from "@remix-run/dev"
 import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
-  plugins: [remixCloudflareDevProxy(), remix(), tsconfigPaths()],
+  plugins: [
+    // 改行対策
+    remixCloudflareDevProxy(),
+    remix(),
+    tailwindcss(),
+    tsconfigPaths(),
+  ],
   server: {
     host: true,
   },
