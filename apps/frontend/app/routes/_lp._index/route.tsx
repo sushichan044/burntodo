@@ -44,6 +44,11 @@ export default function Index() {
       <p>
         Oh, there is a message from the backend: <strong>{data.message}</strong>
       </p>
+      {data.error && (
+        <p className="text-red-500">
+          Error: <strong>{data.error}</strong>
+        </p>
+      )}
     </Container>
   )
 }
