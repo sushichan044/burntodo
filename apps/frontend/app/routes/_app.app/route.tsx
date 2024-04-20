@@ -11,8 +11,8 @@ import { randomUUID } from "node:crypto"
 import Todo from "@/app/routes/_app.app/Todo"
 import Button from "@/components/element/Button"
 
-export async function loader({ context }: LoaderFunctionArgs) {
-  const api = getApi({ context })
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const api = getApi({ context, request })
   return await api.todo
     .$get()
     .then((res) => res.json())
@@ -99,6 +99,7 @@ export default function Route() {
 }
 
 export async function action({ request, context }: ActionFunctionArgs) {
+  const api = getApi({ context, request: request.clone() })
   switch (request.method) {
     case "POST": {
       const formData = await request.formData()
@@ -111,7 +112,6 @@ export async function action({ request, context }: ActionFunctionArgs) {
       const todo = await todoInsertSchema.safeParseAsync(data)
       if (!todo.success)
         return json({ error: todo.error.message, data: null }, 400)
-      const api = getApi({ context })
       return await api.todo
         .$post({ json: todo.data })
         .then((res) => res.json())
@@ -124,7 +124,6 @@ export async function action({ request, context }: ActionFunctionArgs) {
       const formData = await request.formData()
       const id = formData.get("id")
       if (!id) return json({ error: "id is required", data: null }, 400)
-      const api = getApi({ context })
       return await api.todo[":id"]
         .$delete({
           param: { id: id.toString() },

@@ -14,8 +14,8 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export async function loader({ context }: LoaderFunctionArgs) {
-  const api = getApi({ context })
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const api = getApi({ context, request })
   return await api.index
     .$get()
     .then(async (res) => {
