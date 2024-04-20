@@ -16,12 +16,12 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const api = getApi({ context, request })
-  return await api.index
+  return await api.hello
     .$get()
     .then(async (res) => {
       const text = await res.clone().text()
       console.log(text)
-      return res.json()
+      return await res.json()
     })
     .catch((err) => {
       return {
