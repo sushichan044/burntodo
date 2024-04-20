@@ -18,7 +18,10 @@ export async function loader({ context }: LoaderFunctionArgs) {
   const api = getApi({ context })
   return await api.index
     .$get()
-    .then((res) => res.json())
+    .then((res) => {
+      console.log(res.clone().text())
+      return res.json()
+    })
     .catch((err) => {
       return {
         message: "Failed to fetch message from the backend",
