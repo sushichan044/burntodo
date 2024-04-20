@@ -16,7 +16,15 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ context }: LoaderFunctionArgs) {
   const api = getApi({ context })
-  return await api.index.$get().then((res) => res.json())
+  return await api.index
+    .$get()
+    .then((res) => res.json())
+    .catch((err) => {
+      return {
+        message: "Failed to fetch message from the backend",
+        error: String(err),
+      }
+    })
 }
 
 export default function Index() {
