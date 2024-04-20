@@ -1,52 +1,22 @@
 import { createHono } from "../hono"
 
 import { todo } from "../db/schemas"
-import { TodoInsert, todoInsertSchema } from "../db/schemas/zod"
+import { todoInsertSchema } from "../db/schemas/zod"
 import { zValidator } from "@hono/zod-validator"
-
-class TodoDBMap {
-  private db: Map<string, typeof todo.$inferSelect> = new Map()
-  constructor() {
-    this.db = new Map()
-  }
-
-  get(taskId: string) {
-    return { data: this.db.get(taskId), error: null }
-  }
-
-  set(taskId: string, todo: TodoInsert) {
-    try {
-      this.db.set(taskId, todo)
-      return { data: todo, error: null }
-    } catch (error) {
-      return { data: null, error: String(error) }
-    }
-  }
-
-  delete(taskId: string) {
-    try {
-      this.db.delete(taskId)
-      return { data: null, error: null }
-    } catch (error) {
-      return { data: null, error: String(error) }
-    }
-  }
-
-  getAll() {
-    return Array.from(this.db.values())
-  }
-}
-
-const TodoDB = new TodoDBMap()
+import { eq } from "drizzle-orm"
 
 const todoRouter = createHono()
   .get("/", async (c) => {
-    const todos = TodoDB.getAll()
+    const db = c.get("db")
+    const todos = await db.query.todo.findMany()
     return c.json({ data: todos, error: null }, 200)
   })
   .get("/:id", async (c) => {
     const id = c.req.param("id")
-    const todo = TodoDB.get(id)
+    const db = c.get("db")
+    const todo = await db.query.todo.findFirst({
+      where: (todo, { eq }) => eq(todo.id, id),
+    })
     if (!todo) return c.json({ data: null, error: "Not Found" }, 404)
     return c.json({ data: todo, error: null }, 200)
   })
@@ -57,18 +27,28 @@ const todoRouter = createHono()
     }),
     async (c) => {
       const body = c.req.valid("json")
-      const { error } = TodoDB.set(body.id, body)
-      if (error) return c.json({ data: null, error }, 400)
-      return c.json({ data: null, error: null }, 200)
+      const db = c.get("db")
+      const [res] = await db
+        .insert(todo)
+        .values(body)
+        .returning({ id: todo.id })
+      if (res == null || res.id !== body.id) {
+        return c.json({ data: null, error: "Failed to insert" }, 400)
+      }
+      return c.json({ data: res.id, error: null }, 200)
     },
   )
   .delete("/:id", async (c) => {
     const id = c.req.param("id")
-    const todo = TodoDB.get(id)
-    if (!todo) return c.json({ data: null, error: "Not Found" }, 404)
-    const { error } = TodoDB.delete(id)
-    if (error) return c.json({ data: null, error }, 400)
-    return c.json({ data: null, error: null }, 200)
+    const db = c.get("db")
+    const [res] = await db
+      .delete(todo)
+      .where(eq(todo.id, id))
+      .returning({ id: todo.id })
+    if (res == null || res.id !== id) {
+      return c.json({ data: null, error: "Failed to delete" }, 400)
+    }
+    return c.json({ data: res.id, error: null }, 200)
   })
 
 export { todoRouter }

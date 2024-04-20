@@ -1,6 +1,12 @@
 name = "remix-hono-turbo-backend"
 main = "src/index.ts"
 compatibility_date = "2024-04-03"
+node_compat = true
 
 [placement]
 mode = "smart"
+
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "remix-hono-turbo-example"
+database_id = "2b19135e-ebbd-4723-8bcf-74be224781d9"
