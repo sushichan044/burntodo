@@ -11,3 +11,4 @@ mode = "smart"
 
 [vars]
 NODE_VERSION = "20"
+API_MODE = "production"
