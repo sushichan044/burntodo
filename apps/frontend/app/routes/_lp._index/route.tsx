@@ -18,8 +18,9 @@ export async function loader({ context }: LoaderFunctionArgs) {
   const api = getApi({ context })
   return await api.index
     .$get()
-    .then((res) => {
-      console.log(res.clone().text())
+    .then(async (res) => {
+      const text = await res.clone().text()
+      console.log(text)
       return res.json()
     })
     .catch((err) => {
