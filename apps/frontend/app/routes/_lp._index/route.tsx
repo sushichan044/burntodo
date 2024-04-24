@@ -1,15 +1,16 @@
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
+
 import Container from "@/app/routes/_app/Container"
 import ButtonLink from "@/components/element/ButtonLink"
 import { getApi } from "@/lib/api"
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
 import { useLoaderData } from "@remix-run/react"
 
 export const meta: MetaFunction = () => {
   return [
     { title: "Todo App" },
     {
-      name: "description",
       content: "A simple todo app built with Remix and Hono",
+      name: "description",
     },
   ]
 }
@@ -25,8 +26,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     })
     .catch((err) => {
       return {
-        message: "Failed to fetch message from the backend",
         error: String(err),
+        message: "Failed to fetch message from the backend",
       }
     })
 }
@@ -38,9 +39,9 @@ export default function Index() {
     <Container className="space-y-4">
       <h1 className="text-5xl text-center font-bold">Todo App</h1>
       <ButtonLink
-        className="block w-fit mx-auto"
-        variant={{ color: "green", size: "lg", variant: "light" }}
+        className="block w-fit mx-auto font-bold"
         to="/app"
+        variant={{ color: "green", size: "lg", variant: "light" }}
       >
         Go to app
       </ButtonLink>

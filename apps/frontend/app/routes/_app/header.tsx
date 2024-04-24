@@ -4,8 +4,8 @@ import { tv } from "tailwind-variants"
 
 const styles = tv({
   slots: {
-    wrapper: "bg-white",
     title: "text-2xl",
+    wrapper: "bg-white",
   },
 })
 

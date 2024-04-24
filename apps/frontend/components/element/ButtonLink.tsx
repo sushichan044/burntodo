@@ -1,11 +1,10 @@
 import { type ButtonVariant, buttonStyles } from "@/components/element/Button"
 import { Link } from "@remix-run/react"
-
 import { clsx } from "clsx"
 
-type ButtonLinkProps = React.ComponentPropsWithoutRef<typeof Link> & {
+type ButtonLinkProps = {
   variant?: ButtonVariant | undefined
-}
+} & React.ComponentPropsWithoutRef<typeof Link>
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({
   children,

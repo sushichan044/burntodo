@@ -4,8 +4,8 @@ import React from "react"
 type ContainerProps = React.ComponentPropsWithoutRef<"div">
 
 const Container: React.FC<ContainerProps> = ({
-  className,
   children,
+  className,
   ...rest
 }) => {
   return (

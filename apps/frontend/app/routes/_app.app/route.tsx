@@ -1,15 +1,15 @@
-import { useFetcher, useLoaderData } from "@remix-run/react"
-
-import { getApi } from "@/lib/api"
-import {
+import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
-  json,
 } from "@remix-run/cloudflare"
-import { todoInsertSchema } from "@repo/api/schema/zod"
-import { randomUUID } from "node:crypto"
+
 import Todo from "@/app/routes/_app.app/Todo"
 import Button from "@/components/element/Button"
+import { getApi } from "@/lib/api"
+import { json } from "@remix-run/cloudflare"
+import { useFetcher, useLoaderData } from "@remix-run/react"
+import { todoInsertSchema } from "@repo/api/schema/zod"
+import { randomUUID } from "node:crypto"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const api = getApi({ context, request })
@@ -47,11 +47,11 @@ export default function Route() {
           ) : (
             loaderData.data.map((task) => (
               <Todo
-                key={task.id}
-                task={task}
                 doneTask={() => {
                   fetcher.submit({ id: task.id }, { method: "DELETE" })
                 }}
+                key={task.id}
+                task={task}
               />
             ))
           )}
@@ -65,11 +65,11 @@ export default function Route() {
               Title
             </label>
             <input
-              minLength={1}
               className="block border-zinc-200 border rounded p-2"
-              type="text"
-              name="title"
               id="title"
+              minLength={1}
+              name="title"
+              type="text"
             />
           </div>
           <div>
@@ -77,18 +77,18 @@ export default function Route() {
               Description
             </label>
             <input
-              minLength={1}
               className="block border-zinc-200 border rounded p-2"
-              type="text"
-              name="description"
               id="description"
+              minLength={1}
+              name="description"
+              type="text"
             />
           </div>
           <Button
-            variant={{ color: "sky", size: "md", variant: "normal" }}
             className="font-bold"
-            type="submit"
             disabled={disabled}
+            type="submit"
+            variant={{ color: "sky", size: "md", variant: "normal" }}
           >
             {text}
           </Button>
@@ -98,7 +98,7 @@ export default function Route() {
   )
 }
 
-export async function action({ request, context }: ActionFunctionArgs) {
+export async function action({ context, request }: ActionFunctionArgs) {
   const api = getApi({ context, request: request.clone() })
   switch (request.method) {
     case "POST": {
@@ -106,12 +106,12 @@ export async function action({ request, context }: ActionFunctionArgs) {
       const id = randomUUID()
       const data = {
         ...Object.fromEntries(formData.entries()),
-        id: id,
         done: false,
+        id: id,
       }
       const todo = await todoInsertSchema.safeParseAsync(data)
       if (!todo.success)
-        return json({ error: todo.error.message, data: null }, 400)
+        return json({ data: null, error: todo.error.message }, 400)
       return await api.todo
         .$post({ json: todo.data })
         .then((res) => res.json())
@@ -123,10 +123,10 @@ export async function action({ request, context }: ActionFunctionArgs) {
     case "DELETE": {
       const formData = await request.formData()
       const id = formData.get("id")
-      if (!id) return json({ error: "id is required", data: null }, 400)
+      if (!id) return json({ data: null, error: "id is required" }, 400)
       return await api.todo[":id"]
         .$delete({
-          param: { id: id.toString() },
+          param: { id: String(id) },
         })
         .then((res) => res.json())
         .catch((error) => {
@@ -135,7 +135,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         })
     }
     default: {
-      return json({ error: "method not allowed", data: null }, 405)
+      return json({ data: null, error: "method not allowed" }, 405)
     }
   }
 }

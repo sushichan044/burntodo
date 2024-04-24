@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import url("tailwindcss");
 
 body {
-  min-block-size: 100vh;
   display: flex;
   flex-flow: column nowrap;
+  min-block-size: 100vh;
 }
 
 @supports (min-block-size: 100dvh) {

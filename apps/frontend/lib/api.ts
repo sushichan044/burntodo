@@ -1,5 +1,6 @@
+import type { AppLoadContext } from "@remix-run/cloudflare"
+
 import apiClientFactory from "@repo/api/client"
-import { AppLoadContext } from "@remix-run/cloudflare"
 
 const getApi = ({
   context,

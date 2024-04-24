@@ -1,15 +1,16 @@
+import type { TodoSelect } from "@repo/api/schema/zod"
+
 import Button from "@/components/element/Button"
-import { TodoSelect } from "@repo/api/schema/zod"
 import React from "react"
 
 type TodoProps = {
-  task: TodoSelect
   doneTask: React.ComponentPropsWithoutRef<"button">["onClick"]
+  task: TodoSelect
 }
 
 const Todo: React.FC<TodoProps> = ({
-  task: { id, description, title },
   doneTask,
+  task: { description, id, title },
 }) => {
   return (
     <div className="flex flex-row gap-x-4" key={id}>
@@ -21,8 +22,8 @@ const Todo: React.FC<TodoProps> = ({
         <Button
           className="font-bold"
           onClick={doneTask}
-          variant={{ color: "green", size: "md", variant: "normal" }}
           type="button"
+          variant={{ color: "green", size: "md", variant: "normal" }}
         >
           done
         </Button>
