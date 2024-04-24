@@ -5,7 +5,6 @@ compatibility_flags = [ "nodejs_compat" ]
 services = [
     { binding = "BACKEND", service = "remix-hono-turbo-backend", environment = "production" },
 ]
-upload_source_maps = true
 
 [placement]
 mode = "smart"
