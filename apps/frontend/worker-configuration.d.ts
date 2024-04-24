@@ -2,7 +2,7 @@
 // by running `wrangler types`
 
 interface Env {
-	NODE_VERSION: "20";
-	API_MODE: "production";
-	BACKEND: Fetcher;
+  NODE_VERSION: "20"
+  API_MODE: "production"
+  BACKEND: Fetcher
 }

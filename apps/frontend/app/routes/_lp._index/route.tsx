@@ -37,9 +37,9 @@ export default function Index() {
 
   return (
     <Container className="space-y-4">
-      <h1 className="text-5xl text-center font-bold">Todo App</h1>
+      <h1 className="text-center text-5xl font-bold">Todo App</h1>
       <ButtonLink
-        className="block w-fit mx-auto font-bold"
+        className="mx-auto block w-fit font-bold"
         to="/app"
         variant={{ color: "green", size: "lg", variant: "light" }}
       >

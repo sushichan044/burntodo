@@ -9,9 +9,6 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:^",
-    "@repo/prettier-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
     "@virtual-live-lab/eslint-config": "^1.3.0",
     "@virtual-live-lab/tsconfig": "^1.2.0",
     "prettier": "^3.2.5",

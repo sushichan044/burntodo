@@ -8,9 +8,9 @@ type BackendConfigOptions = {
 
 const getBackendConfig = ({ main }: BackendConfigOptions) =>
   defineConfig({
-    name: BACKEND_NAME,
-    main,
     compatibility_date: "2024-04-03",
+    main,
+    name: BACKEND_NAME,
   })
 
 export { getBackendConfig }

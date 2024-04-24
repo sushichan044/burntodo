@@ -1,13 +1,13 @@
 import { defineConfig } from "drizzle-kit"
 
 export default defineConfig({
-  schema: "./src/db/schemas/index.ts",
-  driver: "d1",
   dbCredentials: {
     dbName: "remix-hono-turbo-example",
     wranglerConfigPath: "../../apps/backend/wrangler.toml",
   },
+  driver: "d1",
   out: "./drizzle",
-  verbose: true,
+  schema: "./src/db/schemas/index.ts",
   strict: true,
+  verbose: true,
 })

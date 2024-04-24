@@ -1,8 +1,8 @@
 import { Hono } from "hono"
-
-import { secureHeaders } from "hono/secure-headers"
-import { csrf } from "hono/csrf"
 import { cors } from "hono/cors"
+import { csrf } from "hono/csrf"
+import { secureHeaders } from "hono/secure-headers"
+
 import { createDB } from "./db"
 
 type HonoConfig = {
@@ -12,8 +12,8 @@ type HonoConfig = {
     DB: D1Database
   }
   Variables: {
-    isRateLimited: boolean
     db: ReturnType<typeof createDB>
+    isRateLimited: boolean
   }
 }
 

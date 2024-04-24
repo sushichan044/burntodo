@@ -1,5 +1,5 @@
 import { getRequestContext } from "@cloudflare/next-on-pages"
-import { apiClientFactory } from "@repo/api"
+import apiClientFactory from "@repo/api/client"
 
 const getApi = () => {
   const { env } = getRequestContext()

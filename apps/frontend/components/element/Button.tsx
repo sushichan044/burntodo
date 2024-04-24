@@ -9,7 +9,7 @@ type ButtonProps = {
 type ButtonVariant = VariantProps<typeof buttonStyles>
 
 const buttonStyles = tv({
-  base: "transition duration-300 ease-in-out cursor-pointer disabled:cursor-not-allowed disabled:brightness-50",
+  base: "cursor-pointer transition duration-300 ease-in-out disabled:cursor-not-allowed disabled:brightness-50",
   compoundVariants: [
     {
       className:
@@ -56,12 +56,12 @@ const buttonStyles = tv({
       sky: undefined,
     },
     size: {
-      "2xl": "px-10 py-5 text-2xl rounded-lg",
-      "lg": "px-6 py-3 text-lg rounded-md",
-      "md": "px-4 py-2 text-base rounded-md",
-      "sm": "px-2 py-1 text-sm rounded",
-      "xl": "px-8 py-4 text-xl rounded-lg",
-      "xs": "px-1 py-0.5 text-xs rounded",
+      "2xl": "rounded-lg px-10 py-5 text-2xl",
+      "lg": "rounded-md px-6 py-3 text-lg",
+      "md": "rounded-md px-4 py-2 text-base",
+      "sm": "rounded px-2 py-1 text-sm",
+      "xl": "rounded-lg px-8 py-4 text-xl",
+      "xs": "rounded px-1 py-0.5 text-xs",
     },
     variant: {
       light: undefined,

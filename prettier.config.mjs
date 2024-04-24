@@ -1,3 +1,3 @@
 //@ts-check
 
-export { default } from "@repo/prettier-config"
+export { default } from "@virtual-live-lab/prettier-config"

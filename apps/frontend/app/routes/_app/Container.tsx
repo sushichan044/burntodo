@@ -9,7 +9,7 @@ const Container: React.FC<ContainerProps> = ({
   ...rest
 }) => {
   return (
-    <div className={cn("max-w-3xl px-4 md:py-8 mx-auto", className)} {...rest}>
+    <div className={cn(" md:py-8 px-4 mx-auto max-w-3xl", className)} {...rest}>
       {children}
     </div>
   )

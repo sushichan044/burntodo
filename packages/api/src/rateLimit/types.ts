@@ -32,9 +32,9 @@ type Config<
   P extends string = string,
   I extends Input = Input,
 > = {
-  rateLimitFactory: CloudflareRateLimitFactory<E, P, I>
-  keyFactory: KeyFactory<E, P, I>
   isRateLimitedProperty: BooleanKeys<E["Variables"]>
+  keyFactory: KeyFactory<E, P, I>
+  rateLimitFactory: CloudflareRateLimitFactory<E, P, I>
 }
 
 export type { CloudflareRateLimit, Config }

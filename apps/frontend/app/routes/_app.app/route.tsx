@@ -37,11 +37,11 @@ export default function Route() {
       {fetcher.data?.error && (
         <span className="text-red-500">{fetcher.data.error}</span>
       )}
-      <section className="space-y-2 bg-white py-4 px-8 rounded">
-        <h2 className="text-3xl mt-4 mb-2 font-bold">tasks</h2>
+      <section className="space-y-2 rounded bg-white px-8 py-4">
+        <h2 className="mb-2 mt-4 text-3xl font-bold">tasks</h2>
         <div className="flex flex-col flex-nowrap gap-y-3">
           {loaderData.data == null || loaderData.data.length === 0 ? (
-            <span className="text-zinc-800 text-2xl text-center font-bold">
+            <span className="text-center text-2xl font-bold text-zinc-800">
               All finished! Nice work! 🎉
             </span>
           ) : (
@@ -57,15 +57,15 @@ export default function Route() {
           )}
         </div>
       </section>
-      <section className="bg-white py-6 px-8 rounded">
-        <h3 className="text-xl font-bold mb-1.5">Add new task</h3>
+      <section className="rounded bg-white px-8 py-6">
+        <h3 className="mb-1.5 text-xl font-bold">Add new task</h3>
         <fetcher.Form className="space-y-4" method="POST">
           <div>
             <label className="mb-1 text-zinc-500" htmlFor="title">
               Title
             </label>
             <input
-              className="block border-zinc-200 border rounded p-2"
+              className="block rounded border border-zinc-200 p-2"
               id="title"
               minLength={1}
               name="title"
@@ -77,7 +77,7 @@ export default function Route() {
               Description
             </label>
             <input
-              className="block border-zinc-200 border rounded p-2"
+              className="block rounded border border-zinc-200 p-2"
               id="description"
               minLength={1}
               name="description"

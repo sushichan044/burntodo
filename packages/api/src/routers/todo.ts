@@ -1,9 +1,9 @@
-import { createHono } from "../hono"
+import { zValidator } from "@hono/zod-validator"
+import { eq } from "drizzle-orm"
 
 import { todo } from "../db/schemas"
 import { todoInsertSchema } from "../db/schemas/zod"
-import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
+import { createHono } from "../hono"
 
 const todoRouter = createHono()
   .get("/", async (c) => {
