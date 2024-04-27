@@ -14,5 +14,5 @@
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
     "**/.client/**/*.tsx"
-  ]
+, "../../packages/ui/src/elements/Button.tsx"  ]
 }
