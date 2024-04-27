@@ -1,6 +1,6 @@
 import type { TodoSelect } from "@repo/api/schema/zod"
 
-import Button from "@/components/element/Button"
+import Button from "@repo/ui/elements/Button"
 import React from "react"
 
 type TodoProps = {

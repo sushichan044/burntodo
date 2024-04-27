@@ -1,5 +1,5 @@
-import { type ButtonVariant, buttonStyles } from "@/components/element/Button"
 import { Link } from "@remix-run/react"
+import { type ButtonVariant, buttonStyles } from "@repo/ui/elements/Button"
 import { clsx } from "clsx"
 
 type ButtonLinkProps = {

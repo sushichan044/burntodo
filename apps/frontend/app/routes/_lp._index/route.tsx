@@ -1,7 +1,7 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
 
 import Container from "@/app/routes/_app/Container"
-import ButtonLink from "@/components/element/ButtonLink"
+import ButtonLink from "@/components/ui/ButtonLink"
 import { getApi } from "@/lib/api"
 import { useLoaderData } from "@remix-run/react"
 
