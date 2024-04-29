@@ -2,27 +2,21 @@ import type { AppLoadContext } from "@remix-run/cloudflare"
 
 import apiClientFactory from "@repo/api/client"
 
-const getApi = ({
-  context,
-  request,
-}: {
-  context: AppLoadContext
-  request: Request
-}) => {
+const getApi = ({ context }: { context: AppLoadContext }) => {
   const { BACKEND } = context.cloudflare.env
-  const url = new URL(request.url)
-  // we need to set some hostname, even if used with Service Bindings at production
-  // https://community.cloudflare.com/t/service-binding-to-other-worker-not-working/559030/5
-  const basePath = import.meta.env.PROD
-    ? `${url.protocol}//${url.hostname}`
-    : "http://localhost:8787"
 
+  // fetch always needs hostname.
+  const input = "http://localhost:8787"
+  /*
+  NODE_ENV=productionでビルドした場合は
+  fetchをBACKEND.fetchに差し替えることでService Bindingsを利用する
+   */
   const fetchOptions = import.meta.env.PROD
     ? { fetch: BACKEND.fetch.bind(BACKEND) }
     : undefined
 
-  // @ts-expect-error なんもわからん
-  return apiClientFactory(basePath, fetchOptions)
+  // @ts-expect-error 第一引数の型が合わない
+  return apiClientFactory(input, fetchOptions)
 }
 
 export { getApi }
