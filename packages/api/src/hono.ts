@@ -1,9 +1,8 @@
+import { createDB } from "@repo/module"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { csrf } from "hono/csrf"
 import { secureHeaders } from "hono/secure-headers"
-
-import { createDB } from "./db"
 
 type HonoConfig = {
   Bindings: {

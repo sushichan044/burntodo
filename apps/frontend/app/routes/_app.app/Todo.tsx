@@ -1,11 +1,11 @@
-import type { TodoSelect } from "@repo/api/schema/zod"
+import type { TB_TodoSelect } from "@repo/module/zod"
 
 import Button from "@repo/ui/elements/Button"
 import React from "react"
 
 type TodoProps = {
   doneTask: React.ComponentPropsWithoutRef<"button">["onClick"]
-  task: TodoSelect
+  task: Pick<TB_TodoSelect, "description" | "id" | "title">
 }
 
 const Todo: React.FC<TodoProps> = ({

@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
 
-import Container from "@/app/routes/_app/Container"
+import Container from "@/components/Container"
 import ButtonLink from "@/components/ui/ButtonLink"
 import { getApi } from "@/lib/api"
 import { useLoaderData } from "@remix-run/react"
@@ -15,8 +15,8 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
-  const api = getApi({ context, request })
+export async function loader({ context }: LoaderFunctionArgs) {
+  const api = getApi({ context })
   return await api.hello
     .$get()
     .then(async (res) => {
@@ -40,10 +40,17 @@ export default function Index() {
       <h1 className="text-center text-5xl font-bold">Todo App</h1>
       <ButtonLink
         className="mx-auto block w-fit font-bold"
-        to="/app"
-        variant={{ color: "green", size: "lg", variant: "light" }}
+        to="/register"
+        variant={{ color: "sky", size: "lg", variant: "normal" }}
       >
-        Go to app
+        Register
+      </ButtonLink>
+      <ButtonLink
+        className="mx-auto block w-fit font-bold"
+        to="/login"
+        variant={{ color: "green", size: "lg", variant: "normal" }}
+      >
+        Log in
       </ButtonLink>
       <h2 className="sr-only">Backend Message</h2>
       <p>

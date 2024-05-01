@@ -17,4 +17,7 @@ export default defineConfig({
   server: {
     host: true,
   },
+  ssr: {
+    noExternal: ["ts-results"],
+  },
 })

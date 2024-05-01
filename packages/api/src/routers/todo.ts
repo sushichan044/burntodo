@@ -1,54 +1,53 @@
 import { zValidator } from "@hono/zod-validator"
-import { eq } from "drizzle-orm"
+import {
+  CreateTodoSchema,
+  DeleteTodoSchema,
+  GetTodoSchema,
+  GetTodosByUserIdSchema,
+  createTodo,
+  deleteTodo,
+  getTodo,
+  getTodosByUserId,
+} from "@repo/module/usecase/todo"
 
-import { todo } from "../db/schemas"
-import { todoInsertSchema } from "../db/schemas/zod"
 import { createHono } from "../hono"
 
 const todoRouter = createHono()
-  .get("/", async (c) => {
+  .post("/", zValidator("json", CreateTodoSchema), async (c) => {
     const db = c.get("db")
-    const todos = await db.query.todo.findMany()
-    return c.json({ data: todos, error: null }, 200)
-  })
-  .get("/:id", async (c) => {
-    const id = c.req.param("id")
-    const db = c.get("db")
-    const todo = await db.query.todo.findFirst({
-      where: (todo, { eq }) => eq(todo.id, id),
-    })
-    if (!todo) return c.json({ data: null, error: "Not Found" }, 404)
-    return c.json({ data: todo, error: null }, 200)
-  })
-  .post(
-    "/",
-    zValidator("json", todoInsertSchema, (res, c) => {
-      if (!res.success) return c.json({ data: null, error: res.error }, 400)
-    }),
-    async (c) => {
-      const body = c.req.valid("json")
-      const db = c.get("db")
-      const [res] = await db
-        .insert(todo)
-        .values(body)
-        .returning({ id: todo.id })
-      if (res == null || res.id !== body.id) {
-        return c.json({ data: null, error: "Failed to insert" }, 400)
-      }
-      return c.json({ data: res.id, error: null }, 200)
-    },
-  )
-  .delete("/:id", async (c) => {
-    const id = c.req.param("id")
-    const db = c.get("db")
-    const [res] = await db
-      .delete(todo)
-      .where(eq(todo.id, id))
-      .returning({ id: todo.id })
-    if (res == null || res.id !== id) {
-      return c.json({ data: null, error: "Failed to delete" }, 400)
+    const data = c.req.valid("json")
+    const res = await createTodo(data, db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
     }
-    return c.json({ data: res.id, error: null }, 200)
+    return c.json({ data: res.val, error: null }, 200)
+  })
+  .get("/:id", zValidator("param", GetTodoSchema), async (c) => {
+    const db = c.get("db")
+    const { id } = c.req.valid("param")
+    const res = await getTodo({ id }, db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
+    }
+    return c.json({ data: res.val, error: null }, 200)
+  })
+  .get("/", zValidator("query", GetTodosByUserIdSchema), async (c) => {
+    const db = c.get("db")
+    const { userName } = c.req.valid("query")
+    const res = await getTodosByUserId({ userName }, db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
+    }
+    return c.json({ data: res.val, error: null }, 200)
+  })
+  .delete("/:id", zValidator("param", DeleteTodoSchema), async (c) => {
+    const db = c.get("db")
+    const { id } = c.req.valid("param")
+    const res = await deleteTodo({ id }, db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
+    }
+    return c.json({ data: res.val, error: null }, 200)
   })
 
 export { todoRouter }

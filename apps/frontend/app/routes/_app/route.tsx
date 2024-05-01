@@ -1,4 +1,4 @@
-import Container from "@/app/routes/_app/Container"
+import Container from "@/components/Container"
 import { Outlet } from "@remix-run/react"
 
 import Header from "./header"

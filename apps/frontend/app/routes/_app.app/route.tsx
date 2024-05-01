@@ -4,22 +4,35 @@ import type {
 } from "@remix-run/cloudflare"
 
 import Todo from "@/app/routes/_app.app/Todo"
+import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
-import { json } from "@remix-run/cloudflare"
+import { json, redirect } from "@remix-run/cloudflare"
 import { useFetcher, useLoaderData } from "@remix-run/react"
-import { todoInsertSchema } from "@repo/api/schema/zod"
+import { CreateTodoSchema } from "@repo/module/usecase/todo"
 import Button from "@repo/ui/elements/Button"
-import { randomUUID } from "node:crypto"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
-  const api = getApi({ context, request })
-  return await api.todo
-    .$get()
+  const session = await getSession(request.headers.get("Cookie"))
+  const userName = session.get("userName")
+  if (!userName) {
+    // Redirect to the home page if they are already signed in.
+    return redirect("/login")
+  }
+
+  const api = getApi({ context })
+  const res = await api.todo
+    .$get({ query: { userName } })
     .then((res) => res.json())
     .catch((error) => {
       console.error(error)
       return { data: null, error: String(error) }
     })
+
+  return json(res, {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  })
 }
 
 export default function Route() {
@@ -45,13 +58,13 @@ export default function Route() {
               All finished! Nice work! 🎉
             </span>
           ) : (
-            loaderData.data.map((task) => (
+            loaderData.data.map(({ description, id, title }) => (
               <Todo
                 doneTask={() => {
-                  fetcher.submit({ id: task.id }, { method: "DELETE" })
+                  fetcher.submit({ id }, { method: "DELETE" })
                 }}
-                key={task.id}
-                task={task}
+                key={id}
+                task={{ description, id, title }}
               />
             ))
           )}
@@ -99,17 +112,22 @@ export default function Route() {
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const api = getApi({ context, request: request.clone() })
+  const session = await getSession(request.headers.get("Cookie"))
+  const userName = session.get("userName")
+  if (!userName) {
+    // Redirect to the home page if they are already signed in.
+    return redirect("/login")
+  }
+
+  const api = getApi({ context })
   switch (request.method) {
     case "POST": {
       const formData = await request.formData()
-      const id = randomUUID()
       const data = {
         ...Object.fromEntries(formData.entries()),
-        done: false,
-        id: id,
+        userName,
       }
-      const todo = await todoInsertSchema.safeParseAsync(data)
+      const todo = await CreateTodoSchema.safeParseAsync(data)
       if (!todo.success)
         return json({ data: null, error: todo.error.message }, 400)
       return await api.todo
@@ -123,10 +141,11 @@ export async function action({ context, request }: ActionFunctionArgs) {
     case "DELETE": {
       const formData = await request.formData()
       const id = formData.get("id")
-      if (!id) return json({ data: null, error: "id is required" }, 400)
+      if (!id || typeof id !== "string")
+        return json({ data: null, error: "id is required" }, 400)
       return await api.todo[":id"]
         .$delete({
-          param: { id: String(id) },
+          param: { id },
         })
         .then((res) => res.json())
         .catch((error) => {
