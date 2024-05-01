@@ -30,9 +30,11 @@ const {
 
 type CommitSessionFunction = typeof rawCommitSession
 
+const FOUR_WEEKS_IN_MS = 1000 * 60 * 60 * 24 * 7 * 4
+
 const commitSession: CommitSessionFunction = (session, options) => {
   return rawCommitSession(session, {
-    expires: new Date(Date.now() + 60_000),
+    expires: new Date(Date.now() + FOUR_WEEKS_IN_MS), // 1 week
     ...options,
   })
 }
