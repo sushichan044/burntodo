@@ -3,12 +3,10 @@ import {
   CreateTodoSchema,
   DeleteTodoSchema,
   GetTodoSchema,
-  GetTodosByUserIdSchema,
   createTodo,
   deleteTodo,
   getAllTodos,
   getTodo,
-  getTodosByUserId,
 } from "@repo/module/usecase/todo"
 
 import { createHono } from "../hono"
@@ -26,15 +24,6 @@ const todoRouter = createHono()
     const db = c.get("db")
     const data = c.req.valid("json")
     const res = await createTodo(data, db)
-    if (res.err) {
-      return c.json({ data: null, error: res.val }, 500)
-    }
-    return c.json({ data: res.val, error: null }, 200)
-  })
-  .get("/search", zValidator("query", GetTodosByUserIdSchema), async (c) => {
-    const db = c.get("db")
-    const { userName } = c.req.valid("query")
-    const res = await getTodosByUserId({ userName }, db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }

@@ -1,8 +1,7 @@
-import type { z } from "zod"
-
 import { eq } from "drizzle-orm"
 import { randomUUID } from "node:crypto"
 import { Err, Ok, type Result } from "ts-results"
+import { z } from "zod"
 
 import type { DBType } from "../core/db"
 import type { TB_TodoSelect } from "../zod"
@@ -77,10 +76,10 @@ const getTodo = async (
   }
 }
 
-const GetTodosByUserNameSchema = TB_todoInsertSchema.pick({ userName: true })
+const GetTodosByUserNameSchema = z.object({ name: z.string() })
 type GetTodosByUserNameInput = z.infer<typeof GetTodosByUserNameSchema>
 
-const getTodosByUserId = async (
+const getTodosByUserName = async (
   input: GetTodosByUserNameInput,
   db: DBType,
 ): Promise<Result<TB_TodoSelect[], string>> => {
@@ -88,7 +87,7 @@ const getTodosByUserId = async (
     const todos = await db
       .select()
       .from(TB_todo)
-      .where(eq(TB_todo.userName, input.userName))
+      .where(eq(TB_todo.userName, input.name))
     return Ok(todos)
   } catch (e) {
     if (e instanceof Error) {
@@ -145,10 +144,10 @@ const deleteTodo = async (
   }
 }
 
-export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserId }
+export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserName  }
 export {
   CreateTodoSchema,
   DeleteTodoSchema,
   GetTodoSchema,
-  GetTodosByUserNameSchema as GetTodosByUserIdSchema,
+  GetTodosByUserNameSchema,
 }

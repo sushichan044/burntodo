@@ -13,15 +13,15 @@ import Button from "@repo/ui/elements/Button"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
-  const userName = session.get("userName")
-  if (!userName) {
+  const name = session.get("userName")
+  if (!name) {
     // Redirect to the home page if they are already signed in.
     return redirect("/login")
   }
 
   const api = getApi({ context })
-  const res = await api.todo.search
-    .$get({ query: { userName } })
+  const res = await api.user[":name"].todo
+    .$get({ param: { name } })
     .then((res) => res.json())
     .catch((error) => {
       console.error(error)

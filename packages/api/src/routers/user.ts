@@ -1,5 +1,9 @@
 import { zValidator } from "@hono/zod-validator"
 import {
+  GetTodosByUserNameSchema,
+  getTodosByUserName,
+} from "@repo/module/usecase/todo"
+import {
   CreateUserSchema,
   DeleteUserSchema,
   GetUserSchema,
@@ -47,5 +51,17 @@ const userRouter = createHono()
     }
     return c.json({ data: res.val, error: null }, 200)
   })
-
+  .get(
+    "/:name/todo",
+    zValidator("param", GetTodosByUserNameSchema),
+    async (c) => {
+      const db = c.get("db")
+      const { name } = c.req.valid("param")
+      const res = await getTodosByUserName({ name }, db)
+      if (res.err) {
+        return c.json({ data: null, error: res.val }, 500)
+      }
+      return c.json({ data: res.val, error: null }, 200)
+    },
+  )
 export { userRouter }
