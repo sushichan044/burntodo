@@ -44,7 +44,9 @@ export default function Route() {
   return (
     <Container className="flex-1 p-4" size="xs">
       <div className="flex flex-col gap-y-16">
-        <h1 className="text-center text-4xl font-bold">Log in to BurnTodo🔥</h1>
+        <h1 className="text-center text-4xl font-bold">
+          Sign up to BurnTodo🔥
+        </h1>
         <Form
           aria-describedby={form.errors ? form.errorId : undefined}
           aria-invalid={form.errors ? true : undefined}
@@ -84,7 +86,7 @@ export default function Route() {
             size="lg"
             type="submit"
           >
-            Log in
+            Sign up
           </Button>
         </Form>
       </div>
@@ -100,9 +102,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
   if (submission.status !== "success") {
     return submission.reply()
   }
-
-  const result = await api.user[":name"]
-    .$get({ param: submission.value })
+  const result = await api.user
+    .$post({ json: submission.value })
     .then((res) => res.json())
 
   if (result.error) {
@@ -112,7 +113,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
   }
   if (result.data == null) {
     return submission.reply({
-      formErrors: ["Failed to log in"],
+      formErrors: ["Failed to sign up"],
     })
   }
 

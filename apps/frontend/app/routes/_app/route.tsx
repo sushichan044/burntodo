@@ -1,14 +1,13 @@
-import Container from "@/components/Container"
+import Header from "@/components/layout/Header"
+import { Container } from "@mantine/core"
 import { Outlet } from "@remix-run/react"
-
-import Header from "./header"
 
 export default function AppLayout() {
   return (
     <>
-      <Header />
-      <main className="bg-sky-50">
-        <Container>
+      <Header showUserMenu />
+      <main className="bg-orange-50">
+        <Container className="p-4" size="md">
           <Outlet />
         </Container>
       </main>

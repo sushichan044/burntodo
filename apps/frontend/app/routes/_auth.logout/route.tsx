@@ -8,8 +8,9 @@ import {
   destroySession,
   getSession,
 } from "@/app/sessions.server"
+import { Button, Container } from "@mantine/core"
 import { json, redirect, useFetcher } from "@remix-run/react"
-import Button from "@repo/ui/elements/Button"
+import { LogOut } from "lucide-react"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -39,19 +40,23 @@ export default function Route() {
   })()
 
   return (
-    <div className="flex flex-col gap-y-8">
-      <h1 className="text-3xl font-bold">Logout</h1>
+    <Container className="flex flex-1 flex-col gap-y-16 p-4" size="xs">
+      <h1 className="text-center text-4xl font-bold">
+        Log out from BurnTodo🔥
+      </h1>
       <fetcher.Form className="space-y-4" method="POST">
         <Button
-          className="font-bold"
+          className="w-full font-bold"
+          color="red"
           disabled={disabled}
+          leftSection={<LogOut />}
+          size="lg"
           type="submit"
-          variant={{ color: "red", size: "md", variant: "normal" }}
         >
           {text}
         </Button>
       </fetcher.Form>
-    </div>
+    </Container>
   )
 }
 

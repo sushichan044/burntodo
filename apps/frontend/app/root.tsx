@@ -1,3 +1,5 @@
+import { ColorSchemeScript, MantineProvider } from "@mantine/core"
+import "@mantine/core/styles.css"
 import {
   Links,
   Meta,
@@ -16,9 +18,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <Meta />
         <Links />
+        <ColorSchemeScript />
       </head>
       <body>
-        {children}
+        <MantineProvider>{children}</MantineProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

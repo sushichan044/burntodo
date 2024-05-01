@@ -1,12 +1,13 @@
-import Container from "@/components/Container"
+import Header from "@/components/layout/Header"
 import { Outlet } from "@remix-run/react"
 
 export default function AppLayout() {
   return (
-    <main className="bg-sky-50">
-      <Container>
+    <>
+      <Header />
+      <main className="flex items-center justify-center bg-white">
         <Outlet />
-      </Container>
-    </main>
+      </main>
+    </>
   )
 }
