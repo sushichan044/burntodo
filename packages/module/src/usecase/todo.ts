@@ -77,11 +77,11 @@ const getTodo = async (
   }
 }
 
-const GetTodosByUserIdSchema = TB_todoInsertSchema.pick({ userName: true })
-type GetTodosByUserIdInput = z.infer<typeof GetTodosByUserIdSchema>
+const GetTodosByUserNameSchema = TB_todoInsertSchema.pick({ userName: true })
+type GetTodosByUserNameInput = z.infer<typeof GetTodosByUserNameSchema>
 
 const getTodosByUserId = async (
-  input: GetTodosByUserIdInput,
+  input: GetTodosByUserNameInput,
   db: DBType,
 ): Promise<Result<TB_TodoSelect[], string>> => {
   try {
@@ -89,6 +89,27 @@ const getTodosByUserId = async (
       .select()
       .from(TB_todo)
       .where(eq(TB_todo.userName, input.userName))
+    return Ok(todos)
+  } catch (e) {
+    if (e instanceof Error) {
+      return Err(e.message)
+    }
+    return Err(String(e))
+  }
+}
+
+const getAllTodos = async (
+  db: DBType,
+  options?: { limit: number; offset: number } | undefined,
+): Promise<Result<TB_TodoSelect[], string>> => {
+  options ??= { limit: 100, offset: 0 }
+
+  try {
+    const todos = await db
+      .select()
+      .from(TB_todo)
+      .limit(options.limit)
+      .offset(options.offset)
     return Ok(todos)
   } catch (e) {
     if (e instanceof Error) {
@@ -124,10 +145,10 @@ const deleteTodo = async (
   }
 }
 
-export { createTodo, deleteTodo, getTodo, getTodosByUserId }
+export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserId }
 export {
   CreateTodoSchema,
   DeleteTodoSchema,
   GetTodoSchema,
-  GetTodosByUserIdSchema,
+  GetTodosByUserNameSchema as GetTodosByUserIdSchema,
 }

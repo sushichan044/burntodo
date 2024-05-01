@@ -7,12 +7,12 @@
   },
   "exports": {
     "./elements/*": {
-      "default": "./src/elements/*.tsx",
-      "types": "./src/elements/*.tsx"
+      "types": "./src/elements/*.tsx",
+      "default": "./src/elements/*.tsx"
     },
     "./ui/*": {
-      "default": "./src/ui/*.tsx",
-      "types": "./src/ui/*.tsx"
+      "types": "./src/ui/*.tsx",
+      "default": "./src/ui/*.tsx"
     }
   },
   "keywords": [],

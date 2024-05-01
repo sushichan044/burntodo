@@ -75,25 +75,18 @@ const getUser = async (
   }
 }
 
-const getUserByNameSchema = TB_userInsertSchema.pick({ name: true })
-type GetUserByNameInput = z.infer<typeof getUserByNameSchema>
-
-const getUserByName = async (
-  input: GetUserByNameInput,
+const getAllUsers = async (
   db: DBType,
-): Promise<Result<TB_UserSelect, string>> => {
+  options?: { limit: number; offset: number } | undefined,
+): Promise<Result<TB_UserSelect[], string>> => {
+  options ??= { limit: 100, offset: 0 }
   try {
-    const [user] = await db
+    const users = await db
       .select()
       .from(TB_user)
-      .where(eq(TB_user.name, input.name))
-      .limit(1)
-
-    if (!user) {
-      return Err("User not found")
-    }
-
-    return Ok(user)
+      .limit(options.limit)
+      .offset(options.offset)
+    return Ok(users)
   } catch (e) {
     if (e instanceof Error) {
       return Err(e.message)
@@ -170,10 +163,15 @@ const deleteUser = async (
   }
 }
 
-export { createUser, deleteUser, getUser, getUserByName, getUserWithTodos }
+export {
+  createUser,
+  deleteUser,
+  getAllUsers,
+  getUser,
+  getUserWithTodos,
+}
 export {
   CreateUserSchema,
   DeleteUserSchema,
   GetUserSchema,
-  getUserByNameSchema,
 }

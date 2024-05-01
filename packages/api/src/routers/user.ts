@@ -5,9 +5,8 @@ import {
   GetUserSchema,
   createUser,
   deleteUser,
+  getAllUsers,
   getUser,
-  getUserByName,
-  getUserByNameSchema,
 } from "@repo/module/usecase/user"
 
 import { createHono } from "../hono"
@@ -31,10 +30,9 @@ const userRouter = createHono()
     }
     return c.json({ data: res.val, error: null }, 200)
   })
-  .get("/", zValidator("query", getUserByNameSchema), async (c) => {
+  .get("/", async (c) => {
     const db = c.get("db")
-    const { name } = c.req.valid("query")
-    const res = await getUserByName({ name }, db)
+    const res = await getAllUsers(db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }

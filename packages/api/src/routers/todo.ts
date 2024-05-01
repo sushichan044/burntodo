@@ -6,6 +6,7 @@ import {
   GetTodosByUserIdSchema,
   createTodo,
   deleteTodo,
+  getAllTodos,
   getTodo,
   getTodosByUserId,
 } from "@repo/module/usecase/todo"
@@ -22,6 +23,14 @@ const todoRouter = createHono()
     }
     return c.json({ data: res.val, error: null }, 200)
   })
+  .get("/", async (c) => {
+    const db = c.get("db")
+    const res = await getAllTodos(db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
+    }
+    return c.json({ data: res.val, error: null }, 200)
+  })
   .get("/:id", zValidator("param", GetTodoSchema), async (c) => {
     const db = c.get("db")
     const { id } = c.req.valid("param")
@@ -31,7 +40,7 @@ const todoRouter = createHono()
     }
     return c.json({ data: res.val, error: null }, 200)
   })
-  .get("/", zValidator("query", GetTodosByUserIdSchema), async (c) => {
+  .get("/search", zValidator("query", GetTodosByUserIdSchema), async (c) => {
     const db = c.get("db")
     const { userName } = c.req.valid("query")
     const res = await getTodosByUserId({ userName }, db)

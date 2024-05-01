@@ -75,8 +75,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
   if (!name || typeof name !== "string") {
     return json({ data: null, error: "Name is required" }, { status: 400 })
   }
-  const result = await api.user
-    .$get({ query: { name } })
+  const result = await api.user[":name"]
+    .$get({ param: { name } })
     .then((res) => res.json())
 
   if (result.error) {

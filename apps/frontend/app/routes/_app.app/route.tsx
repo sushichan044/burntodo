@@ -20,7 +20,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   }
 
   const api = getApi({ context })
-  const res = await api.todo
+  const res = await api.todo.search
     .$get({ query: { userName } })
     .then((res) => res.json())
     .catch((error) => {
