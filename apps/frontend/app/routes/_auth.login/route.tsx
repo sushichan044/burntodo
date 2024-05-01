@@ -6,7 +6,7 @@ import type {
 import { signInUpSchema } from "@/app/routes/_auth/form"
 import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
-import { getInputProps, useForm } from "@conform-to/react"
+import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
 import { Alert, Button, Container, TextInput } from "@mantine/core"
 import { Form, json, redirect, useActionData } from "@remix-run/react"
@@ -45,14 +45,7 @@ export default function Route() {
     <Container className="flex-1 p-4" size="xs">
       <div className="flex flex-col gap-y-16">
         <h1 className="text-center text-4xl font-bold">Log in to BurnTodo🔥</h1>
-        <Form
-          aria-describedby={form.errors ? form.errorId : undefined}
-          aria-invalid={form.errors ? true : undefined}
-          className="space-y-4"
-          id={form.id}
-          method="POST"
-          onSubmit={form.onSubmit}
-        >
+        <Form className="space-y-4" method="POST" {...getFormProps(form)}>
           {form.errors && form.errors.length > 0 && (
             <Alert
               classNames={{ message: "text-red-600 text-lg font-semibold" }}
