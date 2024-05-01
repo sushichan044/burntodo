@@ -14,18 +14,18 @@ import {
 import { createHono } from "../hono"
 
 const todoRouter = createHono()
-  .post("/", zValidator("json", CreateTodoSchema), async (c) => {
+  .get("/", async (c) => {
     const db = c.get("db")
-    const data = c.req.valid("json")
-    const res = await createTodo(data, db)
+    const res = await getAllTodos(db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }
     return c.json({ data: res.val, error: null }, 200)
   })
-  .get("/", async (c) => {
+  .post("/", zValidator("json", CreateTodoSchema), async (c) => {
     const db = c.get("db")
-    const res = await getAllTodos(db)
+    const data = c.req.valid("json")
+    const res = await createTodo(data, db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }

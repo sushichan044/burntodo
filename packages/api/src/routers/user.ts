@@ -12,6 +12,14 @@ import {
 import { createHono } from "../hono"
 
 const userRouter = createHono()
+  .get("/", async (c) => {
+    const db = c.get("db")
+    const res = await getAllUsers(db)
+    if (res.err) {
+      return c.json({ data: null, error: res.val }, 500)
+    }
+    return c.json({ data: res.val, error: null }, 200)
+  })
   .post("/", zValidator("json", CreateUserSchema), async (c) => {
     const db = c.get("db")
     const { name } = c.req.valid("json")
@@ -25,14 +33,6 @@ const userRouter = createHono()
     const db = c.get("db")
     const { name } = c.req.valid("param")
     const res = await getUser({ name }, db)
-    if (res.err) {
-      return c.json({ data: null, error: res.val }, 500)
-    }
-    return c.json({ data: res.val, error: null }, 200)
-  })
-  .get("/", async (c) => {
-    const db = c.get("db")
-    const res = await getAllUsers(db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }
