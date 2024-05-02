@@ -2,7 +2,9 @@ import { createDB } from "@repo/module"
 import { Hono } from "hono"
 import { cors } from "hono/cors"
 import { csrf } from "hono/csrf"
+import { poweredBy } from "hono/powered-by"
 import { secureHeaders } from "hono/secure-headers"
+import { trimTrailingSlash } from "hono/trailing-slash"
 
 type HonoConfig = {
   Bindings: {
@@ -23,7 +25,7 @@ const createHono = (...param: ConstructorParameters<typeof Hono>) => {
     c.set("db", db)
     await next()
   })
-  app.use(cors(), csrf(), secureHeaders())
+  app.use(cors(), csrf(), secureHeaders(), trimTrailingSlash(), poweredBy())
   return app
 }
 
