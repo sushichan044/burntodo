@@ -14,8 +14,13 @@ body {
 
 @supports (min-block-size: 100dvh) {
   body {
-    text-size-adjust: 100%;
     min-block-size: 100dvh;
+  }
+}
+
+@supports (text-size-adjust: 100%) {
+  body {
+    text-size-adjust: 100%;
   }
 }
 
