@@ -13,7 +13,7 @@ export default function AppLayout() {
       <Header hideUserMenu />
       <main className="flex flex-col items-center justify-center bg-white">
         <Container
-          className="flex flex-1 flex-col gap-y-16 p-4 pt-[15vh]"
+          className="flex flex-1 flex-col gap-y-16 p-4 pt-[5vh] md:pt-[15vh]"
           size="xs"
         >
           <Outlet />

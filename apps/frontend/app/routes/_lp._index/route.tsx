@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <Container className="flex-1 space-y-8 p-4 pt-[15vh] md:space-y-16">
+    <Container className="flex-1 space-y-8 p-4 pt-[5vh] md:space-y-16 md:pt-[15vh]">
       <div>
         <h1 className="text-4xl font-bold text-zinc-950 md:text-6xl">
           BurnTodo🔥
