@@ -1,7 +1,0 @@
-{
-  "extends": "@virtual-live-lab/tsconfig/react",
-  "compilerOptions": {
-    "moduleResolution": "Bundler"
-  },
-  "include": ["**/*.ts", "**/*.tsx", "../../apps/frontend/components/ui/ButtonLink.tsx"]
-}
