@@ -1,6 +1,6 @@
 import type { TB_TodoSelect } from "@repo/module/zod"
 
-import Button from "@repo/ui/elements/Button"
+import { Button } from "@mantine/core"
 import React from "react"
 
 type TodoProps = {
@@ -21,9 +21,11 @@ const Todo: React.FC<TodoProps> = ({
       <div>
         <Button
           className="font-bold"
+          color="green"
           onClick={doneTask}
+          radius="md"
+          size="md"
           type="button"
-          variant={{ color: "green", size: "md", variant: "normal" }}
         >
           done
         </Button>

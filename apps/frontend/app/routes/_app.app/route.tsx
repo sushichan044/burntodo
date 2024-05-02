@@ -6,10 +6,10 @@ import type {
 import Todo from "@/app/routes/_app.app/Todo"
 import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
+import { Button } from "@mantine/core"
 import { json, redirect } from "@remix-run/cloudflare"
 import { useFetcher, useLoaderData } from "@remix-run/react"
 import { CreateTodoSchema } from "@repo/module/usecase/todo"
-import Button from "@repo/ui/elements/Button"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -99,9 +99,11 @@ export default function Route() {
           </div>
           <Button
             className="font-bold"
+            color="cyan"
             disabled={disabled}
+            radius="md"
+            size="md"
             type="submit"
-            variant={{ color: "sky", size: "md", variant: "normal" }}
           >
             {text}
           </Button>
