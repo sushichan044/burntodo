@@ -66,6 +66,9 @@ importers:
       '@mantine/notifications':
         specifier: ^7.8.1
         version: 7.8.1(@mantine/core@7.8.1(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(@types/react@18.3.1)(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430))(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430)
+      '@mantine/nprogress':
+        specifier: ^7.8.1
+        version: 7.8.1(@mantine/core@7.8.1(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(@types/react@18.3.1)(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430))(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430)
       '@remix-run/cloudflare':
         specifier: ^2.9.1
         version: 2.9.1(@cloudflare/workers-types@4.20240423.0)(typescript@5.4.5)
@@ -1601,6 +1604,14 @@ packages:
 
   '@mantine/notifications@7.8.1':
     resolution: {integrity: sha512-HpjZs45EmBYYmJj72+hbwLVxbO7nbZrkpjcrYc40/VIbcDjjJBXDZrAX4VLu7ZIjkbeoxxPgxp245XheC68ikA==}
+    peerDependencies:
+      '@mantine/core': 7.8.1
+      '@mantine/hooks': 7.8.1
+      react: ^18.2.0
+      react-dom: ^18.2.0
+
+  '@mantine/nprogress@7.8.1':
+    resolution: {integrity: sha512-C520eHH9S5/lFygIr3C5xdJHJaKxw5ITLcLlZrscD3MtzTAWcyelCEodbDEW+Y2eItXE6PtifYkDk9VLXu4WKw==}
     peerDependencies:
       '@mantine/core': 7.8.1
       '@mantine/hooks': 7.8.1
@@ -7808,6 +7819,14 @@ snapshots:
       react: 19.0.0-beta-4508873393-20240430
       react-dom: 19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430)
       react-transition-group: 4.4.5(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430)
+
+  '@mantine/nprogress@7.8.1(@mantine/core@7.8.1(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(@types/react@18.3.1)(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430))(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430)':
+    dependencies:
+      '@mantine/core': 7.8.1(@mantine/hooks@7.8.1(react@19.0.0-beta-4508873393-20240430))(@types/react@18.3.1)(react-dom@19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430))(react@19.0.0-beta-4508873393-20240430)
+      '@mantine/hooks': 7.8.1(react@19.0.0-beta-4508873393-20240430)
+      '@mantine/store': 7.8.1(react@19.0.0-beta-4508873393-20240430)
+      react: 19.0.0-beta-4508873393-20240430
+      react-dom: 19.0.0-beta-4508873393-20240430(react@19.0.0-beta-4508873393-20240430)
 
   '@mantine/store@7.8.1(react@19.0.0-beta-4508873393-20240430)':
     dependencies:
