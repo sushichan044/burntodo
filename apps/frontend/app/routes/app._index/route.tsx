@@ -3,13 +3,15 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/cloudflare"
 
-import Todo from "@/app/routes/_app.app/Todo"
+import NewTodoModal from "@/app/routes/app._index/NewTodoModal"
 import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
 import { Button } from "@mantine/core"
 import { json, redirect } from "@remix-run/cloudflare"
 import { useFetcher, useLoaderData } from "@remix-run/react"
 import { CreateTodoSchema } from "@repo/module/usecase/todo"
+
+import Todo from "./Todo"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -109,6 +111,7 @@ export default function Route() {
           </Button>
         </fetcher.Form>
       </section>
+      <NewTodoModal />
     </div>
   )
 }
