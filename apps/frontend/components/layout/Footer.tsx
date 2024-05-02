@@ -8,7 +8,7 @@ const styles = tv({
     innerWrapper:
       "flex w-full flex-row flex-nowrap items-center justify-between",
     wrapper:
-      "flex h-20 flex-row items-center border-t border-zinc-100 bg-white p-4",
+      "flex h-16 flex-row items-center border-t border-zinc-100 bg-white p-4",
   },
 })
 
