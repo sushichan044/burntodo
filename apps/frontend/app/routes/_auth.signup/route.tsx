@@ -8,9 +8,9 @@ import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
 import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
-import { Alert, Button, Container, TextInput } from "@mantine/core"
+import { Alert, Button, TextInput } from "@mantine/core"
 import { Form, json, redirect, useActionData } from "@remix-run/react"
-import { LogIn } from "lucide-react"
+import { LogIn } from "react-feather"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -42,48 +42,44 @@ export default function Route() {
   })
 
   return (
-    <Container className="flex-1 p-4" size="xs">
-      <div className="flex flex-col gap-y-16">
-        <h1 className="text-center text-4xl font-bold">
-          Sign up to BurnTodo🔥
-        </h1>
-        <Form className="space-y-4" method="POST" {...getFormProps(form)}>
-          {form.errors && form.errors.length > 0 && (
-            <Alert
-              classNames={{ message: "text-red-600 text-lg font-semibold" }}
-              color="red"
-              id={form.errorId}
-              variant="light"
-            >
-              {form.errors}
-            </Alert>
-          )}
-          <TextInput
-            autoComplete="nickname"
-            description="Enter your name"
-            descriptionProps={{ id: fields.name.descriptionId }}
-            size="lg"
-            {...getInputProps(fields.name, {
-              ariaDescribedBy: fields.name.descriptionId,
-              type: "text",
-            })}
-            error={fields.name.errors}
-            label="Name"
-            name="name"
-          />
-          <Button
-            className="w-full font-bold"
-            color="cyan"
-            disabled={!form.valid}
-            leftSection={<LogIn />}
-            size="lg"
-            type="submit"
+    <>
+      <h1 className="text-center text-4xl font-bold">Sign up to BurnTodo🔥</h1>
+      <Form className="space-y-4" method="POST" {...getFormProps(form)}>
+        {form.errors && form.errors.length > 0 && (
+          <Alert
+            classNames={{ message: "text-red-600 text-lg font-semibold" }}
+            color="red"
+            id={form.errorId}
+            variant="light"
           >
-            Sign up
-          </Button>
-        </Form>
-      </div>
-    </Container>
+            {form.errors}
+          </Alert>
+        )}
+        <TextInput
+          autoComplete="nickname"
+          description="Enter your name"
+          descriptionProps={{ id: fields.name.descriptionId }}
+          size="lg"
+          {...getInputProps(fields.name, {
+            ariaDescribedBy: fields.name.descriptionId,
+            type: "text",
+          })}
+          error={fields.name.errors}
+          label="Name"
+          name="name"
+        />
+        <Button
+          className="w-full font-bold"
+          color="cyan"
+          disabled={!form.valid}
+          leftSection={<LogIn />}
+          size="lg"
+          type="submit"
+        >
+          Sign up
+        </Button>
+      </Form>
+    </>
   )
 }
 

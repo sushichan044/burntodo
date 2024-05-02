@@ -6,14 +6,29 @@ body {
   display: flex;
   flex-flow: column nowrap;
   min-block-size: 100vh;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 @supports (min-block-size: 100dvh) {
   body {
+    text-size-adjust: 100%;
     min-block-size: 100vh;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  body {
+    scroll-behavior: auto;
   }
 }
 
 main {
   flex: 1;
+}
+
+* {
+  letter-spacing: 0.05em;
 }

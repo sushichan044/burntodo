@@ -1,41 +1,44 @@
-import ButtonLink from "@/components/ui/ButtonLink"
-import { Container } from "@mantine/core"
+import { Button, Container } from "@mantine/core"
 import { Link } from "@remix-run/react"
 import { tv } from "tailwind-variants"
 
 const styles = tv({
   slots: {
+    innerWrapper:
+      "flex size-full flex-row flex-nowrap items-center justify-between",
     title:
       "inline-flex flex-row items-center justify-center gap-x-3 text-2xl font-bold text-gray-800",
-    wrapper: "border-b border-zinc-100 bg-white p-4",
+    wrapper: "h-20 border-b border-zinc-100 bg-white p-4",
   },
 })
 
 const css = styles()
 
 type HeaderProps = {
-  showUserMenu?: boolean
+  hideUserMenu?: boolean | undefined
+  isLoggedIn?: boolean | undefined
 }
 
-const Header: React.FC<HeaderProps> = ({ showUserMenu }) => {
-  showUserMenu ??= false
+const Header: React.FC<HeaderProps> = ({ hideUserMenu, isLoggedIn }) => {
+  isLoggedIn ??= false
+  hideUserMenu ??= false
 
   return (
     <header className={css.wrapper()}>
-      <Container
-        className="flex flex-row flex-nowrap justify-between"
-        size="md"
-      >
-        <p>
-          <Link className={css.title()} to="/">
-            Burn Todo🔥
-          </Link>
-        </p>
-        {showUserMenu && (
-          <ButtonLink to="/logout" variant={{ color: "red", size: "md" }}>
-            Logout
-          </ButtonLink>
-        )}
+      <Container className={css.innerWrapper()} size="md">
+        <Link className={css.title()} to="/">
+          BurnTodo🔥
+        </Link>
+        {!hideUserMenu &&
+          (isLoggedIn ? (
+            <Button component={Link} to="/logout" variant="default">
+              Logout
+            </Button>
+          ) : (
+            <Button component={Link} to="/login" variant="default">
+              Login
+            </Button>
+          ))}
       </Container>
     </header>
   )
