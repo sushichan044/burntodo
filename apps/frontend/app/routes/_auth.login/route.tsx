@@ -65,7 +65,7 @@ export default function Route() {
         )}
         <fieldset className="space-y-4" disabled={isSubmitting}>
           <TextInput
-            autoComplete="nickname"
+            autoComplete="username"
             description="Enter your name"
             descriptionProps={{ id: fields.name.descriptionId }}
             error={fields.name.errors}
