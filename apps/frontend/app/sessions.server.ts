@@ -24,7 +24,7 @@ const {
     path: "/",
     sameSite: "lax",
     secrets: ["hello!", "This is sample secret key"],
-    secure: true,
+    secure: import.meta.env.PROD,
   },
 })
 

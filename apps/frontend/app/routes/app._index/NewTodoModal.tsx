@@ -1,7 +1,7 @@
 import NewTodoForm from "@/app/routes/app._index/NewTodoForm"
 import { Button, Modal } from "@mantine/core"
 import { useDisclosure, useMediaQuery } from "@mantine/hooks"
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6"
 
 const NewTodoModal = () => {
   const [opened, { close, open }] = useDisclosure(false)
@@ -16,10 +16,11 @@ const NewTodoModal = () => {
   return (
     <>
       <Button
-        className="bg-orange-400 transition hover:bg-orange-500 focus:bg-orange-500 max-md:rounded-full"
+        className="bg-orange-400 transition hover:bg-orange-500 focus:bg-orange-500 max-md:aspect-square max-md:rounded-full max-md:p-2"
         onClick={openModal}
+        size="lg"
       >
-        <FaPlus />
+        <FaPlus size={24} />
         <p className="ms-2 max-md:hidden">Add New Todo</p>
       </Button>
       <Modal

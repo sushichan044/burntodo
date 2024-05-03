@@ -44,9 +44,9 @@ export default function Route() {
   return (
     <div className="space-y-8 py-8 md:space-y-12">
       <section className="space-y-4">
-        <div className="flex flex-row flex-nowrap justify-between">
+        <div className="flex flex-row flex-nowrap items-center justify-between">
           <h1 className="text-2xl font-bold text-slate-600">TASKS</h1>
-          <aside className="max-md:absolute max-md:bottom-4 max-md:right-4">
+          <aside className="max-md:fixed max-md:bottom-5 max-md:right-5">
             <NewTodoModal />
           </aside>
         </div>

@@ -22,7 +22,7 @@ export default function AppLayout() {
   return (
     <>
       <Header isLoggedIn={loggedIn} variants={{ theme: "app" }} />
-      <main className="relative bg-slate-100">
+      <main className="bg-slate-100">
         <Container size="sm">
           <Outlet />
         </Container>

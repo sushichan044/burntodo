@@ -96,14 +96,16 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
           {...getFormProps(form)}
         >
           <TextInput
+            classNames={{ input: "text-base" }}
             data-autofocus
             error={fields.title.errors}
-            errorProps={{ className: "ps-[60px] font-semibold" }}
+            errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
             label="title"
-            labelProps={{ className: "sr-only" }}
+            labelProps={{ className: "sr-only " }}
             leftSection={<></>}
             leftSectionWidth={60}
             placeholder="Enter title"
+            size="xl"
             variant="unstyled"
             {...getInputProps(fields.title, {
               ariaDescribedBy: fields.title.descriptionId,
@@ -112,13 +114,15 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
           />
           <Divider my="sm" />
           <TextInput
+            classNames={{ input: "text-base" }}
             error={fields.description.errors}
-            errorProps={{ className: "ps-[60px]" }}
+            errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
             label="description"
             labelProps={{ className: "sr-only" }}
             leftSection={<FaList />}
             leftSectionWidth={60}
             placeholder="Enter description"
+            size="xl"
             variant="unstyled"
             {...getInputProps(fields.description, {
               ariaDescribedBy: fields.description.descriptionId,
