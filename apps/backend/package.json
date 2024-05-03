@@ -5,6 +5,7 @@
     "dev": "twrangler build && wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "db:migrate": "drizzle-kit generate:sqlite",
+    "db:migrate-custom": "drizzle-kit generate:sqlite --custom",
     "db:push": "wrangler d1 migrations apply remix-hono-turbo-example --local",
     "db:push-remote": "wrangler d1 migrations apply remix-hono-turbo-example --remote"
   },

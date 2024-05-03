@@ -5,7 +5,7 @@ import { NewTodoSchema } from "@/app/routes/app/form"
 import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
 import { Button, Container, Divider, TextInput } from "@mantine/core"
-import { Form, useActionData } from "@remix-run/react"
+import { Form, useActionData, useNavigation } from "@remix-run/react"
 import { FaList } from "react-icons/fa6"
 import { tv } from "tailwind-variants"
 
@@ -46,6 +46,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
   variants,
 }) => {
   const lastResult = useActionData<typeof AppIndexAction>()
+  const navigation = useNavigation()
   const [form, fields] = useForm({
     constraint: getZodConstraint(NewTodoSchema),
     lastResult,
@@ -61,6 +62,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
     shouldValidate: "onBlur",
   })
   const css = style(variants)
+  const isSubmitting = navigation.formAction === "/app?index"
 
   return (
     <div className={css.wrapper()}>
@@ -81,6 +83,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
           color="orange"
           disabled={!form.valid}
           form={form.id}
+          loading={isSubmitting}
           radius="xl"
           size="md"
           type="submit"
@@ -95,40 +98,42 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
           method="POST"
           {...getFormProps(form)}
         >
-          <TextInput
-            classNames={{ input: "text-base" }}
-            data-autofocus
-            error={fields.title.errors}
-            errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
-            label="title"
-            labelProps={{ className: "sr-only " }}
-            leftSection={<></>}
-            leftSectionWidth={60}
-            placeholder="Enter title"
-            size="xl"
-            variant="unstyled"
-            {...getInputProps(fields.title, {
-              ariaDescribedBy: fields.title.descriptionId,
-              type: "text",
-            })}
-          />
-          <Divider my="sm" />
-          <TextInput
-            classNames={{ input: "text-base" }}
-            error={fields.description.errors}
-            errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
-            label="description"
-            labelProps={{ className: "sr-only" }}
-            leftSection={<FaList />}
-            leftSectionWidth={60}
-            placeholder="Enter description"
-            size="xl"
-            variant="unstyled"
-            {...getInputProps(fields.description, {
-              ariaDescribedBy: fields.description.descriptionId,
-              type: "text",
-            })}
-          />
+          <fieldset disabled={isSubmitting}>
+            <TextInput
+              classNames={{ input: "text-base" }}
+              data-autofocus
+              error={fields.title.errors}
+              errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
+              label="title"
+              labelProps={{ className: "sr-only " }}
+              leftSection={<></>}
+              leftSectionWidth={60}
+              placeholder="Enter title"
+              size="xl"
+              variant="unstyled"
+              {...getInputProps(fields.title, {
+                ariaDescribedBy: fields.title.descriptionId,
+                type: "text",
+              })}
+            />
+            <Divider my="sm" />
+            <TextInput
+              classNames={{ input: "text-base" }}
+              error={fields.description.errors}
+              errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
+              label="description"
+              labelProps={{ className: "sr-only" }}
+              leftSection={<FaList />}
+              leftSectionWidth={60}
+              placeholder="Enter description"
+              size="xl"
+              variant="unstyled"
+              {...getInputProps(fields.description, {
+                ariaDescribedBy: fields.description.descriptionId,
+                type: "text",
+              })}
+            />
+          </fieldset>
         </Form>
       </Container>
     </div>

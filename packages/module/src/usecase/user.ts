@@ -5,31 +5,38 @@ import { randomUUID } from "node:crypto"
 import { Err, Ok, type Result } from "ts-results"
 
 import type { DBType } from "../core/db"
-import type { TB_UserSelect } from "../zod"
 
+import { hashPassword, verifyPassword } from "../core/auth"
 import { TB_user } from "../schema"
-import { TB_userInsertSchema } from "../zod"
+import { TB_userInsertSchema, TB_userSelectSchema } from "../zod"
 
-const CreateUserSchema = TB_userInsertSchema.pick({ name: true })
+const CreateUserSchema = TB_userInsertSchema.pick({
+  name: true,
+  password: true,
+})
 type CreateUserInput = z.infer<typeof CreateUserSchema>
 
-const createUser = async (
-  input: CreateUserInput,
-  db: DBType,
-): Promise<Result<TB_UserSelect, string>> => {
+const createUser = async (input: CreateUserInput, db: DBType) => {
   const id = randomUUID()
-  const userParse = await TB_userInsertSchema.safeParseAsync({ ...input, id })
+  const { password, ...rest } = input
+  const hashed = await hashPassword(password)
+  const userParse = await TB_userInsertSchema.safeParseAsync({
+    ...rest,
+    id,
+    password: hashed,
+  })
   if (!userParse.success) {
     return Err(userParse.error.errors.map((e) => e.message).join(", "))
   }
   const user = userParse.data
 
   try {
-    const [already] = await db
-      .select()
-      .from(TB_user)
-      .limit(1)
-      .where(eq(TB_user.name, user.name))
+    const already = await db.query.TB_user.findFirst({
+      columns: {
+        name: true,
+      },
+      where: (fields, { eq }) => eq(fields.name, user.name),
+    })
     if (already) {
       return Err("User already exists")
     }
@@ -51,16 +58,14 @@ const createUser = async (
 const GetUserSchema = TB_userInsertSchema.pick({ name: true })
 type GetUserInput = z.infer<typeof GetUserSchema>
 
-const getUser = async (
-  input: GetUserInput,
-  db: DBType,
-): Promise<Result<TB_UserSelect, string>> => {
+const getUser = async (input: GetUserInput, db: DBType) => {
   try {
-    const [user] = await db
-      .select()
-      .from(TB_user)
-      .where(eq(TB_user.name, input.name))
-      .limit(1)
+    const user = await db.query.TB_user.findFirst({
+      columns: {
+        password: false,
+      },
+      where: (fields, { eq }) => eq(fields.name, input.name),
+    })
 
     if (!user) {
       return Err("User not found")
@@ -75,17 +80,19 @@ const getUser = async (
   }
 }
 
-const getAllUsers = async (
+const getManyUsers = async (
   db: DBType,
   options?: { limit: number; offset: number } | undefined,
-): Promise<Result<TB_UserSelect[], string>> => {
+) => {
   options ??= { limit: 100, offset: 0 }
   try {
-    const users = await db
-      .select()
-      .from(TB_user)
-      .limit(options.limit)
-      .offset(options.offset)
+    const users = await db.query.TB_user.findMany({
+      columns: {
+        password: false,
+      },
+      limit: options.limit,
+      offset: options.offset,
+    })
     return Ok(users)
   } catch (e) {
     if (e instanceof Error) {
@@ -95,30 +102,12 @@ const getAllUsers = async (
   }
 }
 
-const getUserWithTodos = async (
-  input: GetUserInput,
-  db: DBType,
-): Promise<
-  Result<
-    | {
-        createdAt: Date
-        name: string
-        todos: {
-          createdAt: Date
-          description: string | null
-          id: string
-          title: string
-          updatedAt: Date
-          userName: string
-        }[]
-        updatedAt: Date
-      }
-    | undefined,
-    string
-  >
-> => {
+const getUserWithTodos = async (input: GetUserInput, db: DBType) => {
   try {
     const user = await db.query.TB_user.findFirst({
+      columns: {
+        password: false,
+      },
       where: (fields, { eq }) => eq(fields.name, input.name),
       with: {
         todos: true,
@@ -129,6 +118,42 @@ const getUserWithTodos = async (
     }
 
     return Ok(user)
+  } catch (e) {
+    if (e instanceof Error) {
+      return Err(e.message)
+    }
+    return Err(String(e))
+  }
+}
+
+const VerifyUserSchema = TB_userSelectSchema.pick({
+  name: true,
+  password: true,
+})
+type VerifyUserInput = z.infer<typeof VerifyUserSchema>
+
+const verifyUser = async (
+  input: VerifyUserInput,
+  db: DBType,
+): Promise<Result<null, string>> => {
+  try {
+    const user = await db.query.TB_user.findFirst({
+      columns: {
+        password: true,
+      },
+      where: (fields, { eq }) => eq(fields.name, input.name),
+    })
+
+    if (!user) {
+      return Err("User not found")
+    }
+
+    const valid = await verifyPassword(input.password, user.password)
+    if (!valid) {
+      return Err("Invalid password")
+    }
+
+    return Ok(null)
   } catch (e) {
     if (e instanceof Error) {
       return Err(e.message)
@@ -163,5 +188,12 @@ const deleteUser = async (
   }
 }
 
-export { createUser, deleteUser, getAllUsers, getUser, getUserWithTodos }
-export { CreateUserSchema, DeleteUserSchema, GetUserSchema }
+export {
+  createUser,
+  deleteUser,
+  getManyUsers,
+  getUser,
+  getUserWithTodos,
+  verifyUser,
+}
+export { CreateUserSchema, DeleteUserSchema, GetUserSchema, VerifyUserSchema }

@@ -144,7 +144,7 @@ const deleteTodo = async (
   }
 }
 
-export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserName  }
+export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserName }
 export {
   CreateTodoSchema,
   DeleteTodoSchema,

@@ -3,13 +3,19 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/cloudflare"
 
-import { signInUpSchema } from "@/app/routes/_auth/form"
+import { signInSchema, signUpSchema } from "@/app/routes/_auth/form"
 import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
 import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
 import { Alert, Button, TextInput } from "@mantine/core"
-import { Form, json, redirect, useActionData } from "@remix-run/react"
+import {
+  Form,
+  json,
+  redirect,
+  useActionData,
+  useNavigation,
+} from "@remix-run/react"
 import { FiLogIn } from "react-icons/fi"
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -31,15 +37,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function Route() {
   const lastResult = useActionData<typeof action>()
+  const navigation = useNavigation()
   const [form, fields] = useForm({
-    constraint: getZodConstraint(signInUpSchema),
+    constraint: getZodConstraint(signUpSchema),
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: signInUpSchema })
+      return parseWithZod(formData, { schema: signInSchema })
     },
     shouldRevalidate: "onInput",
     shouldValidate: "onBlur",
   })
+  const isSubmitting = navigation.formAction === "/login"
 
   return (
     <>
@@ -55,29 +63,43 @@ export default function Route() {
             {form.errors}
           </Alert>
         )}
-        <TextInput
-          autoComplete="nickname"
-          description="Enter your name"
-          descriptionProps={{ id: fields.name.descriptionId }}
-          size="lg"
-          {...getInputProps(fields.name, {
-            ariaDescribedBy: fields.name.descriptionId,
-            type: "text",
-          })}
-          error={fields.name.errors}
-          label="Name"
-          name="name"
-        />
-        <Button
-          className="w-full font-bold"
-          color="cyan"
-          disabled={!form.valid}
-          leftSection={<FiLogIn />}
-          size="lg"
-          type="submit"
-        >
-          Log in
-        </Button>
+        <fieldset className="space-y-4" disabled={isSubmitting}>
+          <TextInput
+            autoComplete="nickname"
+            description="Enter your name"
+            descriptionProps={{ id: fields.name.descriptionId }}
+            error={fields.name.errors}
+            label="Name"
+            size="lg"
+            {...getInputProps(fields.name, {
+              ariaDescribedBy: fields.name.descriptionId,
+              type: "text",
+            })}
+          />
+          <TextInput
+            autoComplete="current-password"
+            description="Enter your password"
+            descriptionProps={{ id: fields.password.descriptionId }}
+            error={fields.password.errors}
+            label="Password"
+            size="lg"
+            {...getInputProps(fields.password, {
+              ariaDescribedBy: fields.password.descriptionId,
+              type: "password",
+            })}
+          />
+          <Button
+            className="w-full font-bold"
+            color="cyan"
+            disabled={!form.valid}
+            leftSection={<FiLogIn />}
+            loading={isSubmitting}
+            size="lg"
+            type="submit"
+          >
+            Log in
+          </Button>
+        </fieldset>
       </Form>
     </>
   )
@@ -87,13 +109,13 @@ export async function action({ context, request }: ActionFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
   const api = getApi({ context })
   const formData = await request.formData()
-  const submission = parseWithZod(formData, { schema: signInUpSchema })
+  const submission = parseWithZod(formData, { schema: signInSchema })
   if (submission.status !== "success") {
     return submission.reply()
   }
 
-  const result = await api.user[":name"]
-    .$get({ param: submission.value })
+  const result = await api.auth.verify
+    .$post({ json: submission.value })
     .then((res) => res.json())
 
   if (result.error) {
@@ -101,13 +123,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
       formErrors: [result.error],
     })
   }
-  if (result.data == null) {
-    return submission.reply({
-      formErrors: ["Failed to log in"],
-    })
-  }
 
-  session.set("userName", result.data.name)
+  session.set("userName", submission.value.name)
   return redirect("/app", {
     headers: {
       "Set-Cookie": await commitSession(session),
