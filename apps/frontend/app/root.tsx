@@ -26,13 +26,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, [navigation.state])
 
   return (
-    <html lang="ja">
+    <html data-mantine-color-scheme="light" lang="ja">
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <Meta />
         <Links />
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body>
         <MantineProvider>
