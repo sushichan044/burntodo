@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.2.9"
+    "hono": "^4.3.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240423.0",
+    "@cloudflare/workers-types": "^4.20240502.0",
     "drizzle-kit": "^0.20.17",
     "twrangler": "^0.0.7",
-    "wrangler": "^3.53.0"
+    "wrangler": "^3.53.1"
   }
 }
