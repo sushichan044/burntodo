@@ -20,7 +20,7 @@ export default function Layout() {
   return (
     <>
       <Header isLoggedIn={loggedIn} />
-      <main className="bg-orange-50/50">
+      <main className="bg-orange-50">
         <Outlet />
       </main>
       <Footer />

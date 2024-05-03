@@ -40,7 +40,7 @@ export default function Index() {
           component={Link}
           leftSection={<Zap />}
           radius="md"
-          size="lg"
+          size="md"
           to="/signup"
           variant="filled"
           variants={{ color: "none" }}
@@ -52,7 +52,7 @@ export default function Index() {
           component={Link}
           leftSection={<Figma />}
           radius="md"
-          size="lg"
+          size="md"
           to="https://www.figma.com/file/0G1WPjQpdySKBhBsMR8aMl/Workers-Pages-Connect?type=whiteboard&node-id=0%3A1&t=INSAv3hwRCoZ161Q-1"
           variant="filled"
           variants={{ color: "none" }}
@@ -64,7 +64,7 @@ export default function Index() {
           component={Link}
           leftSection={<GitHub />}
           radius="md"
-          size="lg"
+          size="md"
           to={REPO_URL}
           variant="filled"
           variants={{ color: "none" }}
