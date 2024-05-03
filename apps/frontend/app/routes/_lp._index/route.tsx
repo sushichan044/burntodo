@@ -3,7 +3,8 @@ import type { MetaFunction } from "@remix-run/cloudflare"
 import { REPO_URL } from "@/app/const"
 import Link from "@/components/element/Link"
 import { Button, Container } from "@mantine/core"
-import { Figma, GitHub, Zap } from "react-feather"
+import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6"
+
 export const meta: MetaFunction = () => {
   return [
     { title: "BurnTodo🔥" },
@@ -38,7 +39,7 @@ export default function Index() {
         <Button
           color="orange"
           component={Link}
-          leftSection={<Zap />}
+          leftSection={<FaBolt />}
           radius="md"
           size="md"
           to="/signup"
@@ -50,7 +51,7 @@ export default function Index() {
         <Button
           color="blue"
           component={Link}
-          leftSection={<Figma />}
+          leftSection={<FaFigma />}
           radius="md"
           size="md"
           to="https://www.figma.com/file/0G1WPjQpdySKBhBsMR8aMl/Workers-Pages-Connect?type=whiteboard&node-id=0%3A1&t=INSAv3hwRCoZ161Q-1"
@@ -62,7 +63,7 @@ export default function Index() {
         <Button
           color="dark"
           component={Link}
-          leftSection={<GitHub />}
+          leftSection={<FaGithub />}
           radius="md"
           size="md"
           to={REPO_URL}

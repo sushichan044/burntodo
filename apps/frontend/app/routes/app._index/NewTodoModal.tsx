@@ -1,43 +1,35 @@
-import { useWindow } from "@/hooks/useWindow"
-import { ActionIcon, Affix, Button, Container, Modal } from "@mantine/core"
-import { ActionIcon } from "@mantine/core"
-import { useDisclosure } from "@mantine/hooks"
-import { useNavigate } from "@remix-run/react"
-import { Plus } from "react-feather"
+import NewTodoForm from "@/app/routes/app._index/NewTodoForm"
+import { Button, Modal } from "@mantine/core"
+import { useDisclosure, useMediaQuery } from "@mantine/hooks"
+import { FaPlus } from "react-icons/fa6";
 
 const NewTodoModal = () => {
   const [opened, { close, open }] = useDisclosure(false)
-  const navigate = useNavigate()
-  const window = useWindow()
+  const openModal = () => {
+    open()
+  }
+  const closeModal = () => {
+    close()
+  }
+  const isDesktop = useMediaQuery("(min-width: 768px)")
 
   return (
     <>
-      <Affix position={{ bottom: 100, right: 20 }}>
-        <ActionIcon
-          onClick={() => {
-            window?.history.pushState(null, "", "/app/new")
-            open()
-          }}
-          radius="xl"
-          size={40}
-        >
-          <Plus />
-        </ActionIcon>
-      </Affix>
-      <Modal
-        classNames={{
-          header: "max-w-[500px] mx-auto",
-        }}
-        fullScreen
-        onClose={() => {
-          navigate(-1)
-          close()
-        }}
-        opened={opened}
-        title={<h1 className="text-2xl font-bold">New Todo</h1>}
-        transitionProps={{ duration: 250, transition: "slide-up" }}
+      <Button
+        className="bg-orange-400 transition hover:bg-orange-500 focus:bg-orange-500 max-md:rounded-full"
+        onClick={openModal}
       >
-        <Container size={500}>Hello!</Container>
+        <FaPlus />
+        <p className="ms-2 max-md:hidden">Add New Todo</p>
+      </Button>
+      <Modal
+        fullScreen={!isDesktop}
+        onClose={closeModal}
+        opened={opened}
+        transitionProps={{ duration: 250, transition: "slide-up" }}
+        withCloseButton={false}
+      >
+        <NewTodoForm onBackFn={closeModal} onSubmitFn={closeModal} />
       </Modal>
     </>
   )

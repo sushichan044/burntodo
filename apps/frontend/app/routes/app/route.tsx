@@ -21,9 +21,9 @@ export default function AppLayout() {
 
   return (
     <>
-      <Header isLoggedIn={loggedIn} />
-      <main className="bg-orange-50">
-        <Container className="p-4" size="md">
+      <Header isLoggedIn={loggedIn} variants={{ theme: "app" }} />
+      <main className="relative bg-slate-100">
+        <Container size="sm">
           <Outlet />
         </Container>
       </main>

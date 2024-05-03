@@ -10,7 +10,7 @@ import {
 } from "@/app/sessions.server"
 import { Button } from "@mantine/core"
 import { json, redirect, useFetcher } from "@remix-run/react"
-import { LogOut } from "react-feather"
+import { FiLogOut } from "react-icons/fi"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -54,7 +54,7 @@ export default function Route() {
           className="w-full font-bold"
           color="red"
           disabled={disabled}
-          leftSection={<LogOut />}
+          leftSection={<FiLogOut />}
           size="lg"
           type="submit"
         >

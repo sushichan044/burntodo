@@ -15,10 +15,10 @@
   "dependencies": {
     "@conform-to/react": "^1.1.3",
     "@conform-to/zod": "^1.1.3",
-    "@mantine/core": "^7.8.1",
-    "@mantine/hooks": "^7.8.1",
-    "@mantine/notifications": "^7.8.1",
-    "@mantine/nprogress": "^7.8.1",
+    "@mantine/core": "^7.9.0",
+    "@mantine/hooks": "^7.9.0",
+    "@mantine/notifications": "^7.9.0",
+    "@mantine/nprogress": "^7.9.0",
     "@remix-run/cloudflare": "^2.9.1",
     "@remix-run/cloudflare-pages": "^2.9.1",
     "@remix-run/react": "^2.9.1",
@@ -29,17 +29,17 @@
     "miniflare": "^3.20240419.0",
     "react": "19.0.0-beta-4508873393-20240430",
     "react-dom": "19.0.0-beta-4508873393-20240430",
-    "react-feather": "^2.0.10",
+    "react-icons": "^5.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
-    "zod": "^3.23.5"
+    "zod": "^3.23.6"
   },
   "overrides": {
     "react": "19.0.0-beta-4508873393-20240430",
     "react-dom": "19.0.0-beta-4508873393-20240430"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240423.0",
+    "@cloudflare/workers-types": "^4.20240502.0",
     "@double-great/stylelint-a11y": "^3.0.2",
     "@remix-run/dev": "^2.9.1",
     "@types/react": "^18.3.1",
@@ -53,7 +53,7 @@
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
-    "stylelint": "^16.4.0",
+    "stylelint": "^16.5.0",
     "stylelint-config-recess-order": "^5.0.1",
     "stylelint-config-recommended": "^14.0.0",
     "stylelint-config-sass-guidelines": "^11.1.0",
@@ -61,10 +61,11 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.8.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10",
+    "vite": "^5.2.11",
     "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^3.53.0"
+    "wrangler": "^3.53.1"
   }
 }

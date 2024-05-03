@@ -19,7 +19,7 @@ const linkStyles = tv({
       hocus: "color",
     },
     {
-      className: "hover:brightness-75 focus:brightness-75",
+      className: "hover:brightness-95 focus:brightness-95",
       color: "current",
       hocus: "color",
     },

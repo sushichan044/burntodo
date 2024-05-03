@@ -10,7 +10,7 @@ import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
 import { Alert, Button, TextInput } from "@mantine/core"
 import { Form, json, redirect, useActionData } from "@remix-run/react"
-import { LogIn } from "react-feather"
+import { FiLogIn } from "react-icons/fi"
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -72,7 +72,7 @@ export default function Route() {
           className="w-full font-bold"
           color="cyan"
           disabled={!form.valid}
-          leftSection={<LogIn />}
+          leftSection={<FiLogIn />}
           size="lg"
           type="submit"
         >

@@ -1,3 +1,5 @@
+import scrollBar from "tailwind-scrollbar"
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -5,7 +7,9 @@ export default {
     "./components/**/*.{js,jsx,ts,tsx,md,mdx}",
     "../../packages/ui/**/*.{js,jsx,ts,tsx,md,mdx}",
   ],
-  plugins: [],
+  plugins: [
+    scrollBar({ nocompatible: true, preferredStrategy: "pseudoelements" }),
+  ],
   theme: {
     extend: {},
   },

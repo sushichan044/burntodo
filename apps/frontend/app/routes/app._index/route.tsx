@@ -3,15 +3,16 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/cloudflare"
 
-import NewTodoModal from "@/app/routes/app._index/NewTodoModal"
+import { DeleteTodoSchema, NewTodoSchema } from "@/app/routes/app/form"
 import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
-import { Button } from "@mantine/core"
+import { parseWithZod } from "@conform-to/zod"
 import { json, redirect } from "@remix-run/cloudflare"
-import { useFetcher, useLoaderData } from "@remix-run/react"
-import { CreateTodoSchema } from "@repo/module/usecase/todo"
+import { useLoaderData } from "@remix-run/react"
+import { FiAlertCircle, FiCheckCircle } from "react-icons/fi"
 
-import Todo from "./Todo"
+import NewTodoModal from "./NewTodoModal"
+import TodoWrapper from "./TodoWrapper"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"))
@@ -39,79 +40,37 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
 export default function Route() {
   const loaderData = useLoaderData<typeof loader>()
-  const fetcher = useFetcher<typeof action>()
-  const { disabled, text } = (() => {
-    if (fetcher.state === "idle") return { disabled: false, text: "Add todo" }
-    if (fetcher.state === "submitting")
-      return { disabled: true, text: "Submitting..." }
-    return { disabled: true, text: "loading..." }
-  })()
 
   return (
-    <div className="flex flex-col gap-y-8">
-      {fetcher.data?.error && (
-        <span className="text-red-500">{fetcher.data.error}</span>
-      )}
-      <section className="space-y-2 rounded bg-white px-8 py-4">
-        <h2 className="mb-2 mt-4 text-3xl font-bold">tasks</h2>
-        <div className="flex flex-col flex-nowrap gap-y-3">
-          {loaderData.data == null || loaderData.data.length === 0 ? (
-            <span className="text-center text-2xl font-bold text-zinc-800">
-              All finished! Nice work! 🎉
-            </span>
-          ) : (
-            loaderData.data.map(({ description, id, title }) => (
-              <Todo
-                doneTask={() => {
-                  fetcher.submit({ id }, { method: "DELETE" })
-                }}
-                key={id}
-                task={{ description, id, title }}
-              />
-            ))
-          )}
+    <div className="space-y-8 py-8 md:space-y-12">
+      <section className="space-y-4">
+        <div className="flex flex-row flex-nowrap justify-between">
+          <h1 className="text-2xl font-bold text-slate-600">TASKS</h1>
+          <aside className="max-md:absolute max-md:bottom-4 max-md:right-4">
+            <NewTodoModal />
+          </aside>
         </div>
-      </section>
-      <section className="rounded bg-white px-8 py-6">
-        <h3 className="mb-1.5 text-xl font-bold">Add new task</h3>
-        <fetcher.Form className="space-y-4" method="POST">
-          <div>
-            <label className="mb-1 text-zinc-500" htmlFor="title">
-              Title
-            </label>
-            <input
-              className="block rounded border border-zinc-200 p-2"
-              id="title"
-              minLength={1}
-              name="title"
-              type="text"
-            />
+        {loaderData.error && (
+          <div className="grid grid-rows-[80px_1fr] gap-y-8 rounded-md bg-white p-8 text-rose-500 md:gap-y-12">
+            <FiAlertCircle className="size-full" />
+            <p className="text-center text-lg font-semibold md:text-xl">
+              Error occurred while fetching data:
+              <br />
+              {loaderData.error}
+            </p>
           </div>
-          <div>
-            <label className="mb-1 text-zinc-500" htmlFor="description">
-              Description
-            </label>
-            <input
-              className="block rounded border border-zinc-200 p-2"
-              id="description"
-              minLength={1}
-              name="description"
-              type="text"
-            />
+        )}
+        {loaderData.data == null || loaderData.data.length < 1 ? (
+          <div className="grid grid-rows-[80px_1fr] gap-y-8 rounded-md bg-white p-8 text-teal-500 md:gap-y-12">
+            <FiCheckCircle className="size-full" />
+            <p className="text-center text-lg font-semibold md:text-xl">
+              All tasks are done! Nice job!
+            </p>
           </div>
-          <Button
-            className="font-bold"
-            color="cyan"
-            disabled={disabled}
-            radius="md"
-            size="md"
-            type="submit"
-          >
-            {text}
-          </Button>
-        </fetcher.Form>
+        ) : (
+          <TodoWrapper todos={loaderData.data} />
+        )}
       </section>
-      <NewTodoModal />
     </div>
   )
 }
@@ -125,41 +84,58 @@ export async function action({ context, request }: ActionFunctionArgs) {
   }
 
   const api = getApi({ context })
+
   switch (request.method) {
     case "POST": {
       const formData = await request.formData()
-      const data = {
-        ...Object.fromEntries(formData.entries()),
-        userName,
+      const submission = parseWithZod(formData, { schema: NewTodoSchema })
+      if (submission.status !== "success") {
+        return submission.reply()
       }
-      const todo = await CreateTodoSchema.safeParseAsync(data)
-      if (!todo.success)
-        return json({ data: null, error: todo.error.message }, 400)
-      return await api.todo
-        .$post({ json: todo.data })
+
+      const result = await api.todo
+        .$post({ json: { ...submission.value, userName } })
         .then((res) => res.json())
-        .catch((error) => {
-          console.error(error)
-          return { data: null, error: String(error) }
+
+      if (result.error) {
+        return submission.reply({
+          formErrors: [result.error],
         })
+      }
+      if (result.data == null) {
+        return submission.reply({
+          formErrors: ["Failed to Create Todo"],
+        })
+      }
+      break
     }
     case "DELETE": {
       const formData = await request.formData()
-      const id = formData.get("id")
-      if (!id || typeof id !== "string")
-        return json({ data: null, error: "id is required" }, 400)
-      return await api.todo[":id"]
+      const submission = parseWithZod(formData, { schema: DeleteTodoSchema })
+      if (submission.status !== "success") {
+        return submission.reply()
+      }
+
+      const result = await api.todo[":id"]
         .$delete({
-          param: { id },
+          param: { id: submission.value.id },
         })
         .then((res) => res.json())
-        .catch((error) => {
-          console.error(error)
-          return { data: null, error: String(error) }
+
+      if (result.error) {
+        return submission.reply({
+          formErrors: [result.error],
         })
-    }
-    default: {
-      return json({ data: null, error: "method not allowed" }, 405)
+      }
+      if (result.data == null) {
+        return submission.reply({
+          formErrors: ["Failed to Delete Todo"],
+        })
+      }
+
+      return submission.reply({ formErrors: ["Success"] })
     }
   }
+
+  return redirect("/app")
 }
