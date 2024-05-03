@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs"
 type HashPassword = (rawPassword: string) => Promise<string>
 
 const hashPassword: HashPassword = async (rawPassword: string) => {
-  const salt = await bcrypt.genSalt(16)
+  const salt = await bcrypt.genSalt(10)
   const hashed = await bcrypt.hash(rawPassword, salt)
   return hashed
 }
