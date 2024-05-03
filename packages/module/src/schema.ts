@@ -19,7 +19,7 @@ const TB_todo = sqliteTable("todos", {
   createdAt: integer("createdAt", { mode: "timestamp" })
     .default(sql`(CURRENT_TIMESTAMP)`)
     .notNull(),
-  description: text("description").notNull(),
+  description: text("description"),
   id: text("id").primaryKey().notNull(), // UUID
   title: text("title").notNull(),
   updatedAt: integer("updatedAt", { mode: "timestamp" })

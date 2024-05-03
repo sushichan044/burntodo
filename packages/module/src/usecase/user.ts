@@ -105,7 +105,7 @@ const getUserWithTodos = async (
         name: string
         todos: {
           createdAt: Date
-          description: string
+          description: string | null
           id: string
           title: string
           updatedAt: Date
@@ -163,15 +163,5 @@ const deleteUser = async (
   }
 }
 
-export {
-  createUser,
-  deleteUser,
-  getAllUsers,
-  getUser,
-  getUserWithTodos,
-}
-export {
-  CreateUserSchema,
-  DeleteUserSchema,
-  GetUserSchema,
-}
+export { createUser, deleteUser, getAllUsers, getUser, getUserWithTodos }
+export { CreateUserSchema, DeleteUserSchema, GetUserSchema }
