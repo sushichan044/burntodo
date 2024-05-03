@@ -27,16 +27,16 @@
     "clsx": "^2.1.1",
     "isbot": "^4.4.0",
     "miniflare": "^3.20240419.0",
-    "react": "19.0.0-beta-4508873393-20240430",
-    "react-dom": "19.0.0-beta-4508873393-20240430",
+    "react": "19.0.0-beta-1beb73de0f-20240503",
+    "react-dom": "19.0.0-beta-1beb73de0f-20240503",
     "react-icons": "^5.2.0",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
     "zod": "^3.23.6"
   },
   "overrides": {
-    "react": "19.0.0-beta-4508873393-20240430",
-    "react-dom": "19.0.0-beta-4508873393-20240430"
+    "react": "19.0.0-beta-1beb73de0f-20240503",
+    "react-dom": "19.0.0-beta-1beb73de0f-20240503"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240502.0",
