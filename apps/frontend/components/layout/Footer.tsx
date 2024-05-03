@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
           // replace link later
         }
         <Link to={REPO_URL} variants={{ color: "current" }}>
-          <FaGithub />
+          <FaGithub size={24} />
         </Link>
       </Container>
     </footer>

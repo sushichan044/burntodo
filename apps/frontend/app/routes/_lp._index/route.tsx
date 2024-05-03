@@ -39,7 +39,7 @@ export default function Index() {
         <Button
           color="orange"
           component={Link}
-          leftSection={<FaBolt />}
+          leftSection={<FaBolt size={24} />}
           radius="md"
           size="md"
           to="/signup"
@@ -51,7 +51,7 @@ export default function Index() {
         <Button
           color="blue"
           component={Link}
-          leftSection={<FaFigma />}
+          leftSection={<FaFigma size={24} />}
           radius="md"
           size="md"
           to="https://www.figma.com/file/0G1WPjQpdySKBhBsMR8aMl/Workers-Pages-Connect?type=whiteboard&node-id=0%3A1&t=INSAv3hwRCoZ161Q-1"
@@ -63,7 +63,7 @@ export default function Index() {
         <Button
           color="dark"
           component={Link}
-          leftSection={<FaGithub />}
+          leftSection={<FaGithub size={24} />}
           radius="md"
           size="md"
           to={REPO_URL}

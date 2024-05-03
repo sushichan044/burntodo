@@ -46,7 +46,7 @@ export default function Route() {
       <section className="space-y-4">
         <div className="flex flex-row flex-nowrap items-center justify-between">
           <h1 className="text-2xl font-bold text-slate-600">TASKS</h1>
-          <aside className="max-md:fixed max-md:bottom-5 max-md:right-5">
+          <aside className="max-md:fixed max-md:bottom-[88px] max-md:right-6">
             <NewTodoModal />
           </aside>
         </div>
