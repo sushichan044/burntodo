@@ -7,7 +7,7 @@ import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6"
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "BurnTodo🔥" },
+    { title: "BurnTodo" },
     {
       content: "A simple todo app built with Hono and Remix",
       name: "description",
