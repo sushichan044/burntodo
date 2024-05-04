@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@virtual-live-lab/eslint-config':
         specifier: ^2.0.1
-        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.1.1)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
+        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.2.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
       '@virtual-live-lab/prettier-config':
         specifier: ^2.0.1
         version: 2.0.1(prettier@3.2.5)
@@ -33,18 +33,27 @@ importers:
         specifier: workspace:^
         version: link:../../packages/api
       hono:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.3.1
+        version: 4.3.1
     devDependencies:
       '@cloudflare/workers-types':
         specifier: ^4.20240502.0
         version: 4.20240502.0
+      '@virtual-live-lab/eslint-config':
+        specifier: ^2.0.1
+        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@8.57.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
+      '@virtual-live-lab/tsconfig':
+        specifier: ^2.0.1
+        version: 2.0.1(@cloudflare/workers-types@4.20240502.0)
       drizzle-kit:
         specifier: ^0.20.17
         version: 0.20.17
-      twrangler:
-        specifier: ^0.0.7
-        version: 0.0.7
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
       wrangler:
         specifier: ^3.53.1
         version: 3.53.1(@cloudflare/workers-types@4.20240502.0)
@@ -63,9 +72,6 @@ importers:
       '@mantine/hooks':
         specifier: ^7.9.0
         version: 7.9.0(react@19.0.0-beta-1beb73de0f-20240503)
-      '@mantine/notifications':
-        specifier: ^7.9.0
-        version: 7.9.0(@mantine/core@7.9.0(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(@types/react@18.3.1)(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503))(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)
       '@mantine/nprogress':
         specifier: ^7.9.0
         version: 7.9.0(@mantine/core@7.9.0(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(@types/react@18.3.1)(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503))(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)
@@ -289,22 +295,13 @@ importers:
     dependencies:
       '@hono/zod-validator':
         specifier: ^0.2.1
-        version: 0.2.1(hono@4.3.0)(zod@3.23.6)
-      '@libsql/client':
-        specifier: ^0.6.0
-        version: 0.6.0
+        version: 0.2.1(hono@4.3.1)(zod@3.23.6)
       '@repo/module':
         specifier: workspace:^
         version: link:../module
-      drizzle-orm:
-        specifier: ^0.30.10
-        version: 0.30.10(@cloudflare/workers-types@4.20240502.0)(@libsql/client@0.6.0)(@types/react@18.3.1)(react@18.3.1)
-      drizzle-zod:
-        specifier: ^0.5.1
-        version: 0.5.1(drizzle-orm@0.30.10(@cloudflare/workers-types@4.20240502.0)(@libsql/client@0.6.0)(@types/react@18.3.1)(react@18.3.1))(zod@3.23.6)
       hono:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.3.1
+        version: 4.3.1
       zod:
         specifier: ^3.23.6
         version: 3.23.6
@@ -312,21 +309,24 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20240502.0
         version: 4.20240502.0
-      drizzle-kit:
-        specifier: ^0.20.17
-        version: 0.20.17
-      twrangler:
-        specifier: ^0.0.7
-        version: 0.0.7
-      wrangler:
-        specifier: ^3.53.1
-        version: 3.53.1(@cloudflare/workers-types@4.20240502.0)
+      '@virtual-live-lab/eslint-config':
+        specifier: ^2.0.1
+        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@8.57.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
+      '@virtual-live-lab/tsconfig':
+        specifier: ^2.0.1
+        version: 2.0.1(@cloudflare/workers-types@4.20240502.0)
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
 
   packages/module:
     dependencies:
       '@hono/zod-validator':
         specifier: ^0.2.1
-        version: 0.2.1(hono@4.3.0)(zod@3.23.6)
+        version: 0.2.1(hono@4.3.1)(zod@3.23.6)
       '@libsql/client':
         specifier: ^0.6.0
         version: 0.6.0
@@ -340,8 +340,11 @@ importers:
         specifier: ^0.5.1
         version: 0.5.1(drizzle-orm@0.30.10(@cloudflare/workers-types@4.20240502.0)(@libsql/client@0.6.0)(@types/react@18.3.1)(react@18.3.1))(zod@3.23.6)
       hono:
-        specifier: ^4.3.0
-        version: 4.3.0
+        specifier: ^4.3.1
+        version: 4.3.1
+      twrangler:
+        specifier: ^0.0.7
+        version: 0.0.7
       zod:
         specifier: ^3.23.6
         version: 3.23.6
@@ -354,19 +357,16 @@ importers:
         version: 2.4.6
       '@virtual-live-lab/eslint-config':
         specifier: ^2.0.1
-        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.1.1)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
+        version: 2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@8.57.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)
       '@virtual-live-lab/tsconfig':
         specifier: ^2.0.1
         version: 2.0.1(@cloudflare/workers-types@4.20240502.0)
       eslint:
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^8.57.0
+        version: 8.57.0
       ts-results:
         specifier: ^3.3.0
         version: 3.3.0
-      twrangler:
-        specifier: ^0.0.7
-        version: 0.0.7
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
@@ -1452,8 +1452,8 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@eslint/js@9.1.1':
-    resolution: {integrity: sha512-5WoDz3Y19Bg2BnErkZTp0en+c/i9PvgFS7MBe1+m60HjFr0hrphlAGp4yzI7pxpt4xShln4ZyYp4neJm8hmOkQ==}
+  '@eslint/js@9.2.0':
+    resolution: {integrity: sha512-ESiIudvhoYni+MdsI8oD7skpprZ89qKocwRM2KEvhhBJ9nl5MRh7BXU5GTod7Mdygq+AUl+QzId6iWJKR/wABA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@fastify/busboy@2.1.1':
@@ -1610,14 +1610,6 @@ packages:
     resolution: {integrity: sha512-LKgyrlaIK0S/gcn/VDbhqLBZOYjvhXfVcH7rMs4MIBVD+wuRo2LvvAYe3cUfQbBCfmlpRjqvewwvsIYYsjSofQ==}
     peerDependencies:
       react: ^18.2.0
-
-  '@mantine/notifications@7.9.0':
-    resolution: {integrity: sha512-jGwvPrLnHCQMmWuuiuLWr8mjVHnOoOlydqPSya9JB1FFJU+MJP+wP5ncKeIbAmu1h2VlOuGomToM6KzvxksUGw==}
-    peerDependencies:
-      '@mantine/core': 7.9.0
-      '@mantine/hooks': 7.9.0
-      react: ^18.2.0
-      react-dom: ^18.2.0
 
   '@mantine/nprogress@7.9.0':
     resolution: {integrity: sha512-/hL0ve7J39aQQ/CPwflk5hI3XQZqov/vhw8shy5qCxiy9RKZVZBOJ3CN/vyZ7XQqRtkX+esiIUkiVzbK/ZW+1g==}
@@ -2940,9 +2932,6 @@ packages:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
     engines: {node: '>=6.0.0'}
 
-  dom-helpers@5.2.1:
-    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
-
   dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
 
@@ -3630,8 +3619,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
 
-  eslint@9.1.1:
-    resolution: {integrity: sha512-b4cRQ0BeZcSEzPpY2PjFY70VbO32K7BStTGtBsnIGdTSEEQzBi8hPBcGQmTG2zUvFr9uLe0TK42bw8YszuHEqg==}
+  eslint@9.2.0:
+    resolution: {integrity: sha512-0n/I88vZpCOzO+PQpt0lbsqmn9AsnsJAQseIqhZFI8ibQT0U1AkEKRxA3EVMos0BoHSXDQvCXY25TUjB5tr8Og==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
 
@@ -4071,8 +4060,8 @@ packages:
   heap@0.2.7:
     resolution: {integrity: sha512-2bsegYkkHO+h/9MGbn6KWcE45cHZgPANo5LXF7EvWdT0yT2EguSVO1nDgU5c8+ZOPwp2vMNa7YFsJhVcDR9Sdg==}
 
-  hono@4.3.0:
-    resolution: {integrity: sha512-rf9142VLQNMVBj+BjVLISgDWDxnJGUIuX39dvqcdySwr2gTsPfsqW1twWDUjfwQNWm9hEn40MpDu9RFGUN+e8A==}
+  hono@4.3.1:
+    resolution: {integrity: sha512-yw/m4lZCuPpVJUQXyoeCy4uHXmq/osMxfEM8jMKGMr2V1OuL3vYybLrtoGj3GxC2wKIcMZO20i9nDMuZGkExNw==}
     engines: {node: '>=16.0.0'}
 
   hosted-git-info@6.1.1:
@@ -5558,12 +5547,6 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
-
-  react-transition-group@4.4.5:
-    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
-    peerDependencies:
-      react: '>=16.6.0'
-      react-dom: '>=16.6.0'
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -7541,9 +7524,9 @@ snapshots:
       eslint: 8.57.0
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.4.0(eslint@9.1.1)':
+  '@eslint-community/eslint-utils@4.4.0(eslint@9.2.0)':
     dependencies:
-      eslint: 9.1.1
+      eslint: 9.2.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.10.0': {}
@@ -7578,7 +7561,7 @@ snapshots:
 
   '@eslint/js@8.57.0': {}
 
-  '@eslint/js@9.1.1': {}
+  '@eslint/js@9.2.0': {}
 
   '@fastify/busboy@2.1.1': {}
 
@@ -7609,14 +7592,14 @@ snapshots:
 
   '@hono/node-server@1.11.0': {}
 
-  '@hono/zod-validator@0.2.1(hono@4.3.0)(zod@3.23.5)':
+  '@hono/zod-validator@0.2.1(hono@4.3.1)(zod@3.23.5)':
     dependencies:
-      hono: 4.3.0
+      hono: 4.3.1
       zod: 3.23.5
 
-  '@hono/zod-validator@0.2.1(hono@4.3.0)(zod@3.23.6)':
+  '@hono/zod-validator@0.2.1(hono@4.3.1)(zod@3.23.6)':
     dependencies:
-      hono: 4.3.0
+      hono: 4.3.1
       zod: 3.23.6
 
   '@humanwhocodes/config-array@0.11.14':
@@ -7759,15 +7742,6 @@ snapshots:
   '@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503)':
     dependencies:
       react: 19.0.0-beta-1beb73de0f-20240503
-
-  '@mantine/notifications@7.9.0(@mantine/core@7.9.0(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(@types/react@18.3.1)(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503))(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)':
-    dependencies:
-      '@mantine/core': 7.9.0(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(@types/react@18.3.1)(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)
-      '@mantine/hooks': 7.9.0(react@19.0.0-beta-1beb73de0f-20240503)
-      '@mantine/store': 7.9.0(react@19.0.0-beta-1beb73de0f-20240503)
-      react: 19.0.0-beta-1beb73de0f-20240503
-      react-dom: 19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503)
-      react-transition-group: 4.4.5(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)
 
   '@mantine/nprogress@7.9.0(@mantine/core@7.9.0(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(@types/react@18.3.1)(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503))(@mantine/hooks@7.9.0(react@19.0.0-beta-1beb73de0f-20240503))(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503)':
     dependencies:
@@ -8222,16 +8196,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/eslint-plugin@7.7.1(@typescript-eslint/parser@7.7.1(eslint@9.1.1)(typescript@5.4.5))(eslint@9.1.1)(typescript@5.4.5)':
+  '@typescript-eslint/eslint-plugin@7.7.1(@typescript-eslint/parser@7.7.1(eslint@9.2.0)(typescript@5.4.5))(eslint@9.2.0)(typescript@5.4.5)':
     dependencies:
       '@eslint-community/regexpp': 4.10.0
-      '@typescript-eslint/parser': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
+      '@typescript-eslint/parser': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
       '@typescript-eslint/scope-manager': 7.7.1
-      '@typescript-eslint/type-utils': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
-      '@typescript-eslint/utils': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
+      '@typescript-eslint/type-utils': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
+      '@typescript-eslint/utils': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
       '@typescript-eslint/visitor-keys': 7.7.1
       debug: 4.3.4
-      eslint: 9.1.1
+      eslint: 9.2.0
       graphemer: 1.4.0
       ignore: 5.3.1
       natural-compare: 1.4.0
@@ -8268,14 +8242,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@7.7.1(eslint@9.1.1)(typescript@5.4.5)':
+  '@typescript-eslint/parser@7.7.1(eslint@9.2.0)(typescript@5.4.5)':
     dependencies:
       '@typescript-eslint/scope-manager': 7.7.1
       '@typescript-eslint/types': 7.7.1
       '@typescript-eslint/typescript-estree': 7.7.1(typescript@5.4.5)
       '@typescript-eslint/visitor-keys': 7.7.1
       debug: 4.3.4
-      eslint: 9.1.1
+      eslint: 9.2.0
     optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
@@ -8313,12 +8287,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/type-utils@7.7.1(eslint@9.1.1)(typescript@5.4.5)':
+  '@typescript-eslint/type-utils@7.7.1(eslint@9.2.0)(typescript@5.4.5)':
     dependencies:
       '@typescript-eslint/typescript-estree': 7.7.1(typescript@5.4.5)
-      '@typescript-eslint/utils': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
+      '@typescript-eslint/utils': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
       debug: 4.3.4
-      eslint: 9.1.1
+      eslint: 9.2.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
     optionalDependencies:
       typescript: 5.4.5
@@ -8420,15 +8394,15 @@ snapshots:
       - supports-color
       - typescript
 
-  '@typescript-eslint/utils@7.7.1(eslint@9.1.1)(typescript@5.4.5)':
+  '@typescript-eslint/utils@7.7.1(eslint@9.2.0)(typescript@5.4.5)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.1.1)
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.2.0)
       '@types/json-schema': 7.0.15
       '@types/semver': 7.5.8
       '@typescript-eslint/scope-manager': 7.7.1
       '@typescript-eslint/types': 7.7.1
       '@typescript-eslint/typescript-estree': 7.7.1(typescript@5.4.5)
-      eslint: 9.1.1
+      eslint: 9.2.0
       semver: 7.6.0
     transitivePeerDependencies:
       - supports-color
@@ -8698,22 +8672,47 @@ snapshots:
       - typescript
       - vue-eslint-parser
 
-  '@virtual-live-lab/eslint-config@2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.1.1)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)':
+  '@virtual-live-lab/eslint-config@2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@8.57.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)':
     dependencies:
       '@eslint/eslintrc': 3.0.2
       '@eslint/js': 8.57.0
-      eslint: 9.1.1
+      eslint: 8.57.0
       eslint-config-flat-gitignore: 0.1.5
-      eslint-config-prettier: 9.1.0(eslint@9.1.1)
-      eslint-plugin-astro: 1.1.1(eslint@9.1.1)(typescript@5.4.5)
-      eslint-plugin-jsx-a11y: 6.8.0(eslint@9.1.1)
-      eslint-plugin-perfectionist: 2.10.0(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.1.1)(typescript@5.4.5)
-      eslint-plugin-react: 7.34.1(eslint@9.1.1)
-      eslint-plugin-react-hooks: 4.6.2(eslint@9.1.1)
+      eslint-config-prettier: 9.1.0(eslint@8.57.0)
+      eslint-plugin-astro: 1.1.1(eslint@8.57.0)(typescript@5.4.5)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
+      eslint-plugin-perfectionist: 2.10.0(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
+      eslint-plugin-react: 7.34.1(eslint@8.57.0)
+      eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
       eslint-plugin-tailwindcss: 3.15.1(tailwindcss@4.0.0-alpha.14)
       globals: 15.1.0
       pkg-dir: 8.0.0
-      typescript-eslint: 7.7.1(eslint@9.1.1)(typescript@5.4.5)
+      typescript-eslint: 7.7.1(eslint@8.57.0)(typescript@5.4.5)
+    transitivePeerDependencies:
+      - astro-eslint-parser
+      - supports-color
+      - svelte
+      - svelte-eslint-parser
+      - tailwindcss
+      - typescript
+      - vue-eslint-parser
+
+  '@virtual-live-lab/eslint-config@2.0.1(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.2.0)(tailwindcss@4.0.0-alpha.14)(typescript@5.4.5)':
+    dependencies:
+      '@eslint/eslintrc': 3.0.2
+      '@eslint/js': 8.57.0
+      eslint: 9.2.0
+      eslint-config-flat-gitignore: 0.1.5
+      eslint-config-prettier: 9.1.0(eslint@9.2.0)
+      eslint-plugin-astro: 1.1.1(eslint@9.2.0)(typescript@5.4.5)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@9.2.0)
+      eslint-plugin-perfectionist: 2.10.0(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.2.0)(typescript@5.4.5)
+      eslint-plugin-react: 7.34.1(eslint@9.2.0)
+      eslint-plugin-react-hooks: 4.6.2(eslint@9.2.0)
+      eslint-plugin-tailwindcss: 3.15.1(tailwindcss@4.0.0-alpha.14)
+      globals: 15.1.0
+      pkg-dir: 8.0.0
+      typescript-eslint: 7.7.1(eslint@9.2.0)(typescript@5.4.5)
     transitivePeerDependencies:
       - astro-eslint-parser
       - supports-color
@@ -9455,11 +9454,6 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  dom-helpers@5.2.1:
-    dependencies:
-      '@babel/runtime': 7.24.4
-      csstype: 3.1.2
-
   dom-serializer@2.0.0:
     dependencies:
       domelementtype: 2.3.0
@@ -9488,7 +9482,7 @@ snapshots:
     dependencies:
       '@esbuild-kit/esm-loader': 2.6.5
       '@hono/node-server': 1.11.0
-      '@hono/zod-validator': 0.2.1(hono@4.3.0)(zod@3.23.5)
+      '@hono/zod-validator': 0.2.1(hono@4.3.1)(zod@3.23.5)
       camelcase: 7.0.1
       chalk: 5.3.0
       commander: 9.5.0
@@ -9497,7 +9491,7 @@ snapshots:
       esbuild-register: 3.5.0(esbuild@0.19.12)
       glob: 8.1.0
       hanji: 0.0.5
-      hono: 4.3.0
+      hono: 4.3.1
       json-diff: 0.9.0
       minimatch: 7.4.6
       semver: 7.6.0
@@ -10067,9 +10061,9 @@ snapshots:
       eslint: 8.57.0
       semver: 7.6.0
 
-  eslint-compat-utils@0.5.0(eslint@9.1.1):
+  eslint-compat-utils@0.5.0(eslint@9.2.0):
     dependencies:
-      eslint: 9.1.1
+      eslint: 9.2.0
       semver: 7.6.0
 
   eslint-config-flat-gitignore@0.1.5:
@@ -10099,9 +10093,9 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-config-prettier@9.1.0(eslint@9.1.1):
+  eslint-config-prettier@9.1.0(eslint@9.2.0):
     dependencies:
-      eslint: 9.1.1
+      eslint: 9.2.0
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -10179,14 +10173,14 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-astro@1.1.1(eslint@9.1.1)(typescript@5.4.5):
+  eslint-plugin-astro@1.1.1(eslint@9.2.0)(typescript@5.4.5):
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.1.1)
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.2.0)
       '@jridgewell/sourcemap-codec': 1.4.15
       '@typescript-eslint/types': 7.7.1
       astro-eslint-parser: 1.0.1(typescript@5.4.5)
-      eslint: 9.1.1
-      eslint-compat-utils: 0.5.0(eslint@9.1.1)
+      eslint: 9.2.0
+      eslint-compat-utils: 0.5.0(eslint@9.2.0)
       globals: 15.1.0
       postcss: 8.4.38
       postcss-selector-parser: 6.0.16
@@ -10241,7 +10235,7 @@ snapshots:
       object.entries: 1.1.7
       object.fromentries: 2.0.7
 
-  eslint-plugin-jsx-a11y@6.8.0(eslint@9.1.1):
+  eslint-plugin-jsx-a11y@6.8.0(eslint@9.2.0):
     dependencies:
       '@babel/runtime': 7.24.4
       aria-query: 5.3.0
@@ -10253,7 +10247,7 @@ snapshots:
       damerau-levenshtein: 1.0.8
       emoji-regex: 9.2.2
       es-iterator-helpers: 1.0.18
-      eslint: 9.1.1
+      eslint: 9.2.0
       hasown: 2.0.2
       jsx-ast-utils: 3.3.5
       language-tags: 1.0.9
@@ -10273,10 +10267,10 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-perfectionist@2.10.0(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.1.1)(typescript@5.4.5):
+  eslint-plugin-perfectionist@2.10.0(astro-eslint-parser@1.0.1(typescript@5.4.5))(eslint@9.2.0)(typescript@5.4.5):
     dependencies:
-      '@typescript-eslint/utils': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
-      eslint: 9.1.1
+      '@typescript-eslint/utils': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
+      eslint: 9.2.0
       minimatch: 9.0.4
       natural-compare-lite: 1.4.0
     optionalDependencies:
@@ -10301,9 +10295,9 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-plugin-react-hooks@4.6.2(eslint@9.1.1):
+  eslint-plugin-react-hooks@4.6.2(eslint@9.2.0):
     dependencies:
-      eslint: 9.1.1
+      eslint: 9.2.0
 
   eslint-plugin-react@7.34.1(eslint@8.57.0):
     dependencies:
@@ -10327,7 +10321,7 @@ snapshots:
       semver: 6.3.1
       string.prototype.matchall: 4.0.10
 
-  eslint-plugin-react@7.34.1(eslint@9.1.1):
+  eslint-plugin-react@7.34.1(eslint@9.2.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlast: 1.2.5
@@ -10336,7 +10330,7 @@ snapshots:
       array.prototype.tosorted: 1.1.3
       doctrine: 2.1.0
       es-iterator-helpers: 1.0.18
-      eslint: 9.1.1
+      eslint: 9.2.0
       estraverse: 5.3.0
       jsx-ast-utils: 3.3.5
       minimatch: 3.1.2
@@ -10418,12 +10412,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint@9.1.1:
+  eslint@9.2.0:
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.1.1)
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.2.0)
       '@eslint-community/regexpp': 4.10.0
       '@eslint/eslintrc': 3.0.2
-      '@eslint/js': 9.1.1
+      '@eslint/js': 9.2.0
       '@humanwhocodes/config-array': 0.13.0
       '@humanwhocodes/module-importer': 1.0.1
       '@humanwhocodes/retry': 0.2.3
@@ -10995,7 +10989,7 @@ snapshots:
 
   heap@0.2.7: {}
 
-  hono@4.3.0: {}
+  hono@4.3.1: {}
 
   hosted-git-info@6.1.1:
     dependencies:
@@ -12593,15 +12587,6 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  react-transition-group@4.4.5(react-dom@19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503))(react@19.0.0-beta-1beb73de0f-20240503):
-    dependencies:
-      '@babel/runtime': 7.24.4
-      dom-helpers: 5.2.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 19.0.0-beta-1beb73de0f-20240503
-      react-dom: 19.0.0-beta-1beb73de0f-20240503(react@19.0.0-beta-1beb73de0f-20240503)
-
   react@18.3.1:
     dependencies:
       loose-envify: 1.4.0
@@ -13584,12 +13569,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  typescript-eslint@7.7.1(eslint@9.1.1)(typescript@5.4.5):
+  typescript-eslint@7.7.1(eslint@9.2.0)(typescript@5.4.5):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 7.7.1(@typescript-eslint/parser@7.7.1(eslint@9.1.1)(typescript@5.4.5))(eslint@9.1.1)(typescript@5.4.5)
-      '@typescript-eslint/parser': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
-      '@typescript-eslint/utils': 7.7.1(eslint@9.1.1)(typescript@5.4.5)
-      eslint: 9.1.1
+      '@typescript-eslint/eslint-plugin': 7.7.1(@typescript-eslint/parser@7.7.1(eslint@9.2.0)(typescript@5.4.5))(eslint@9.2.0)(typescript@5.4.5)
+      '@typescript-eslint/parser': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
+      '@typescript-eslint/utils': 7.7.1(eslint@9.2.0)(typescript@5.4.5)
+      eslint: 9.2.0
     optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:

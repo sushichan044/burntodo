@@ -1,8 +1,7 @@
 {
   "name": "backend",
   "scripts": {
-    "predev": "twrangler build",
-    "dev": "twrangler build && wrangler dev src/index.ts",
+    "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "db:migrate": "drizzle-kit generate:sqlite",
     "db:migrate-custom": "drizzle-kit generate:sqlite --custom",
@@ -11,12 +10,15 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.3.0"
+    "hono": "^4.3.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240502.0",
+    "@virtual-live-lab/eslint-config": "^2.0.1",
+    "@virtual-live-lab/tsconfig": "^2.0.1",
     "drizzle-kit": "^0.20.17",
-    "twrangler": "^0.0.7",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
     "wrangler": "^3.53.1"
   }
 }

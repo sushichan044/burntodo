@@ -7,7 +7,7 @@
     "build": "next build",
     "build:cloudflare": "next-on-pages",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@repo/api": "workspace:^",

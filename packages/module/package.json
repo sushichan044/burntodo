@@ -1,10 +1,14 @@
 {
   "name": "@repo/module",
+  "private": true,
   "exports": {
     ".": "./src/index.ts",
     "./schema": "./src/schema.ts",
     "./usecase/*": "./src/usecase/*.ts",
     "./zod": "./src/zod.ts"
+  },
+  "scripts": {
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.1",
@@ -12,7 +16,7 @@
     "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
-    "hono": "^4.3.0",
+    "hono": "^4.3.1",
     "zod": "^3.23.6"
   },
   "peerDependencies": {
@@ -26,9 +30,8 @@
     "@types/bcryptjs": "^2.4.6",
     "@virtual-live-lab/eslint-config": "^2.0.1",
     "@virtual-live-lab/tsconfig": "^2.0.1",
-    "eslint": "^9.1.1",
+    "eslint": "^8.57.0",
     "ts-results": "^3.3.0",
-    "twrangler": "^0.0.7",
     "typescript": "^5.4.5",
     "wrangler": "^3.53.1"
   }
