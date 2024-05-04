@@ -4,8 +4,8 @@ import type {
 } from "@remix-run/cloudflare"
 
 import { signUpSchema } from "@/app/routes/_auth/form"
-import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
+import { getSessionCookieHelper } from "@/lib/session"
 import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
 import { Alert, Button, TextInput } from "@mantine/core"
@@ -18,8 +18,10 @@ import {
 } from "@remix-run/react"
 import { FiLogIn } from "react-icons/fi"
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const helper = getSessionCookieHelper(context)
+
+  const session = await helper.getSession(request.headers.get("Cookie"))
   if (session.has("userName")) {
     // Redirect to the home page if they are already signed in.
     return redirect("/app")
@@ -29,7 +31,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     {},
     {
       headers: {
-        "Set-Cookie": await commitSession(session),
+        "Set-Cookie": await helper.commitSession(session),
       },
     },
   )
@@ -106,7 +108,8 @@ export default function Route() {
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+  const helper = getSessionCookieHelper(context)
+  const session = await helper.getSession(request.headers.get("Cookie"))
   const api = getApi({ context })
   const formData = await request.formData()
   const submission = parseWithZod(formData, { schema: signUpSchema })
@@ -131,7 +134,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
   session.set("userName", result.data.name)
   return redirect("/app", {
     headers: {
-      "Set-Cookie": await commitSession(session),
+      "Set-Cookie": await helper.commitSession(session),
     },
   })
 }

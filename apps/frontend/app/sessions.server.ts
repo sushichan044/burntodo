@@ -1,5 +1,7 @@
 // app/sessions.ts
-import { createCookieSessionStorage } from "@remix-run/cloudflare" // or cloudflare/deno
+import type { SessionStorage } from "@remix-run/cloudflare"
+
+import { createCookieSessionStorage as _createCookieSessionStorage } from "@remix-run/cloudflare" // or cloudflare/deno
 
 type SessionData = {
   userName: string
@@ -9,34 +11,52 @@ type SessionFlashData = {
   error: string
 }
 
-const {
-  commitSession: rawCommitSession,
-  destroySession,
-  getSession,
-} = createCookieSessionStorage<SessionData, SessionFlashData>({
-  // a Cookie from `createCookie` or the CookieOptions to create one
-  cookie: {
-    httpOnly: true,
-    // Expires can also be set (although maxAge overrides it when used in combination).
-    // Note that this method is NOT recommended as `new Date` creates only one date on each server deployment, not a dynamic date in the future!
-    //
-    name: "__session",
-    path: "/",
-    sameSite: "lax",
-    secrets: ["hello!", "This is sample secret key"],
-    secure: import.meta.env.PROD,
-  },
-})
-
-type CommitSessionFunction = typeof rawCommitSession
+const OLD_SESSION_SECRETS = ["hello!", "This is sample secret key"]
 
 const FOUR_WEEKS_IN_MS = 1000 * 60 * 60 * 24 * 7 * 4
 
-const commitSession: CommitSessionFunction = (session, options) => {
-  return rawCommitSession(session, {
-    expires: new Date(Date.now() + FOUR_WEEKS_IN_MS), // 1 week
-    ...options,
-  })
+class SessionCookieHelper {
+  private secrets: string[]
+  private sessionStorage: SessionStorage<SessionData, SessionFlashData>
+
+  constructor(secrets: string[]) {
+    this.secrets = secrets
+    this.sessionStorage = _createCookieSessionStorage<
+      SessionData,
+      SessionFlashData
+    >({
+      cookie: {
+        httpOnly: true,
+        name: "__session",
+        path: "/",
+        sameSite: "lax",
+        secrets: this.secrets,
+        secure: import.meta.env.PROD,
+      },
+    })
+  }
+
+  async commitSession(
+    ...params: Parameters<typeof this.sessionStorage.commitSession>
+  ) {
+    const [session, options] = params
+    return this.sessionStorage.commitSession(session, {
+      expires: new Date(Date.now() + FOUR_WEEKS_IN_MS),
+      ...options,
+    })
+  }
+
+  async destroySession(
+    ...params: Parameters<typeof this.sessionStorage.destroySession>
+  ) {
+    return this.sessionStorage.destroySession(...params)
+  }
+
+  async getSession(
+    ...params: Parameters<typeof this.sessionStorage.getSession>
+  ) {
+    return this.sessionStorage.getSession(...params)
+  }
 }
 
-export { commitSession, destroySession, getSession }
+export { OLD_SESSION_SECRETS, SessionCookieHelper }

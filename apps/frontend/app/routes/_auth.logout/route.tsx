@@ -3,17 +3,15 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/cloudflare"
 
-import {
-  commitSession,
-  destroySession,
-  getSession,
-} from "@/app/sessions.server"
+import { getSessionCookieHelper } from "@/lib/session"
 import { Button } from "@mantine/core"
 import { json, redirect, useFetcher } from "@remix-run/react"
 import { FiLogOut } from "react-icons/fi"
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const helper = getSessionCookieHelper(context)
+
+  const session = await helper.getSession(request.headers.get("Cookie"))
   if (!session.has("userName")) {
     // Redirect to the home page if they are already signed in.
     return redirect("/app")
@@ -23,7 +21,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     {},
     {
       headers: {
-        "Set-Cookie": await commitSession(session),
+        "Set-Cookie": await helper.commitSession(session),
       },
     },
   )
@@ -65,11 +63,12 @@ export default function Route() {
   )
 }
 
-export async function action({ request }: ActionFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+export async function action({ context, request }: ActionFunctionArgs) {
+  const helper = getSessionCookieHelper(context)
+  const session = await helper.getSession(request.headers.get("Cookie"))
   return redirect("/", {
     headers: {
-      "Set-Cookie": await destroySession(session),
+      "Set-Cookie": await helper.destroySession(session),
     },
   })
 }

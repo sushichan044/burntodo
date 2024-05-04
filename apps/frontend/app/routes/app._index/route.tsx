@@ -4,8 +4,8 @@ import type {
 } from "@remix-run/cloudflare"
 
 import { DeleteTodoSchema, NewTodoSchema } from "@/app/routes/app/form"
-import { commitSession, getSession } from "@/app/sessions.server"
 import { getApi } from "@/lib/api"
+import { getSessionCookieHelper } from "@/lib/session"
 import { parseWithZod } from "@conform-to/zod"
 import { json, redirect } from "@remix-run/cloudflare"
 import { useLoaderData } from "@remix-run/react"
@@ -15,7 +15,8 @@ import NewTodoModal from "./NewTodoModal"
 import TodoWrapper from "./TodoWrapper"
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+  const helper = getSessionCookieHelper(context)
+  const session = await helper.getSession(request.headers.get("Cookie"))
   const name = session.get("userName")
   if (!name) {
     // Redirect to the home page if they are already signed in.
@@ -33,7 +34,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
   return json(res, {
     headers: {
-      "Set-Cookie": await commitSession(session),
+      "Set-Cookie": await helper.commitSession(session),
     },
   })
 }
@@ -76,7 +77,9 @@ export default function Route() {
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+  const helper = getSessionCookieHelper(context)
+
+  const session = await helper.getSession(request.headers.get("Cookie"))
   const userName = session.get("userName")
   if (!userName) {
     // Redirect to the home page if they are already signed in.

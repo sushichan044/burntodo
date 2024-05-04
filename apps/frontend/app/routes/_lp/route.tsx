@@ -1,12 +1,14 @@
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare"
 
-import { getSession } from "@/app/sessions.server"
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
+import { getSessionCookieHelper } from "@/lib/session"
 import { Outlet, json, useLoaderData } from "@remix-run/react"
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const session = await getSession(request.headers.get("Cookie"))
+export async function loader({ context, request }: LoaderFunctionArgs) {
+  const helper = getSessionCookieHelper(context)
+
+  const session = await helper.getSession(request.headers.get("Cookie"))
   if (session.has("userName")) {
     // Redirect to the home page if they are already signed in.
     return json({ loggedIn: true })

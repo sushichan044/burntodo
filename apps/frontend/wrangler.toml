@@ -8,3 +8,6 @@ services = [
 
 [placement]
 mode = "smart"
+
+[vars]
+NODE_VERSION = "20"
