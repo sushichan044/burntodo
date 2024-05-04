@@ -7,8 +7,8 @@ export default async function Page() {
     .then((res) => res.json())
     .catch((err) => {
       return {
-        error: String(err),
         data: null,
+        error: String(err),
       }
     })
 
