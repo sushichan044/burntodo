@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare"
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare"
 
 import Footer from "@/components/layout/Footer"
 import Header from "@/components/layout/Header"
@@ -6,6 +6,16 @@ import { getSessionCookieHelper } from "@/lib/session"
 import { Container } from "@mantine/core"
 import { json } from "@remix-run/cloudflare"
 import { Outlet, useLoaderData } from "@remix-run/react"
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "BurnTodo" },
+    {
+      content: "A simple todo app built with Hono and Remix",
+      name: "description",
+    },
+  ]
+}
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const helper = getSessionCookieHelper(context)

@@ -1,6 +1,7 @@
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
+  MetaFunction,
 } from "@remix-run/cloudflare"
 
 import { signUpSchema } from "@/app/routes/_auth/form"
@@ -17,6 +18,13 @@ import {
   useNavigation,
 } from "@remix-run/react"
 import { FiLogIn } from "react-icons/fi"
+
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches
+    .flatMap((match) => match.meta ?? [])
+    .filter((meta) => !("title" in meta))
+  return [...parentMeta, { title: "Logout | BurnTodo" }]
+}
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const helper = getSessionCookieHelper(context)

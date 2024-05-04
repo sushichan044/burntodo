@@ -1,12 +1,20 @@
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
+  MetaFunction,
 } from "@remix-run/cloudflare"
 
 import { getSessionCookieHelper } from "@/lib/session"
 import { Button } from "@mantine/core"
 import { json, redirect, useFetcher } from "@remix-run/react"
 import { FiLogOut } from "react-icons/fi"
+
+export const meta: MetaFunction = ({ matches }) => {
+  const parentMeta = matches
+    .flatMap((match) => match.meta ?? [])
+    .filter((meta) => !("title" in meta))
+  return [...parentMeta, { title: "Logout | BurnTodo" }]
+}
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const helper = getSessionCookieHelper(context)

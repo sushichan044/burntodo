@@ -1,9 +1,21 @@
+import type { MetaFunction } from "@remix-run/cloudflare"
+
 import AuthFooter from "@/app/routes/_auth/AuthFooter"
 import Link from "@/components/element/Link"
 import Header from "@/components/layout/Header"
 import { Container } from "@mantine/core"
 import { Outlet } from "@remix-run/react"
 import { useLocation } from "@remix-run/react"
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "BurnTodo" },
+    {
+      content: "A simple todo app built with Hono and Remix",
+      name: "description",
+    },
+  ]
+}
 
 export default function AppLayout() {
   const { pathname } = useLocation()
