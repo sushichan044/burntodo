@@ -29,13 +29,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
 export default function Route() {
   const fetcher = useFetcher<typeof action>()
-
-  const { disabled, text } = (() => {
-    if (fetcher.state === "idle") return { disabled: false, text: "Logout" }
-    if (fetcher.state === "submitting")
-      return { disabled: true, text: "Submitting..." }
-    return { disabled: true, text: "loading..." }
-  })()
+  const loading = fetcher.state !== "idle"
 
   return (
     <>
@@ -51,12 +45,12 @@ export default function Route() {
         <Button
           className="w-full font-bold"
           color="red"
-          disabled={disabled}
           leftSection={<FiLogOut />}
+          loading={loading}
           size="lg"
           type="submit"
         >
-          {text}
+          Log out
         </Button>
       </fetcher.Form>
     </>
