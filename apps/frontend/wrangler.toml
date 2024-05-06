@@ -3,7 +3,7 @@ pages_build_output_dir = "./build/client"
 compatibility_date = "2024-04-16"
 compatibility_flags = [ "nodejs_compat" ]
 services = [
-    { binding = "BACKEND", service = "burntodo-backend", environment = "production" },
+    { binding = "BACKEND", service = "burntodo-backend" },
 ]
 
 [placement]
