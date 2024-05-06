@@ -102,6 +102,12 @@ pnpm exec wrangler secret put COOKIE_SECRET
   })
   ```
 
+4. Put Password Salt.
+
+  ```bash
+  pnpm exec wrangler secret put PASSWORD_SALT
+  ```
+
 ## Run Locally
 
 1. Follow [setup](#setup) section.
