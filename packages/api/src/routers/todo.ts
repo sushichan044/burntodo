@@ -9,9 +9,10 @@ import {
   getTodo,
 } from "@repo/module/usecase/todo"
 
-import { createHono } from "../hono"
+import { honoFactory } from "../hono"
 
-const todoRouter = createHono()
+const todoRouter = honoFactory
+  .createApp()
   .get("/", async (c) => {
     const db = c.get("db")
     const res = await getAllTodos(db)

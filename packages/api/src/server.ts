@@ -1,9 +1,9 @@
-import { createHono } from "./hono"
+import { honoFactory } from "./hono"
 import { authRouter } from "./routers/auth"
 import { todoRouter } from "./routers/todo"
 import { userRouter } from "./routers/user"
 
-const app = createHono()
+const app = honoFactory.createApp()
 const routes = app
   .get("/", (c) =>
     c.json({ error: null, message: "Hello, frontend! I'm Hono from backend!" }),

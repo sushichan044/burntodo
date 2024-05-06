@@ -1,12 +1,11 @@
 import { zValidator } from "@hono/zod-validator"
 import { VerifyUserSchema, verifyUser } from "@repo/module/usecase/user"
 
-import { createHono } from "../hono"
+import { honoFactory } from "../hono"
 
-const authRouter = createHono().post(
-  "/verify",
-  zValidator("json", VerifyUserSchema),
-  async (c) => {
+const authRouter = honoFactory
+  .createApp()
+  .post("/verify", zValidator("json", VerifyUserSchema), async (c) => {
     const db = c.get("db")
     const { name, password } = c.req.valid("json")
     const res = await verifyUser({ name, password }, db)
@@ -14,7 +13,6 @@ const authRouter = createHono().post(
       return c.json({ data: null, error: res.val }, 500)
     }
     return c.json({ data: res.val, error: null }, 200)
-  },
-)
+  })
 
 export { authRouter }

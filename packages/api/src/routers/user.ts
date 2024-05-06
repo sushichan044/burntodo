@@ -13,9 +13,10 @@ import {
   getUser,
 } from "@repo/module/usecase/user"
 
-import { createHono } from "../hono"
+import { honoFactory } from "../hono"
 
-const userRouter = createHono()
+const userRouter = honoFactory
+  .createApp()
   .get("/", async (c) => {
     const db = c.get("db")
     const res = await getManyUsers(db)
