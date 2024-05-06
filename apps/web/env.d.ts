@@ -1,1 +1,0 @@
-interface CloudflareEnv extends Env {}
