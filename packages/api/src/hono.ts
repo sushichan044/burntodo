@@ -9,6 +9,7 @@ import { trimTrailingSlash } from "hono/trailing-slash"
 type HonoConfig = {
   Bindings: {
     DB: D1Database
+    PASSWORD_SALT: string
   }
   Variables: {
     db: ReturnType<typeof createDB>

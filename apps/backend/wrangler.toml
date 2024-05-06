@@ -11,3 +11,7 @@ mode = "smart"
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "remix-hono-turbo-example"
 database_id = "2b19135e-ebbd-4723-8bcf-74be224781d9"
+
+
+[env.dev]
+vars = { PASSWORD_SALT = "some salt" }

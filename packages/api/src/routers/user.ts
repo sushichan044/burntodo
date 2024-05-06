@@ -28,7 +28,7 @@ const userRouter = honoFactory
   .post("/", zValidator("json", CreateUserSchema), async (c) => {
     const db = c.get("db")
     const { name, password } = c.req.valid("json")
-    const res = await createUser({ name, password }, db)
+    const res = await createUser({ name, password }, c.env.PASSWORD_SALT, db)
     if (res.err) {
       return c.json({ data: null, error: res.val }, 500)
     }

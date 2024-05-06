@@ -16,10 +16,10 @@ const CreateUserSchema = TB_userInsertSchema.pick({
 })
 type CreateUserInput = z.infer<typeof CreateUserSchema>
 
-const createUser = async (input: CreateUserInput, db: DBType) => {
+const createUser = async (input: CreateUserInput, salt: string, db: DBType) => {
   const id = randomUUID()
   const { password, ...rest } = input
-  const hashed = await hashPassword(password)
+  const hashed = await hashPassword({ rawPassword: password, salt })
   const userParse = await TB_userInsertSchema.safeParseAsync({
     ...rest,
     id,

@@ -1,9 +1,14 @@
 import bcrypt from "bcryptjs"
 
-type HashPassword = (rawPassword: string) => Promise<string>
+type HashPassword = ({
+  rawPassword,
+  salt,
+}: {
+  rawPassword: string
+  salt: string
+}) => Promise<string>
 
-const hashPassword: HashPassword = async (rawPassword: string) => {
-  const salt = await bcrypt.genSalt(10)
+const hashPassword: HashPassword = async ({ rawPassword, salt }) => {
   const hashed = await bcrypt.hash(rawPassword, salt)
   return hashed
 }
