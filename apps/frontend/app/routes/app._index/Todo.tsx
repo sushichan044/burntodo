@@ -46,7 +46,9 @@ const Todo: React.FC<TodoProps> = ({ task: { description, id, title } }) => {
       </button>
       <div className="inline-flex flex-col flex-nowrap">
         <span className="text-xl font-bold text-slate-700">{title}</span>
-        <span className="text-sm text-slate-500">{description}</span>
+        <span className="whitespace-pre-wrap text-sm text-slate-500">
+          {description}
+        </span>
       </div>
     </div>
   )
