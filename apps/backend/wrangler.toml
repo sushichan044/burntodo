@@ -15,3 +15,8 @@ database_id = "2b19135e-ebbd-4723-8bcf-74be224781d9"
 
 [env.dev]
 vars = { PASSWORD_SALT = "$2a$10$ACtdEZ3JjyfBPL1t6Kgmtu" }
+
+[[env.dev.d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "remix-hono-turbo-example"
+database_id = "2b19135e-ebbd-4723-8bcf-74be224781d9"
