@@ -1,14 +1,14 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "a50f842f-bb52-4ebd-abd6-817c3b45eb98",
+  "id": "927c06b6-ba2b-4b14-8231-16d271c410a6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "todos": {
       "name": "todos",
       "columns": {
-        "createdAt": {
-          "name": "createdAt",
+        "created_at": {
+          "name": "created_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -19,7 +19,7 @@
           "name": "description",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "id": {
@@ -36,16 +36,16 @@
           "notNull": true,
           "autoincrement": false
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "updated_at": {
+          "name": "updated_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
           "default": "(CURRENT_TIMESTAMP)"
         },
-        "userName": {
-          "name": "userName",
+        "user_name": {
+          "name": "user_name",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -54,12 +54,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "todos_userName_users_name_fk": {
-          "name": "todos_userName_users_name_fk",
+        "todos_user_name_users_name_fk": {
+          "name": "todos_user_name_users_name_fk",
           "tableFrom": "todos",
           "tableTo": "users",
           "columnsFrom": [
-            "userName"
+            "user_name"
           ],
           "columnsTo": [
             "name"
@@ -74,8 +74,8 @@
     "users": {
       "name": "users",
       "columns": {
-        "createdAt": {
-          "name": "createdAt",
+        "created_at": {
+          "name": "created_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -89,8 +89,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,

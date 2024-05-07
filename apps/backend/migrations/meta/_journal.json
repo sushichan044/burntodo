@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1714583343757,
-      "tag": "0000_dapper_whirlwind",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1714756714343,
-      "tag": "0001_cool_hannibal_king",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1714772669211,
-      "tag": "0002_graceful_strong_guy",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1714772937232,
-      "tag": "0003_special_cammi",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1714773126774,
-      "tag": "0004_dashing_landau",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1714773456434,
-      "tag": "0005_safe_smiling_tiger",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "5",
-      "when": 1714773706548,
-      "tag": "0006_cynical_brother_voodoo",
+      "when": 1715116108221,
+      "tag": "0000_superb_korvac",
       "breakpoints": true
     }
   ]
