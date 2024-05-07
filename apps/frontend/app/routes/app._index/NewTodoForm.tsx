@@ -4,8 +4,10 @@ import type { VariantProps } from "tailwind-variants"
 import { NewTodoSchema } from "@/app/routes/app/form"
 import { getFormProps, getInputProps, useForm } from "@conform-to/react"
 import { getZodConstraint, parseWithZod } from "@conform-to/zod"
-import { Button, Container, Divider, TextInput } from "@mantine/core"
+import { Button, Container, Divider, TextInput, Textarea } from "@mantine/core"
+import { getHotkeyHandler } from "@mantine/hooks"
 import { Form, useActionData, useNavigation } from "@remix-run/react"
+import { useRef } from "react"
 import { FaList } from "react-icons/fa6"
 import { tv } from "tailwind-variants"
 
@@ -61,6 +63,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
     shouldRevalidate: "onInput",
     shouldValidate: "onBlur",
   })
+  const ref = useRef<HTMLFormElement | null>(null)
   const css = style(variants)
   const isSubmitting = navigation.formAction === "/app?index"
 
@@ -96,6 +99,15 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
           action="/app?index"
           className={css.formWrapper()}
           method="POST"
+          onKeyDown={getHotkeyHandler([
+            [
+              "ctrl+enter",
+              () => {
+                ref.current?.submit()
+              },
+            ],
+          ])}
+          ref={ref}
           {...getFormProps(form)}
         >
           <fieldset disabled={isSubmitting}>
@@ -117,7 +129,8 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
               })}
             />
             <Divider my="sm" />
-            <TextInput
+            <Textarea
+              autosize
               classNames={{ input: "text-base" }}
               error={fields.description.errors}
               errorProps={{ className: "ps-[60px] font-semibold text-sm" }}
@@ -125,6 +138,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
               labelProps={{ className: "sr-only" }}
               leftSection={<FaList />}
               leftSectionWidth={60}
+              maxRows={5}
               placeholder="Enter description"
               size="xl"
               variant="unstyled"
