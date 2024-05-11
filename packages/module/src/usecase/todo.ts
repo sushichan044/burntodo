@@ -1,58 +1,58 @@
-import { eq } from "drizzle-orm"
-import { randomUUID } from "node:crypto"
-import { Err, Ok, type Result } from "ts-results"
-import { z } from "zod"
+import { eq } from "drizzle-orm";
+import { randomUUID } from "node:crypto";
+import { Err, Ok, type Result } from "ts-results";
+import { z } from "zod";
 
-import type { DBType } from "../core/db"
-import type { TB_TodoSelect } from "../zod"
+import type { DBType } from "../core/db";
+import type { TB_TodoSelect } from "../zod";
 
-import { TB_todo } from "../schema"
-import { TB_todoInsertSchema } from "../zod"
+import { TB_todo } from "../schema";
+import { TB_todoInsertSchema } from "../zod";
 
 const CreateTodoSchema = TB_todoInsertSchema.pick({
   description: true,
   title: true,
   userName: true,
-})
-type CreateTodoInput = z.infer<typeof CreateTodoSchema>
+});
+type CreateTodoInput = z.infer<typeof CreateTodoSchema>;
 
 const createTodo = async (
   input: CreateTodoInput,
   db: DBType,
 ): Promise<Result<TB_TodoSelect, string>> => {
-  const id = randomUUID()
-  const TodoParse = await TB_todoInsertSchema.safeParseAsync({ ...input, id })
+  const id = randomUUID();
+  const TodoParse = await TB_todoInsertSchema.safeParseAsync({ ...input, id });
   if (!TodoParse.success) {
-    return Err(TodoParse.error.errors.map((e) => e.message).join(", "))
+    return Err(TodoParse.error.errors.map((e) => e.message).join(", "));
   }
-  const todo = TodoParse.data
+  const todo = TodoParse.data;
 
   try {
     const [already] = await db
       .select({ id: TB_todo.id })
       .from(TB_todo)
       .limit(1)
-      .where(eq(TB_todo.id, todo.id))
+      .where(eq(TB_todo.id, todo.id));
     if (already?.id) {
-      return Err("Todo already exists")
+      return Err("Todo already exists");
     }
 
-    const [inserted] = await db.insert(TB_todo).values(todo).returning()
+    const [inserted] = await db.insert(TB_todo).values(todo).returning();
     if (!inserted) {
-      return Err("Failed to create Todo")
+      return Err("Failed to create Todo");
     }
 
-    return Ok(inserted)
+    return Ok(inserted);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-const GetTodoSchema = TB_todoInsertSchema.pick({ id: true })
-type GetTodoInput = z.infer<typeof GetTodoSchema>
+const GetTodoSchema = TB_todoInsertSchema.pick({ id: true });
+type GetTodoInput = z.infer<typeof GetTodoSchema>;
 
 const getTodo = async (
   input: GetTodoInput,
@@ -63,21 +63,21 @@ const getTodo = async (
       .select()
       .from(TB_todo)
       .where(eq(TB_todo.id, input.id))
-      .limit(1)
+      .limit(1);
     if (!Todo) {
-      return Err("Todo not found")
+      return Err("Todo not found");
     }
-    return Ok(Todo)
+    return Ok(Todo);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-const GetTodosByUserNameSchema = z.object({ name: z.string() })
-type GetTodosByUserNameInput = z.infer<typeof GetTodosByUserNameSchema>
+const GetTodosByUserNameSchema = z.object({ name: z.string() });
+type GetTodosByUserNameInput = z.infer<typeof GetTodosByUserNameSchema>;
 
 const getTodosByUserName = async (
   input: GetTodosByUserNameInput,
@@ -87,39 +87,39 @@ const getTodosByUserName = async (
     const todos = await db
       .select()
       .from(TB_todo)
-      .where(eq(TB_todo.userName, input.name))
-    return Ok(todos)
+      .where(eq(TB_todo.userName, input.name));
+    return Ok(todos);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
 const getAllTodos = async (
   db: DBType,
   options?: { limit: number; offset: number } | undefined,
 ): Promise<Result<TB_TodoSelect[], string>> => {
-  options ??= { limit: 100, offset: 0 }
+  options ??= { limit: 100, offset: 0 };
 
   try {
     const todos = await db
       .select()
       .from(TB_todo)
       .limit(options.limit)
-      .offset(options.offset)
-    return Ok(todos)
+      .offset(options.offset);
+    return Ok(todos);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-const DeleteTodoSchema = TB_todoInsertSchema.pick({ id: true })
-type DeleteTodoInput = z.infer<typeof DeleteTodoSchema>
+const DeleteTodoSchema = TB_todoInsertSchema.pick({ id: true });
+type DeleteTodoInput = z.infer<typeof DeleteTodoSchema>;
 
 const deleteTodo = async (
   input: DeleteTodoInput,
@@ -129,25 +129,25 @@ const deleteTodo = async (
     const [deleted] = await db
       .delete(TB_todo)
       .where(eq(TB_todo.id, input.id))
-      .returning({ id: TB_todo.id })
+      .returning({ id: TB_todo.id });
 
     if (!deleted?.id) {
-      return Err("Todo not found")
+      return Err("Todo not found");
     }
 
-    return Ok(null)
+    return Ok(null);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserName }
+export { createTodo, deleteTodo, getAllTodos, getTodo, getTodosByUserName };
 export {
   CreateTodoSchema,
   DeleteTodoSchema,
   GetTodoSchema,
   GetTodosByUserNameSchema,
-}
+};

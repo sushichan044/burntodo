@@ -2,27 +2,27 @@ import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   MetaFunction,
-} from "@remix-run/cloudflare"
+} from "@remix-run/cloudflare";
 
-import { getSessionCookieHelper } from "@/lib/session"
-import { Button } from "@mantine/core"
-import { json, redirect, useFetcher } from "@remix-run/react"
-import { FiLogOut } from "react-icons/fi"
+import { getSessionCookieHelper } from "@/lib/session";
+import { Button } from "@mantine/core";
+import { json, redirect, useFetcher } from "@remix-run/react";
+import { FiLogOut } from "react-icons/fi";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches
     .flatMap((match) => match.meta ?? [])
-    .filter((meta) => !("title" in meta))
-  return [...parentMeta, { title: "Logout | BurnTodo" }]
-}
+    .filter((meta) => !("title" in meta));
+  return [...parentMeta, { title: "Logout | BurnTodo" }];
+};
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
+  const helper = getSessionCookieHelper(context);
 
-  const session = await helper.getSession(request.headers.get("Cookie"))
+  const session = await helper.getSession(request.headers.get("Cookie"));
   if (!session.has("userName")) {
     // Redirect to the home page if they are already signed in.
-    return redirect("/app")
+    return redirect("/app");
   }
 
   return json(
@@ -32,12 +32,12 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         "Set-Cookie": await helper.commitSession(session),
       },
     },
-  )
+  );
 }
 
 export default function Route() {
-  const fetcher = useFetcher<typeof action>()
-  const loading = fetcher.state !== "idle"
+  const fetcher = useFetcher<typeof action>();
+  const loading = fetcher.state !== "idle";
 
   return (
     <>
@@ -62,15 +62,15 @@ export default function Route() {
         </Button>
       </fetcher.Form>
     </>
-  )
+  );
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
-  const session = await helper.getSession(request.headers.get("Cookie"))
+  const helper = getSessionCookieHelper(context);
+  const session = await helper.getSession(request.headers.get("Cookie"));
   return redirect("/", {
     headers: {
       "Set-Cookie": await helper.destroySession(session),
     },
-  })
+  });
 }

@@ -1,4 +1,4 @@
-import scrollBar from "tailwind-scrollbar"
+import scrollBar from "tailwind-scrollbar";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,4 +13,4 @@ export default {
   theme: {
     extend: {},
   },
-}
+};

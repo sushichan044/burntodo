@@ -1,23 +1,23 @@
-import type { action as AppIndexAction } from "@/app/routes/app._index/route"
-import type { VariantProps } from "tailwind-variants"
+import type { action as AppIndexAction } from "@/app/routes/app._index/route";
+import type { VariantProps } from "tailwind-variants";
 
-import { NewTodoSchema } from "@/app/routes/app/form"
-import { getFormProps, getInputProps, useForm } from "@conform-to/react"
-import { getZodConstraint, parseWithZod } from "@conform-to/zod"
-import { Button, Container, Divider, TextInput, Textarea } from "@mantine/core"
-import { getHotkeyHandler } from "@mantine/hooks"
-import { Form, useActionData, useNavigation } from "@remix-run/react"
-import { useRef } from "react"
-import { FaList } from "react-icons/fa6"
-import { tv } from "tailwind-variants"
+import { NewTodoSchema } from "@/app/routes/app/form";
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import { Button, Container, Divider, TextInput, Textarea } from "@mantine/core";
+import { getHotkeyHandler } from "@mantine/hooks";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
+import { useRef } from "react";
+import { FaList } from "react-icons/fa6";
+import { tv } from "tailwind-variants";
 
-type OnSubmit = ReturnType<typeof useForm>[0]["onSubmit"]
+type OnSubmit = ReturnType<typeof useForm>[0]["onSubmit"];
 
 type NewTodoFormProps = {
-  onBackFn?: () => void
-  onSubmitFn?: OnSubmit
-  variants?: VariantProps<typeof style>
-}
+  onBackFn?: () => void;
+  onSubmitFn?: OnSubmit;
+  variants?: VariantProps<typeof style>;
+};
 
 const style = tv({
   defaultVariants: {
@@ -40,32 +40,32 @@ const style = tv({
       },
     },
   },
-})
+});
 
 const NewTodoForm: React.FC<NewTodoFormProps> = ({
   onBackFn,
   onSubmitFn: onSubmitProp,
   variants,
 }) => {
-  const lastResult = useActionData<typeof AppIndexAction>()
-  const navigation = useNavigation()
+  const lastResult = useActionData<typeof AppIndexAction>();
+  const navigation = useNavigation();
   const [form, fields] = useForm({
     constraint: getZodConstraint(NewTodoSchema),
     lastResult,
     onSubmit(event) {
       if (onSubmitProp) {
-        onSubmitProp(event)
+        onSubmitProp(event);
       }
     },
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: NewTodoSchema })
+      return parseWithZod(formData, { schema: NewTodoSchema });
     },
     shouldRevalidate: "onInput",
     shouldValidate: "onBlur",
-  })
-  const ref = useRef<HTMLFormElement | null>(null)
-  const css = style(variants)
-  const isSubmitting = navigation.formAction === "/app?index"
+  });
+  const ref = useRef<HTMLFormElement | null>(null);
+  const css = style(variants);
+  const isSubmitting = navigation.formAction === "/app?index";
 
   return (
     <div className={css.wrapper()}>
@@ -103,7 +103,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
             [
               "ctrl+enter",
               () => {
-                ref.current?.submit()
+                ref.current?.submit();
               },
             ],
           ])}
@@ -151,7 +151,7 @@ const NewTodoForm: React.FC<NewTodoFormProps> = ({
         </Form>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default NewTodoForm
+export default NewTodoForm;

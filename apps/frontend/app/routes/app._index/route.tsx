@@ -1,46 +1,46 @@
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
-} from "@remix-run/cloudflare"
+} from "@remix-run/cloudflare";
 
-import { DeleteTodoSchema, NewTodoSchema } from "@/app/routes/app/form"
-import { getApi } from "@/lib/api"
-import { getSessionCookieHelper } from "@/lib/session"
-import { parseWithZod } from "@conform-to/zod"
-import { json, redirect } from "@remix-run/cloudflare"
-import { useLoaderData } from "@remix-run/react"
-import { FiAlertCircle, FiCheckCircle } from "react-icons/fi"
+import { DeleteTodoSchema, NewTodoSchema } from "@/app/routes/app/form";
+import { getApi } from "@/lib/api";
+import { getSessionCookieHelper } from "@/lib/session";
+import { parseWithZod } from "@conform-to/zod";
+import { json, redirect } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
+import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
-import NewTodoModal from "./NewTodoModal"
-import TodoWrapper from "./TodoWrapper"
+import NewTodoModal from "./NewTodoModal";
+import TodoWrapper from "./TodoWrapper";
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
-  const session = await helper.getSession(request.headers.get("Cookie"))
-  const name = session.get("userName")
+  const helper = getSessionCookieHelper(context);
+  const session = await helper.getSession(request.headers.get("Cookie"));
+  const name = session.get("userName");
   if (!name) {
     // Redirect to the home page if they are already signed in.
-    return redirect("/login")
+    return redirect("/login");
   }
 
-  const api = getApi({ context })
+  const api = getApi({ context });
   const res = await api.user[":name"].todo
     .$get({ param: { name } })
     .then((res) => res.json())
     .catch((error) => {
-      console.error(error)
-      return { data: null, error: String(error) }
-    })
+      console.error(error);
+      return { data: null, error: String(error) };
+    });
 
   return json(res, {
     headers: {
       "Set-Cookie": await helper.commitSession(session),
     },
-  })
+  });
 }
 
 export default function Route() {
-  const loaderData = useLoaderData<typeof loader>()
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
     <div className="space-y-8 py-8 md:space-y-12">
@@ -73,72 +73,72 @@ export default function Route() {
         )}
       </section>
     </div>
-  )
+  );
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
+  const helper = getSessionCookieHelper(context);
 
-  const session = await helper.getSession(request.headers.get("Cookie"))
-  const userName = session.get("userName")
+  const session = await helper.getSession(request.headers.get("Cookie"));
+  const userName = session.get("userName");
   if (!userName) {
     // Redirect to the home page if they are already signed in.
-    return redirect("/login")
+    return redirect("/login");
   }
 
-  const api = getApi({ context })
+  const api = getApi({ context });
 
   switch (request.method) {
     case "POST": {
-      const formData = await request.formData()
-      const submission = parseWithZod(formData, { schema: NewTodoSchema })
+      const formData = await request.formData();
+      const submission = parseWithZod(formData, { schema: NewTodoSchema });
       if (submission.status !== "success") {
-        return submission.reply()
+        return submission.reply();
       }
 
       const result = await api.todo
         .$post({ json: { ...submission.value, userName } })
-        .then((res) => res.json())
+        .then((res) => res.json());
 
       if (result.error) {
         return submission.reply({
           formErrors: [result.error],
-        })
+        });
       }
       if (result.data == null) {
         return submission.reply({
           formErrors: ["Failed to Create Todo"],
-        })
+        });
       }
-      break
+      break;
     }
     case "DELETE": {
-      const formData = await request.formData()
-      const submission = parseWithZod(formData, { schema: DeleteTodoSchema })
+      const formData = await request.formData();
+      const submission = parseWithZod(formData, { schema: DeleteTodoSchema });
       if (submission.status !== "success") {
-        return submission.reply()
+        return submission.reply();
       }
 
       const result = await api.todo[":id"]
         .$delete({
           param: { id: submission.value.id },
         })
-        .then((res) => res.json())
+        .then((res) => res.json());
 
       if (result.error) {
         return submission.reply({
           formErrors: [result.error],
-        })
+        });
       }
       if (result.data == null) {
         return submission.reply({
           formErrors: ["Failed to Delete Todo"],
-        })
+        });
       }
 
-      return submission.reply({ formErrors: ["Success"] })
+      return submission.reply({ formErrors: ["Success"] });
     }
   }
 
-  return redirect("/app")
+  return redirect("/app");
 }

@@ -1,7 +1,7 @@
-import { ColorSchemeScript, MantineProvider } from "@mantine/core"
-import "@mantine/core/styles.css"
-import { NavigationProgress, nprogress } from "@mantine/nprogress"
-import "@mantine/nprogress/styles.css"
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { NavigationProgress, nprogress } from "@mantine/nprogress";
+import "@mantine/nprogress/styles.css";
 import {
   Links,
   Meta,
@@ -9,21 +9,21 @@ import {
   Scripts,
   ScrollRestoration,
   useNavigation,
-} from "@remix-run/react"
-import { useLayoutEffect } from "react"
+} from "@remix-run/react";
+import { useLayoutEffect } from "react";
 
-import "./style.css"
+import "./style.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useLayoutEffect(() => {
     if (navigation.state === "loading") {
-      nprogress.start()
+      nprogress.start();
     }
     if (navigation.state === "idle") {
-      nprogress.complete()
+      nprogress.complete();
     }
-  }, [navigation.state])
+  }, [navigation.state]);
 
   return (
     <html data-mantine-color-scheme="light" lang="ja">
@@ -61,9 +61,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
 
 export default function App() {
-  return <Outlet />
+  return <Outlet />;
 }

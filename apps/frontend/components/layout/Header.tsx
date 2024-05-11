@@ -1,8 +1,8 @@
-import type { VariantProps } from "tailwind-variants"
+import type { VariantProps } from "tailwind-variants";
 
-import Link from "@/components/element/Link"
-import { Button, Container } from "@mantine/core"
-import { tv } from "tailwind-variants"
+import Link from "@/components/element/Link";
+import { Button, Container } from "@mantine/core";
+import { tv } from "tailwind-variants";
 
 const styles = tv({
   slots: {
@@ -27,25 +27,25 @@ const styles = tv({
       },
     },
   },
-})
+});
 
-const css = styles()
+const css = styles();
 
 type HeaderProps = {
-  hideUserMenu?: boolean | undefined
-  isLoggedIn?: boolean | undefined
-  variants?: VariantProps<typeof styles>
-}
+  hideUserMenu?: boolean | undefined;
+  isLoggedIn?: boolean | undefined;
+  variants?: VariantProps<typeof styles>;
+};
 
 const Header: React.FC<HeaderProps> = ({
   hideUserMenu,
   isLoggedIn,
   variants,
 }) => {
-  hideUserMenu ??= false
-  isLoggedIn ??= false
-  variants ??= { theme: "lp" }
-  const buttonVariant = variants.theme === "app" ? "filled" : "default"
+  hideUserMenu ??= false;
+  isLoggedIn ??= false;
+  variants ??= { theme: "lp" };
+  const buttonVariant = variants.theme === "app" ? "filled" : "default";
 
   return (
     <header className={css.wrapper(variants)}>
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({
           ))}
       </Container>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

@@ -1,8 +1,8 @@
-import { REPO_URL } from "@/app/const"
-import Link from "@/components/element/Link"
-import { Container } from "@mantine/core"
-import { FaGithub } from "react-icons/fa6"
-import { tv } from "tailwind-variants"
+import { REPO_URL } from "@/app/const";
+import Link from "@/components/element/Link";
+import { Container } from "@mantine/core";
+import { FaGithub } from "react-icons/fa6";
+import { tv } from "tailwind-variants";
 const styles = tv({
   slots: {
     innerWrapper:
@@ -10,9 +10,9 @@ const styles = tv({
     wrapper:
       "flex h-16 flex-row items-center border-t border-zinc-100 bg-white p-4",
   },
-})
+});
 
-const css = styles()
+const css = styles();
 
 const Footer: React.FC = () => {
   return (
@@ -29,7 +29,7 @@ const Footer: React.FC = () => {
         </Link>
       </Container>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

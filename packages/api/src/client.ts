@@ -1,7 +1,7 @@
-import { hc } from "hono/client"
+import { hc } from "hono/client";
 
-import type { HonoRoutes } from "./server"
+import type { HonoRoutes } from "./server";
 
-const apiClientFactory = hc<HonoRoutes>
+const apiClientFactory = hc<HonoRoutes>;
 
-export default apiClientFactory
+export default apiClientFactory;

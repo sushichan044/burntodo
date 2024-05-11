@@ -1,14 +1,14 @@
-import type { RemixLinkProps } from "@remix-run/react/dist/components"
-import type { VariantProps } from "tailwind-variants"
+import type { RemixLinkProps } from "@remix-run/react/dist/components";
+import type { VariantProps } from "tailwind-variants";
 
-import { cn } from "@/lib/cn"
-import { Link as RemixLink } from "@remix-run/react"
-import { tv } from "tailwind-variants"
+import { cn } from "@/lib/cn";
+import { Link as RemixLink } from "@remix-run/react";
+import { tv } from "tailwind-variants";
 
-import { isInternalLink } from "./util"
+import { isInternalLink } from "./util";
 type LinkProps = {
-  variants?: VariantProps<typeof linkStyles> | undefined
-} & RemixLinkProps
+  variants?: VariantProps<typeof linkStyles> | undefined;
+} & RemixLinkProps;
 
 const linkStyles = tv({
   base: "transition duration-200 ease-in-out",
@@ -39,7 +39,7 @@ const linkStyles = tv({
       underline: "hover:underline focus:underline",
     },
   },
-})
+});
 
 const Link: React.FC<LinkProps> = ({
   children,
@@ -52,12 +52,12 @@ const Link: React.FC<LinkProps> = ({
 }) => {
   const { rel, target } = (() => {
     if (typeof to !== "string" || isInternalLink(to))
-      return { rel: relProp, target: targetProp }
+      return { rel: relProp, target: targetProp };
     return {
       rel: "noopener noreferrer" + (relProp ? ` ${relProp}` : ""),
       target: "_blank",
-    }
-  })()
+    };
+  })();
 
   return (
     <RemixLink
@@ -69,7 +69,7 @@ const Link: React.FC<LinkProps> = ({
     >
       {children}
     </RemixLink>
-  )
-}
+  );
+};
 
-export default Link
+export default Link;

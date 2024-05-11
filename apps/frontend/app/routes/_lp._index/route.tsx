@@ -1,9 +1,9 @@
-import type { MetaFunction } from "@remix-run/cloudflare"
+import type { MetaFunction } from "@remix-run/cloudflare";
 
-import { REPO_URL } from "@/app/const"
-import Link from "@/components/element/Link"
-import { Button, Container } from "@mantine/core"
-import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6"
+import { REPO_URL } from "@/app/const";
+import Link from "@/components/element/Link";
+import { Button, Container } from "@mantine/core";
+import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,8 +12,8 @@ export const meta: MetaFunction = () => {
       content: "A simple todo app built with Hono and Remix",
       name: "description",
     },
-  ]
-}
+  ];
+};
 
 export default function Index() {
   return (
@@ -74,5 +74,5 @@ export default function Index() {
         </Button>
       </div>
     </Container>
-  )
+  );
 }

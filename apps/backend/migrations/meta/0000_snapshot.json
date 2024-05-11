@@ -58,12 +58,8 @@
           "name": "todos_user_name_users_name_fk",
           "tableFrom": "todos",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_name"
-          ],
-          "columnsTo": [
-            "name"
-          ],
+          "columnsFrom": ["user_name"],
+          "columnsTo": ["name"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

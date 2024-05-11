@@ -1,22 +1,22 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare"
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-import { getApi } from "@/lib/api"
-import { Container } from "@mantine/core"
-import { useLoaderData } from "@remix-run/react"
+import { getApi } from "@/lib/api";
+import { Container } from "@mantine/core";
+import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  const api = getApi({ context })
+  const api = getApi({ context });
   return await api.hello
     .$get()
     .then((res) => res.json())
     .catch((err) => {
-      console.error(err)
-      return { error: "Failed to fetch data", message: null }
-    })
+      console.error(err);
+      return { error: "Failed to fetch data", message: null };
+    });
 }
 
 export default function Route() {
-  const data = useLoaderData<typeof loader>()
+  const data = useLoaderData<typeof loader>();
 
   return (
     <Container className="py-4" size="md">
@@ -25,5 +25,5 @@ export default function Route() {
         <code>{JSON.stringify(data, null, 2)}</code>
       </pre>
     </Container>
-  )
+  );
 }

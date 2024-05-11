@@ -1,4 +1,3 @@
-
 # BurnTodo🔥
 
 This is an example Todo App. Backend is written in Hono🔥 and Frontend is written in Remix.
@@ -16,22 +15,22 @@ The resulting backend API call via Service Bindings looks like this.
 You can try this page at [here](https://burntodo.pages.dev/hello).
 
 ```tsx
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare"
-import { useLoaderData } from "@remix-run/react"
+import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 
 export async function loader({ context }: LoaderFunctionArgs) {
-  const api = getApi({ context }) // this is factory for hono/client
+  const api = getApi({ context }); // this is factory for hono/client
   return await api.hello
     .$get()
     .then((res) => res.json())
     .catch((err) => {
-      console.error(err)
-      return { error: "Failed to fetch data", message: null }
-    })
+      console.error(err);
+      return { error: "Failed to fetch data", message: null };
+    });
 }
 
 export default function Route() {
-  const data = useLoaderData<typeof loader>()
+  const data = useLoaderData<typeof loader>();
 
   return (
     <div>
@@ -40,7 +39,7 @@ export default function Route() {
         <code>{JSON.stringify(data, null, 2)}</code>
       </pre>
     </div>
-  )
+  );
 }
 ```
 
@@ -70,43 +69,43 @@ pnpm exec wrangler secret put COOKIE_SECRET
 
 1. Create D1 databse.
 
-  ```bash
-  cd apps/backend
-  pnpm exec wrangler d1 create <DATABASE_NAME>
-  ```
+```bash
+cd apps/backend
+pnpm exec wrangler d1 create <DATABASE_NAME>
+```
 
 2. Paste output to `apps/backend/wrangler.toml`.
 
-  ```toml
-  [[d1_databases]]
-  binding = "DB" # i.e. available in your Worker on env.DB
-  database_name = "<DATABASE_NAME>"
-  database_id = "<DATABASE_ID>"
-  ```
+```toml
+[[d1_databases]]
+binding = "DB" # i.e. available in your Worker on env.DB
+database_name = "<DATABASE_NAME>"
+database_id = "<DATABASE_ID>"
+```
 
 3. Modify `dbCredentials` in `apps/backend/drizzle.config.ts`.
 
-  ```ts
-  import { defineConfig } from "drizzle-kit"
+```ts
+import { defineConfig } from "drizzle-kit";
 
-  export default defineConfig({
-    dbCredentials: {
-      dbName: "<DATABASE_NAME>", // edit here!!!
-      wranglerConfigPath: "./wrangler.toml",
-    },
-    driver: "d1",
-    out: "./migrations",
-    schema: "../../packages/module/src/schema.ts",
-    strict: true,
-    verbose: true,
-  })
-  ```
+export default defineConfig({
+  dbCredentials: {
+    dbName: "<DATABASE_NAME>", // edit here!!!
+    wranglerConfigPath: "./wrangler.toml",
+  },
+  driver: "d1",
+  out: "./migrations",
+  schema: "../../packages/module/src/schema.ts",
+  strict: true,
+  verbose: true,
+});
+```
 
 4. Put Password Salt.
 
-  ```bash
-  pnpm exec wrangler secret put PASSWORD_SALT
-  ```
+```bash
+pnpm exec wrangler secret put PASSWORD_SALT
+```
 
 ## Run Locally
 

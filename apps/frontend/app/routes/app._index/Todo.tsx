@@ -1,25 +1,25 @@
-import type { TB_TodoSelect } from "@repo/module/zod"
+import type { TB_TodoSelect } from "@repo/module/zod";
 
-import { cn } from "@/lib/cn"
-import { useFetcher } from "@remix-run/react"
-import React from "react"
-import { FaFire } from "react-icons/fa6"
+import { cn } from "@/lib/cn";
+import { useFetcher } from "@remix-run/react";
+import React from "react";
+import { FaFire } from "react-icons/fa6";
 
 type TodoProps = {
-  task: Pick<TB_TodoSelect, "description" | "id" | "title">
-}
+  task: Pick<TB_TodoSelect, "description" | "id" | "title">;
+};
 
 const Todo: React.FC<TodoProps> = ({ task: { description, id, title } }) => {
-  const fetcher = useFetcher()
+  const fetcher = useFetcher();
 
   const submitDelete = () => {
-    const formData = new FormData()
-    formData.append("id", id)
+    const formData = new FormData();
+    formData.append("id", id);
     fetcher.submit(formData, {
       action: "/app?index",
       method: "DELETE",
-    })
-  }
+    });
+  };
 
   return (
     <div
@@ -51,7 +51,7 @@ const Todo: React.FC<TodoProps> = ({ task: { description, id, title } }) => {
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Todo
+export default Todo;

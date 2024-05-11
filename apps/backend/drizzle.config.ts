@@ -1,4 +1,4 @@
-import { defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dbCredentials: {
@@ -10,4 +10,4 @@ export default defineConfig({
   schema: "../../packages/module/src/schema.ts",
   strict: true,
   verbose: true,
-})
+});

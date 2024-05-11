@@ -1,34 +1,34 @@
-import type { z } from "zod"
+import type { z } from "zod";
 
-import { eq } from "drizzle-orm"
-import { randomUUID } from "node:crypto"
-import { Err, Ok, type Result } from "ts-results"
+import { eq } from "drizzle-orm";
+import { randomUUID } from "node:crypto";
+import { Err, Ok, type Result } from "ts-results";
 
-import type { DBType } from "../core/db"
+import type { DBType } from "../core/db";
 
-import { hashPassword, verifyPassword } from "../core/auth"
-import { TB_user } from "../schema"
-import { TB_userInsertSchema, TB_userSelectSchema } from "../zod"
+import { hashPassword, verifyPassword } from "../core/auth";
+import { TB_user } from "../schema";
+import { TB_userInsertSchema, TB_userSelectSchema } from "../zod";
 
 const CreateUserSchema = TB_userInsertSchema.pick({
   name: true,
   password: true,
-})
-type CreateUserInput = z.infer<typeof CreateUserSchema>
+});
+type CreateUserInput = z.infer<typeof CreateUserSchema>;
 
 const createUser = async (input: CreateUserInput, salt: string, db: DBType) => {
-  const id = randomUUID()
-  const { password, ...rest } = input
-  const hashed = await hashPassword({ rawPassword: password, salt })
+  const id = randomUUID();
+  const { password, ...rest } = input;
+  const hashed = await hashPassword({ rawPassword: password, salt });
   const userParse = await TB_userInsertSchema.safeParseAsync({
     ...rest,
     id,
     password: hashed,
-  })
+  });
   if (!userParse.success) {
-    return Err(userParse.error.errors.map((e) => e.message).join(", "))
+    return Err(userParse.error.errors.map((e) => e.message).join(", "));
   }
-  const user = userParse.data
+  const user = userParse.data;
 
   try {
     const already = await db.query.TB_user.findFirst({
@@ -36,27 +36,27 @@ const createUser = async (input: CreateUserInput, salt: string, db: DBType) => {
         name: true,
       },
       where: (fields, { eq }) => eq(fields.name, user.name),
-    })
+    });
     if (already) {
-      return Err("User already exists")
+      return Err("User already exists");
     }
 
-    const [inserted] = await db.insert(TB_user).values(user).returning()
+    const [inserted] = await db.insert(TB_user).values(user).returning();
     if (!inserted) {
-      return Err("Failed to create user")
+      return Err("Failed to create user");
     }
 
-    return Ok(inserted)
+    return Ok(inserted);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-const GetUserSchema = TB_userInsertSchema.pick({ name: true })
-type GetUserInput = z.infer<typeof GetUserSchema>
+const GetUserSchema = TB_userInsertSchema.pick({ name: true });
+type GetUserInput = z.infer<typeof GetUserSchema>;
 
 const getUser = async (input: GetUserInput, db: DBType) => {
   try {
@@ -65,26 +65,26 @@ const getUser = async (input: GetUserInput, db: DBType) => {
         password: false,
       },
       where: (fields, { eq }) => eq(fields.name, input.name),
-    })
+    });
 
     if (!user) {
-      return Err("User not found")
+      return Err("User not found");
     }
 
-    return Ok(user)
+    return Ok(user);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
 const getManyUsers = async (
   db: DBType,
   options?: { limit: number; offset: number } | undefined,
 ) => {
-  options ??= { limit: 100, offset: 0 }
+  options ??= { limit: 100, offset: 0 };
   try {
     const users = await db.query.TB_user.findMany({
       columns: {
@@ -92,15 +92,15 @@ const getManyUsers = async (
       },
       limit: options.limit,
       offset: options.offset,
-    })
-    return Ok(users)
+    });
+    return Ok(users);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
 const getUserWithTodos = async (input: GetUserInput, db: DBType) => {
   try {
@@ -112,25 +112,25 @@ const getUserWithTodos = async (input: GetUserInput, db: DBType) => {
       with: {
         todos: true,
       },
-    })
+    });
     if (!user) {
-      return Err("User not found")
+      return Err("User not found");
     }
 
-    return Ok(user)
+    return Ok(user);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
 const VerifyUserSchema = TB_userSelectSchema.pick({
   name: true,
   password: true,
-})
-type VerifyUserInput = z.infer<typeof VerifyUserSchema>
+});
+type VerifyUserInput = z.infer<typeof VerifyUserSchema>;
 
 const verifyUser = async (
   input: VerifyUserInput,
@@ -142,28 +142,28 @@ const verifyUser = async (
         password: true,
       },
       where: (fields, { eq }) => eq(fields.name, input.name),
-    })
+    });
 
     if (!user) {
-      return Err("User not found")
+      return Err("User not found");
     }
 
-    const valid = await verifyPassword(input.password, user.password)
+    const valid = await verifyPassword(input.password, user.password);
     if (!valid) {
-      return Err("Invalid password")
+      return Err("Invalid password");
     }
 
-    return Ok(null)
+    return Ok(null);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
-const DeleteUserSchema = TB_userInsertSchema.pick({ name: true })
-type DeleteUserInput = z.infer<typeof DeleteUserSchema>
+const DeleteUserSchema = TB_userInsertSchema.pick({ name: true });
+type DeleteUserInput = z.infer<typeof DeleteUserSchema>;
 
 const deleteUser = async (
   input: DeleteUserInput,
@@ -173,20 +173,20 @@ const deleteUser = async (
     const [deleted] = await db
       .delete(TB_user)
       .where(eq(TB_user.name, input.name))
-      .returning({ name: TB_user.name })
+      .returning({ name: TB_user.name });
 
     if (!deleted) {
-      return Err("User not found")
+      return Err("User not found");
     }
 
-    return Ok(null)
+    return Ok(null);
   } catch (e) {
     if (e instanceof Error) {
-      return Err(e.message)
+      return Err(e.message);
     }
-    return Err(String(e))
+    return Err(String(e));
   }
-}
+};
 
 export {
   createUser,
@@ -195,5 +195,5 @@ export {
   getUser,
   getUserWithTodos,
   verifyUser,
-}
-export { CreateUserSchema, DeleteUserSchema, GetUserSchema, VerifyUserSchema }
+};
+export { CreateUserSchema, DeleteUserSchema, GetUserSchema, VerifyUserSchema };

@@ -2,36 +2,36 @@ import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   MetaFunction,
-} from "@remix-run/cloudflare"
+} from "@remix-run/cloudflare";
 
-import { signInSchema, signUpSchema } from "@/app/routes/_auth/form"
-import { getApi } from "@/lib/api"
-import { getSessionCookieHelper } from "@/lib/session"
-import { getFormProps, getInputProps, useForm } from "@conform-to/react"
-import { getZodConstraint, parseWithZod } from "@conform-to/zod"
-import { Alert, Button, TextInput } from "@mantine/core"
+import { signInSchema, signUpSchema } from "@/app/routes/_auth/form";
+import { getApi } from "@/lib/api";
+import { getSessionCookieHelper } from "@/lib/session";
+import { getFormProps, getInputProps, useForm } from "@conform-to/react";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import { Alert, Button, TextInput } from "@mantine/core";
 import {
   Form,
   json,
   redirect,
   useActionData,
   useNavigation,
-} from "@remix-run/react"
-import { FiLogIn } from "react-icons/fi"
+} from "@remix-run/react";
+import { FiLogIn } from "react-icons/fi";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches
     .flatMap((match) => match.meta ?? [])
-    .filter((meta) => !("title" in meta))
-  return [...parentMeta, { title: "Login | BurnTodo" }]
-}
+    .filter((meta) => !("title" in meta));
+  return [...parentMeta, { title: "Login | BurnTodo" }];
+};
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
-  const session = await helper.getSession(request.headers.get("Cookie"))
+  const helper = getSessionCookieHelper(context);
+  const session = await helper.getSession(request.headers.get("Cookie"));
   if (session.has("userName")) {
     // Redirect to the home page if they are already signed in.
-    return redirect("/app")
+    return redirect("/app");
   }
 
   return json(
@@ -41,22 +41,22 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         "Set-Cookie": await helper.commitSession(session),
       },
     },
-  )
+  );
 }
 
 export default function Route() {
-  const lastResult = useActionData<typeof action>()
-  const navigation = useNavigation()
+  const lastResult = useActionData<typeof action>();
+  const navigation = useNavigation();
   const [form, fields] = useForm({
     constraint: getZodConstraint(signUpSchema),
     lastResult,
     onValidate({ formData }) {
-      return parseWithZod(formData, { schema: signInSchema })
+      return parseWithZod(formData, { schema: signInSchema });
     },
     shouldRevalidate: "onInput",
     shouldValidate: "onBlur",
-  })
-  const isSubmitting = navigation.formAction === "/login"
+  });
+  const isSubmitting = navigation.formAction === "/login";
 
   return (
     <>
@@ -112,33 +112,33 @@ export default function Route() {
         </fieldset>
       </Form>
     </>
-  )
+  );
 }
 
 export async function action({ context, request }: ActionFunctionArgs) {
-  const helper = getSessionCookieHelper(context)
-  const session = await helper.getSession(request.headers.get("Cookie"))
-  const api = getApi({ context })
-  const formData = await request.formData()
-  const submission = parseWithZod(formData, { schema: signInSchema })
+  const helper = getSessionCookieHelper(context);
+  const session = await helper.getSession(request.headers.get("Cookie"));
+  const api = getApi({ context });
+  const formData = await request.formData();
+  const submission = parseWithZod(formData, { schema: signInSchema });
   if (submission.status !== "success") {
-    return submission.reply()
+    return submission.reply();
   }
 
   const result = await api.auth.verify
     .$post({ json: submission.value })
-    .then((res) => res.json())
+    .then((res) => res.json());
 
   if (result.error) {
     return submission.reply({
       formErrors: [result.error],
-    })
+    });
   }
 
-  session.set("userName", submission.value.name)
+  session.set("userName", submission.value.name);
   return redirect("/app", {
     headers: {
       "Set-Cookie": await helper.commitSession(session),
     },
-  })
+  });
 }

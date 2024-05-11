@@ -2,7 +2,7 @@
 // by running `wrangler types`
 
 interface Env {
-	NODE_VERSION: "20";
-	COOKIE_SECRET: string;
-	BACKEND: Fetcher;
+  NODE_VERSION: "20";
+  COOKIE_SECRET: string;
+  BACKEND: Fetcher;
 }

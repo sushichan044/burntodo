@@ -1,1 +1,1 @@
-export { default } from "@virtual-live-lab/stylelint-config"
+export { default } from "@virtual-live-lab/stylelint-config";

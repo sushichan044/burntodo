@@ -13,6 +13,8 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
-, "../../packages/ui/src/elements/Button.tsx", "app/sessions.server.ts"  ]
+    "**/.client/**/*.tsx",
+    "../../packages/ui/src/elements/Button.tsx",
+    "app/sessions.server.ts"
+  ]
 }

@@ -1,8 +1,8 @@
-import { z } from "zod"
+import { z } from "zod";
 
 const regex = new RegExp(
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&^])[A-Za-z\d@.#$!%*?&]{8,128}$/,
-)
+);
 
 const signUpSchema = z.object({
   name: z.preprocess(
@@ -20,7 +20,7 @@ const signUpSchema = z.object({
         "Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be 8-128 characters long",
       ),
   ),
-})
+});
 
 const signInSchema = z.object({
   name: z.preprocess(
@@ -31,6 +31,6 @@ const signInSchema = z.object({
     (val) => (val === "" ? undefined : val),
     z.string({ required_error: "Password is required" }),
   ),
-})
+});
 
-export { signInSchema, signUpSchema }
+export { signInSchema, signUpSchema };
