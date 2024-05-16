@@ -149,14 +149,14 @@ importers:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       babel-plugin-react-compiler:
-        specifier: 0.0.0-experimental-4690415-20240515
-        version: 0.0.0-experimental-4690415-20240515
+        specifier: 0.0.0-experimental-c23de8d-20240515
+        version: 0.0.0-experimental-c23de8d-20240515
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
       eslint-plugin-react-compiler:
-        specifier: 0.0.0-experimental-e04a001-20240515
-        version: 0.0.0-experimental-e04a001-20240515(eslint@8.57.0)
+        specifier: 0.0.0-experimental-53bb89e-20240515
+        version: 0.0.0-experimental-53bb89e-20240515(eslint@8.57.0)
       node-fetch:
         specifier: ^3.3.2
         version: 3.3.2
@@ -2011,8 +2011,8 @@ packages:
   axobject-query@3.2.1:
     resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
 
-  babel-plugin-react-compiler@0.0.0-experimental-4690415-20240515:
-    resolution: {integrity: sha512-unBK0w2vxrFa3CAeeEGXfMTdBHM9vWZpItUXea4L4FDrD4QpqcAVMtR4Zu0GC0PvXRwj6KuPzzBkVmgGGPFxnw==}
+  babel-plugin-react-compiler@0.0.0-experimental-c23de8d-20240515:
+    resolution: {integrity: sha512-0XN2gmpT55QtAz5n7d5g91y1AuO9tRhWBaLgCRyc4ExHrlr7+LfxW+YTb3mOwxngkkiggwM8HyYsaEK9MqhnlQ==}
 
   bail@2.0.2:
     resolution: {integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw==}
@@ -2709,8 +2709,8 @@ packages:
       vue-eslint-parser:
         optional: true
 
-  eslint-plugin-react-compiler@0.0.0-experimental-e04a001-20240515:
-    resolution: {integrity: sha512-Cwj07NvHezC8wFaFf7nQ2N2ILfs9IuhT2z07PurZb7WxQ5DOZTaX5yaOTCKaMdxoL/7l7wMgbo8+hkgMhpmM8g==}
+  eslint-plugin-react-compiler@0.0.0-experimental-53bb89e-20240515:
+    resolution: {integrity: sha512-L3HV9qja1dnClRlR9aaWEJeJoGPH9cgjKq0sYqIOOH9uyWdVMH9CudsFr6yLva7dj05FpLZkiIaRSZJ3P/v6yQ==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
     peerDependencies:
       eslint: '>=7'
@@ -7261,7 +7261,7 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
-  babel-plugin-react-compiler@0.0.0-experimental-4690415-20240515:
+  babel-plugin-react-compiler@0.0.0-experimental-c23de8d-20240515:
     dependencies:
       '@babel/generator': 7.2.0
       '@babel/types': 7.24.0
@@ -8159,7 +8159,7 @@ snapshots:
       - supports-color
       - typescript
 
-  eslint-plugin-react-compiler@0.0.0-experimental-e04a001-20240515(eslint@8.57.0):
+  eslint-plugin-react-compiler@0.0.0-experimental-53bb89e-20240515(eslint@8.57.0):
     dependencies:
       '@babel/core': 7.24.4
       '@babel/parser': 7.24.4
