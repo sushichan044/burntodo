@@ -26,16 +26,17 @@
     "clsx": "^2.1.1",
     "isbot": "^4.4.0",
     "miniflare": "^3.20240419.1",
-    "react": "19.0.0-beta-1beb73de0f-20240503",
-    "react-dom": "19.0.0-beta-1beb73de0f-20240503",
+    "react": "19.0.0-rc-915b914b3a-20240515",
+    "react-dom": "19.0.0-rc-915b914b3a-20240515",
     "react-icons": "^5.2.1",
     "tailwind-merge": "^2.3.0",
     "tailwind-variants": "^0.2.1",
+    "vite-plugin-babel": "^1.2.0",
     "zod": "^3.23.8"
   },
   "overrides": {
-    "react": "19.0.0-beta-1beb73de0f-20240503",
-    "react-dom": "19.0.0-beta-1beb73de0f-20240503"
+    "react": "19.0.0-rc-915b914b3a-20240515",
+    "react-dom": "19.0.0-rc-915b914b3a-20240515"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240502.0",
@@ -47,7 +48,9 @@
     "@virtual-live-lab/stylelint-config": "^2.0.1",
     "@virtual-live-lab/tsconfig": "^2.0.1",
     "autoprefixer": "^10.4.19",
+    "babel-plugin-react-compiler": "0.0.0-experimental-4690415-20240515",
     "eslint": "^8.57.0",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-e04a001-20240515",
     "node-fetch": "^3.3.2",
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.15.0",
