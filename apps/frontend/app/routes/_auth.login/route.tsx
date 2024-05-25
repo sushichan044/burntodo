@@ -127,7 +127,11 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
   const result = await api.auth.verify
     .$post({ json: submission.value })
-    .then((res) => res.json());
+    .then(async (res) => await res.json())
+    .catch((error) => {
+      console.error(error);
+      return { error: String(error) };
+    });
 
   if (result.error) {
     return submission.reply({

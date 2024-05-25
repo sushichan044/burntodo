@@ -26,7 +26,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   const api = getApi({ context });
   const res = await api.user[":name"].todo
     .$get({ param: { name } })
-    .then((res) => res.json())
+    .then(async (res) => await res.json())
     .catch((error) => {
       console.error(error);
       return { data: null, error: String(error) };
@@ -98,7 +98,11 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
       const result = await api.todo
         .$post({ json: { ...submission.value, userName } })
-        .then((res) => res.json());
+        .then(async (res) => await res.json())
+        .catch((error) => {
+          console.error(error);
+          return { data: null, error: String(error) };
+        });
 
       if (result.error) {
         return submission.reply({
@@ -123,7 +127,11 @@ export async function action({ context, request }: ActionFunctionArgs) {
         .$delete({
           param: { id: submission.value.id },
         })
-        .then((res) => res.json());
+        .then(async (res) => await res.json())
+        .catch((error) => {
+          console.error(error);
+          return { data: null, error: String(error) };
+        });
 
       if (result.error) {
         return submission.reply({
