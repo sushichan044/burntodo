@@ -1,3 +1,5 @@
+import type { DBType } from "@repo/module";
+
 import { createDB } from "@repo/module";
 import { cors } from "hono/cors";
 import { csrf } from "hono/csrf";
@@ -12,7 +14,7 @@ type HonoConfig = {
     PASSWORD_SALT: string;
   };
   Variables: {
-    db: ReturnType<typeof createDB>;
+    db: DBType;
   };
 };
 

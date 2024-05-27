@@ -1,1 +1,1 @@
-export { createDB } from "./core/db";
+export { type DBType, createDB } from "./core/db";
