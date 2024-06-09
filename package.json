@@ -11,12 +11,12 @@
   "devDependencies": {
     "@virtual-live-lab/eslint-config": "^2.0.2",
     "@virtual-live-lab/prettier-config": "^2.0.2",
-    "@virtual-live-lab/tsconfig": "^2.0.1",
-    "prettier": "^3.2.5",
-    "turbo": "^1.13.3",
+    "@virtual-live-lab/tsconfig": "^2.1.0",
+    "prettier": "^3.3.1",
+    "turbo": "^1.13.4",
     "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.2.0",
   "engines": {
     "node": ">=20 <21"
   }
