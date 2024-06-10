@@ -13,6 +13,8 @@
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
     "@libsql/client": "^0.6.2",
+    "@prisma/adapter-d1": "^5.15.0",
+    "@prisma/client": "^5.15.0",
     "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
@@ -31,6 +33,7 @@
     "@virtual-live-lab/eslint-config": "^2.0.2",
     "@virtual-live-lab/tsconfig": "^2.1.0",
     "eslint": "^8.57.0",
+    "prisma": "^5.15.0",
     "ts-results": "^3.3.0",
     "typescript": "^5.4.5",
     "wrangler": "^3.60.0"

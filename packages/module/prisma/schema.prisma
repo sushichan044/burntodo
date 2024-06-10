@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  name      String   @id
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Todo      Todo[]
+}
+
+model Todo {
+  id       String @id // use UUID v7. Inputted by application.
+  title    String
+  description String?
+  userName String
+  user     User   @relation(fields: [userName], references: [name])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
