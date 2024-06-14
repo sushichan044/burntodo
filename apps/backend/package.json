@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.4.4"
+    "hono": "^4.4.6"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240605.0",
@@ -19,6 +19,6 @@
     "drizzle-kit": "^0.20.18",
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
-    "wrangler": "^3.60.0"
+    "wrangler": "^3.60.3"
   }
 }

@@ -16,7 +16,7 @@
     "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.30.10",
     "drizzle-zod": "^0.5.1",
-    "hono": "^4.4.4",
+    "hono": "^4.4.6",
     "zod": "^3.23.8"
   },
   "peerDependencies": {
@@ -33,6 +33,6 @@
     "eslint": "^8.57.0",
     "ts-results": "^3.3.0",
     "typescript": "^5.4.5",
-    "wrangler": "^3.60.0"
+    "wrangler": "^3.60.3"
   }
 }
