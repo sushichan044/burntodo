@@ -4,7 +4,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./schema": "./src/schema.ts",
-    "./usecase/*": "./src/usecase/*.ts",
+    "./usecase": "./src/usecase/index.ts",
     "./zod": "./src/zod.ts"
   },
   "scripts": {
