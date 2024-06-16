@@ -13,8 +13,8 @@
     "hono": "^4.4.6"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240605.0",
-    "@virtual-live-lab/eslint-config": "^2.0.2",
+    "@cloudflare/workers-types": "^4.20240614.0",
+    "@virtual-live-lab/eslint-config": "^2.0.3",
     "@virtual-live-lab/tsconfig": "^2.1.0",
     "drizzle-kit": "^0.20.18",
     "eslint": "^8.57.0",

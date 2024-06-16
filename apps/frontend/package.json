@@ -39,12 +39,12 @@
     "react-dom": "19.0.0-rc-915b914b3a-20240515"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240605.0",
+    "@cloudflare/workers-types": "^4.20240614.0",
     "@double-great/stylelint-a11y": "^3.0.2",
     "@remix-run/dev": "^2.9.2",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "@virtual-live-lab/eslint-config": "^2.0.2",
+    "@virtual-live-lab/eslint-config": "^2.0.3",
     "@virtual-live-lab/stylelint-config": "^2.0.2",
     "@virtual-live-lab/tsconfig": "^2.1.0",
     "autoprefixer": "^10.4.19",
