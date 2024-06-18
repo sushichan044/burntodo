@@ -1,7 +1,8 @@
-import NewTodoForm from "@/app/routes/app._index/NewTodoForm";
 import { Button, Modal } from "@mantine/core";
 import { useDisclosure, useHotkeys, useMediaQuery } from "@mantine/hooks";
 import { FaPlus } from "react-icons/fa6";
+
+import NewTodoForm from "./NewTodoForm";
 
 const NewTodoModal = () => {
   const [opened, { close, open }] = useDisclosure(false);
@@ -12,7 +13,8 @@ const NewTodoModal = () => {
     close();
   };
   useHotkeys([["n", openModal]]);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  // mobile first
+  const isDesktop = useMediaQuery("(min-width: 768px)") ?? false;
 
   return (
     <>

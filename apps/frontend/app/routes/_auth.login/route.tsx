@@ -4,9 +4,6 @@ import type {
   MetaFunction,
 } from "@remix-run/cloudflare";
 
-import { signInSchema, signUpSchema } from "@/app/routes/_auth/form";
-import { getApi } from "@/lib/api";
-import { getSessionCookieHelper } from "@/lib/session";
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
@@ -18,6 +15,10 @@ import {
   useNavigation,
 } from "@remix-run/react";
 import { FiLogIn } from "react-icons/fi";
+
+import { getApi } from "../../../lib/api";
+import { getSessionCookieHelper } from "../../../lib/session";
+import { signInSchema, signUpSchema } from "../_auth/form";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches
@@ -133,7 +134,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       return { error: String(error) };
     });
 
-  if (result.error) {
+  if (result.error != null) {
     return submission.reply({
       formErrors: [result.error],
     });

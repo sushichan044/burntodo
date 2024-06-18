@@ -1,9 +1,10 @@
 import type { TB_TodoSelect } from "@repo/module/zod";
 
-import { cn } from "@/lib/cn";
 import { useFetcher } from "@remix-run/react";
 import React from "react";
 import { FaFire } from "react-icons/fa6";
+
+import { cn } from "../../../lib/cn";
 
 type TodoProps = {
   task: Pick<TB_TodoSelect, "description" | "id" | "title">;

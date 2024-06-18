@@ -1,7 +1,5 @@
-import type { action as AppIndexAction } from "@/app/routes/app._index/route";
 import type { VariantProps } from "tailwind-variants";
 
-import { NewTodoSchema } from "@/app/routes/app/form";
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Button, Container, Divider, TextInput, Textarea } from "@mantine/core";
@@ -10,6 +8,10 @@ import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { useRef } from "react";
 import { FaList } from "react-icons/fa6";
 import { tv } from "tailwind-variants";
+
+import type { action as AppIndexAction } from "./route";
+
+import { NewTodoSchema } from "../app/form";
 
 type OnSubmit = ReturnType<typeof useForm>[0]["onSubmit"];
 

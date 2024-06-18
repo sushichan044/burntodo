@@ -1,8 +1,9 @@
 import type { VariantProps } from "tailwind-variants";
 
-import Link from "@/components/element/Link";
 import { Button, Container } from "@mantine/core";
 import { tv } from "tailwind-variants";
+
+import Link from "../element/Link";
 
 const styles = tv({
   slots: {

@@ -1,6 +1,6 @@
 import type { TB_TodoSelect } from "@repo/module/zod";
 
-import Todo from "@/app/routes/app._index/Todo";
+import Todo from "./Todo";
 
 type TodoWrapperProps = {
   todos: Pick<TB_TodoSelect, "description" | "id" | "title">[];

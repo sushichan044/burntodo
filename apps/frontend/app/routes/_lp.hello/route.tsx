@@ -1,8 +1,9 @@
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-import { getApi } from "@/lib/api";
 import { Container } from "@mantine/core";
 import { useLoaderData } from "@remix-run/react";
+
+import { getApi } from "../../../lib/api";
 
 export async function loader({ context }: LoaderFunctionArgs) {
   const api = getApi({ context });
