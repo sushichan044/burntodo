@@ -1,8 +1,9 @@
-import { REPO_URL } from "@/app/const";
-import Link from "@/components/element/Link";
 import { Container } from "@mantine/core";
 import { FaGithub } from "react-icons/fa6";
 import { tv } from "tailwind-variants";
+
+import { REPO_URL } from "../../app/const";
+import Link from "../element/Link";
 const styles = tv({
   slots: {
     innerWrapper:

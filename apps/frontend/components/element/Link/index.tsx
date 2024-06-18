@@ -1,10 +1,10 @@
 import type { RemixLinkProps } from "@remix-run/react/dist/components";
 import type { VariantProps } from "tailwind-variants";
 
-import { cn } from "@/lib/cn";
 import { Link as RemixLink } from "@remix-run/react";
 import { tv } from "tailwind-variants";
 
+import { cn } from "../../../lib/cn";
 import { isInternalLink } from "./util";
 type LinkProps = {
   variants?: VariantProps<typeof linkStyles> | undefined;
@@ -54,7 +54,7 @@ const Link: React.FC<LinkProps> = ({
     if (typeof to !== "string" || isInternalLink(to))
       return { rel: relProp, target: targetProp };
     return {
-      rel: "noopener noreferrer" + (relProp ? ` ${relProp}` : ""),
+      rel: "noopener noreferrer" + (relProp ?? "" ? ` ${relProp}` : ""),
       target: "_blank",
     };
   })();

@@ -3,7 +3,7 @@ import type { AppLoadContext } from "@remix-run/cloudflare";
 import {
   OLD_SESSION_SECRETS,
   SessionCookieHelper,
-} from "@/app/sessions.server";
+} from "../app/sessions.server";
 
 const getSessionCookieHelper = (context: AppLoadContext) => {
   const secret = context.cloudflare.env.COOKIE_SECRET;

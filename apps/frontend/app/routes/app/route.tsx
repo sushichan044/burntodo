@@ -1,11 +1,12 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
-import { getSessionCookieHelper } from "@/lib/session";
 import { Container } from "@mantine/core";
 import { json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
+
+import Footer from "../../../components/layout/Footer";
+import Header from "../../../components/layout/Header";
+import { getSessionCookieHelper } from "../../../lib/session";
 
 export const meta: MetaFunction = () => {
   return [

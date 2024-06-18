@@ -1,11 +1,7 @@
 {
   "extends": "@virtual-live-lab/tsconfig/remix",
   "compilerOptions": {
-    "types": ["@remix-run/cloudflare", "vite/client"],
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "types": ["@remix-run/cloudflare", "vite/client"]
   },
   "include": [
     "**/*.ts",
@@ -13,8 +9,6 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx",
-    "../../packages/ui/src/elements/Button.tsx",
-    "app/sessions.server.ts"
+    "**/.client/**/*.tsx"
   ]
 }

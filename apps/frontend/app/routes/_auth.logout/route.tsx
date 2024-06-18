@@ -4,10 +4,11 @@ import type {
   MetaFunction,
 } from "@remix-run/cloudflare";
 
-import { getSessionCookieHelper } from "@/lib/session";
 import { Button } from "@mantine/core";
 import { json, redirect, useFetcher } from "@remix-run/react";
 import { FiLogOut } from "react-icons/fi";
+
+import { getSessionCookieHelper } from "../../../lib/session";
 
 export const meta: MetaFunction = ({ matches }) => {
   const parentMeta = matches

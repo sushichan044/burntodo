@@ -3,14 +3,14 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/cloudflare";
 
-import { DeleteTodoSchema, NewTodoSchema } from "@/app/routes/app/form";
-import { getApi } from "@/lib/api";
-import { getSessionCookieHelper } from "@/lib/session";
 import { parseWithZod } from "@conform-to/zod";
 import { json, redirect } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
+import { getApi } from "../../../lib/api";
+import { getSessionCookieHelper } from "../../../lib/session";
+import { DeleteTodoSchema, NewTodoSchema } from "../app/form";
 import NewTodoModal from "./NewTodoModal";
 import TodoWrapper from "./TodoWrapper";
 
@@ -18,7 +18,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
   const name = session.get("userName");
-  if (!name) {
+  if (!(name ?? "")) {
     // Redirect to the home page if they are already signed in.
     return redirect("/login");
   }
@@ -51,7 +51,7 @@ export default function Route() {
             <NewTodoModal />
           </aside>
         </div>
-        {loaderData.error && (
+        {(loaderData.error ?? "") && (
           <div className="grid grid-rows-[80px_1fr] gap-y-8 rounded-md bg-white p-8 text-rose-500 md:gap-y-12">
             <FiAlertCircle className="size-full" />
             <p className="text-center text-lg font-semibold md:text-xl">
@@ -61,7 +61,7 @@ export default function Route() {
             </p>
           </div>
         )}
-        {loaderData.data == null || loaderData.data.length < 1 ? (
+        {loaderData.data == null || loaderData.data.todos.length < 1 ? (
           <div className="grid grid-rows-[80px_1fr] gap-y-8 rounded-md bg-white p-8 text-teal-500 md:gap-y-12">
             <FiCheckCircle className="size-full" />
             <p className="text-center text-lg font-semibold md:text-xl">
@@ -69,7 +69,7 @@ export default function Route() {
             </p>
           </div>
         ) : (
-          <TodoWrapper todos={loaderData.data} />
+          <TodoWrapper todos={loaderData.data.todos} />
         )}
       </section>
     </div>
@@ -81,7 +81,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
   const session = await helper.getSession(request.headers.get("Cookie"));
   const userName = session.get("userName");
-  if (!userName) {
+  if (userName == null) {
     // Redirect to the home page if they are already signed in.
     return redirect("/login");
   }
@@ -104,7 +104,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
           return { data: null, error: String(error) };
         });
 
-      if (result.error) {
+      if (result.error != null) {
         return submission.reply({
           formErrors: [result.error],
         });
@@ -133,7 +133,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
           return { data: null, error: String(error) };
         });
 
-      if (result.error) {
+      if (result.error != null) {
         return submission.reply({
           formErrors: [result.error],
         });

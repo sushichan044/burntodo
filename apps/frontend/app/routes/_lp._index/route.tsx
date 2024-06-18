@@ -1,9 +1,10 @@
 import type { MetaFunction } from "@remix-run/cloudflare";
 
-import { REPO_URL } from "@/app/const";
-import Link from "@/components/element/Link";
 import { Button, Container } from "@mantine/core";
 import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6";
+
+import Link from "../../../components/element/Link";
+import { REPO_URL } from "../../const";
 
 export const meta: MetaFunction = () => {
   return [
