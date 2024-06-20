@@ -1,11 +1,10 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/cloudflare";
-
 import { Button } from "@mantine/core";
-import { json, redirect, useFetcher } from "@remix-run/react";
+import {
+  type MetaFunction,
+  unstable_defineAction,
+  unstable_defineLoader,
+} from "@remix-run/cloudflare";
+import { useFetcher } from "@remix-run/react";
 import { FiLogOut } from "react-icons/fi";
 
 import { getSessionCookieHelper } from "../../../lib/session";
@@ -17,24 +16,22 @@ export const meta: MetaFunction = ({ matches }) => {
   return [...parentMeta, { title: "Logout | BurnTodo" }];
 };
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context);
+export const loader = unstable_defineLoader(
+  async ({ context, request, response }) => {
+    const helper = getSessionCookieHelper(context);
 
-  const session = await helper.getSession(request.headers.get("Cookie"));
-  if (!session.has("userName")) {
-    // Redirect to the home page if they are already signed in.
-    return redirect("/app");
-  }
+    const session = await helper.getSession(request.headers.get("Cookie"));
+    if (!session.has("userName")) {
+      // Redirect to the home page if they are already signed in.
+      response.status = 303;
+      response.headers.set("Location", "/app");
+      throw response;
+    }
 
-  return json(
-    {},
-    {
-      headers: {
-        "Set-Cookie": await helper.commitSession(session),
-      },
-    },
-  );
-}
+    response.headers.set("Set-Cookie", await helper.commitSession(session));
+    throw response;
+  },
+);
 
 export default function Route() {
   const fetcher = useFetcher<typeof action>();
@@ -66,12 +63,14 @@ export default function Route() {
   );
 }
 
-export async function action({ context, request }: ActionFunctionArgs) {
-  const helper = getSessionCookieHelper(context);
-  const session = await helper.getSession(request.headers.get("Cookie"));
-  return redirect("/", {
-    headers: {
-      "Set-Cookie": await helper.destroySession(session),
-    },
-  });
-}
+export const action = unstable_defineAction(
+  async ({ context, request, response }) => {
+    const helper = getSessionCookieHelper(context);
+    const session = await helper.getSession(request.headers.get("Cookie"));
+
+    response.headers.set("Set-Cookie", await helper.destroySession(session));
+    response.status = 308;
+    response.headers.set("Location", "/");
+    throw response;
+  },
+);

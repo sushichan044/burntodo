@@ -1,19 +1,12 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/cloudflare";
-
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
 import {
-  Form,
-  json,
-  redirect,
-  useActionData,
-  useNavigation,
-} from "@remix-run/react";
+  type ActionFunctionArgs,
+  type MetaFunction,
+  unstable_defineLoader,
+} from "@remix-run/cloudflare";
+import { Form, redirect, useActionData, useNavigation } from "@remix-run/react";
 import { FiLogIn } from "react-icons/fi";
 
 import { getApi } from "../../../lib/api";
@@ -27,23 +20,21 @@ export const meta: MetaFunction = ({ matches }) => {
   return [...parentMeta, { title: "Login | BurnTodo" }];
 };
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context);
-  const session = await helper.getSession(request.headers.get("Cookie"));
-  if (session.has("userName")) {
-    // Redirect to the home page if they are already signed in.
-    return redirect("/app");
-  }
+export const loader = unstable_defineLoader(
+  async ({ context, request, response }) => {
+    const helper = getSessionCookieHelper(context);
+    const session = await helper.getSession(request.headers.get("Cookie"));
+    if (session.has("userName")) {
+      // Redirect to the home page if they are already signed in.
+      response.status = 303;
+      response.headers.set("Location", "/app");
+      throw response;
+    }
 
-  return json(
-    {},
-    {
-      headers: {
-        "Set-Cookie": await helper.commitSession(session),
-      },
-    },
-  );
-}
+    response.headers.set("Set-Cookie", await helper.commitSession(session));
+    throw response;
+  },
+);
 
 export default function Route() {
   const lastResult = useActionData<typeof action>();
@@ -116,6 +107,7 @@ export default function Route() {
   );
 }
 
+// Conform's SubmissionResult.initialValue is Record<string, unknown> | null and not compatible with defineAction
 export async function action({ context, request }: ActionFunctionArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
@@ -141,7 +133,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
   }
 
   session.set("userName", submission.value.name);
-  return redirect("/app", {
+  throw redirect("/app", {
     headers: {
       "Set-Cookie": await helper.commitSession(session),
     },

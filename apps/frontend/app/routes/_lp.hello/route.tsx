@@ -1,11 +1,10 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-
 import { Container } from "@mantine/core";
+import { unstable_defineLoader } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 
 import { getApi } from "../../../lib/api";
 
-export async function loader({ context }: LoaderFunctionArgs) {
+export const loader = unstable_defineLoader(async ({ context }) => {
   const api = getApi({ context });
   return await api.hello
     .$get()
@@ -14,7 +13,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
       console.error(err);
       return { error: "Failed to fetch data", message: null };
     });
-}
+});
 
 export default function Route() {
   const data = useLoaderData<typeof loader>();

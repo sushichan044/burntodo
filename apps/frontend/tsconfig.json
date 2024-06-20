@@ -1,7 +1,11 @@
 {
   "extends": "@virtual-live-lab/tsconfig/remix",
   "compilerOptions": {
-    "types": ["@remix-run/cloudflare", "vite/client"]
+    "types": [
+      "@remix-run/cloudflare",
+      "vite/client",
+      "@remix-run/react/future/single-fetch.d.ts"
+    ]
   },
   "include": [
     "**/*.ts",

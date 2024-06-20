@@ -1,10 +1,7 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-} from "@remix-run/cloudflare";
+import type { ActionFunctionArgs } from "@remix-run/cloudflare";
 
 import { parseWithZod } from "@conform-to/zod";
-import { json, redirect } from "@remix-run/cloudflare";
+import { redirect, unstable_defineLoader } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
@@ -14,30 +11,31 @@ import { DeleteTodoSchema, NewTodoSchema } from "../app/form";
 import NewTodoModal from "./NewTodoModal";
 import TodoWrapper from "./TodoWrapper";
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
-  const helper = getSessionCookieHelper(context);
-  const session = await helper.getSession(request.headers.get("Cookie"));
-  const name = session.get("userName");
-  if (!(name ?? "")) {
-    // Redirect to the home page if they are already signed in.
-    return redirect("/login");
-  }
+export const loader = unstable_defineLoader(
+  async ({ context, request, response }) => {
+    const helper = getSessionCookieHelper(context);
+    const session = await helper.getSession(request.headers.get("Cookie"));
+    const name = session.get("userName");
+    if (!(name ?? "")) {
+      // Redirect to the home page if they are already signed in.
+      response.status = 303;
+      response.headers.set("Location", "/login");
+      throw response;
+    }
 
-  const api = getApi({ context });
-  const res = await api.user[":name"].todo
-    .$get({ param: { name } })
-    .then(async (res) => await res.json())
-    .catch((error) => {
-      console.error(error);
-      return { data: null, error: String(error) };
-    });
+    const api = getApi({ context });
+    const res = await api.user[":name"].todo
+      .$get({ param: { name } })
+      .then(async (res) => await res.json())
+      .catch((error) => {
+        console.error(error);
+        return { data: null, error: String(error) };
+      });
 
-  return json(res, {
-    headers: {
-      "Set-Cookie": await helper.commitSession(session),
-    },
-  });
-}
+    response.headers.set("Set-Cookie", await helper.commitSession(session));
+    return res;
+  },
+);
 
 export default function Route() {
   const loaderData = useLoaderData<typeof loader>();
@@ -76,6 +74,7 @@ export default function Route() {
   );
 }
 
+// Conform's SubmissionResult.initialValue is Record<string, unknown> | null and not compatible with defineAction
 export async function action({ context, request }: ActionFunctionArgs) {
   const helper = getSessionCookieHelper(context);
 
