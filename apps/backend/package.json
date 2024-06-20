@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.4.6"
+    "hono": "^4.4.7"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240614.0",
     "@virtual-live-lab/eslint-config": "^2.0.3",
-    "@virtual-live-lab/tsconfig": "^2.1.0",
+    "@virtual-live-lab/tsconfig": "^2.1.1",
     "drizzle-kit": "^0.20.18",
     "eslint": "^8.57.0",
     "typescript": "^5.4.5",
-    "wrangler": "^3.60.3"
+    "wrangler": "^3.61.0"
   }
 }
