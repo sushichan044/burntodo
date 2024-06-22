@@ -1,1 +1,3 @@
-export { default } from "@repo/api/server";
+import { serve } from "@hono/node-server";
+import server from "@repo/api/server";
+serve(server);

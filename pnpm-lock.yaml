@@ -29,6 +29,9 @@ importers:
 
   apps/backend:
     dependencies:
+      '@hono/node-server':
+        specifier: ^1.11.4
+        version: 1.11.4
       '@repo/api':
         specifier: workspace:^
         version: link:../../packages/api
@@ -1454,8 +1457,8 @@ packages:
   '@floating-ui/utils@0.2.2':
     resolution: {integrity: sha512-J4yDIIthosAsRZ5CPYP/jQvUAQtlZTTD/4suA08/FEnlxqW3sKS9iAhgsa9VYLZ6vDHn/ixJgIqRQPotoBjxIw==}
 
-  '@hono/node-server@1.11.0':
-    resolution: {integrity: sha512-TLIJq9TMtD1NEG1mVoqNUn1Ita0qSaB5XboZErjFBcO/GJYXwWY4dVdTi9G0lbxtu0x+hJXDItcLaFHb7rlFTw==}
+  '@hono/node-server@1.11.4':
+    resolution: {integrity: sha512-8TOiiiAqcFC6f62P7M9p6adQREAlWdVi1awehAwgWW+3R65/rKzHnLARO/Hu/466z01VNViBoogqatqXJMyItA==}
     engines: {node: '>=18.14.1'}
 
   '@hono/zod-validator@0.2.1':
@@ -6438,7 +6441,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.2': {}
 
-  '@hono/node-server@1.11.0': {}
+  '@hono/node-server@1.11.4': {}
 
   '@hono/zod-validator@0.2.1(hono@4.4.7)(zod@3.23.8)':
     dependencies:
@@ -7849,7 +7852,7 @@ snapshots:
   drizzle-kit@0.20.18:
     dependencies:
       '@esbuild-kit/esm-loader': 2.6.5
-      '@hono/node-server': 1.11.0
+      '@hono/node-server': 1.11.4
       '@hono/zod-validator': 0.2.1(hono@4.4.7)(zod@3.23.8)
       camelcase: 7.0.1
       chalk: 5.3.0

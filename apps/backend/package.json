@@ -9,6 +9,7 @@
     "db:push-remote": "wrangler d1 migrations apply remix-hono-turbo-example --remote"
   },
   "dependencies": {
+    "@hono/node-server": "^1.11.4",
     "@repo/api": "workspace:^",
     "hono": "^4.4.7"
   },
