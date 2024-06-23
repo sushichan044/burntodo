@@ -26,13 +26,13 @@
     "wrangler": "^3.47.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240614.0",
+    "@cloudflare/workers-types": "^4.20240620.0",
     "@types/bcryptjs": "^2.4.6",
-    "@virtual-live-lab/eslint-config": "^2.0.3",
-    "@virtual-live-lab/tsconfig": "^2.1.1",
+    "@virtual-live-lab/eslint-config": "^2.0.4",
+    "@virtual-live-lab/tsconfig": "^2.1.2",
     "eslint": "^8.57.0",
     "ts-results": "^3.3.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.5.2",
     "wrangler": "^3.61.0"
   }
 }

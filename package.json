@@ -9,12 +9,12 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@virtual-live-lab/eslint-config": "^2.0.3",
-    "@virtual-live-lab/prettier-config": "^2.0.2",
-    "@virtual-live-lab/tsconfig": "^2.1.1",
+    "@virtual-live-lab/eslint-config": "^2.0.4",
+    "@virtual-live-lab/prettier-config": "^2.0.3",
+    "@virtual-live-lab/tsconfig": "^2.1.2",
     "prettier": "^3.3.2",
     "turbo": "^2.0.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "packageManager": "pnpm@9.4.0",
   "engines": {
