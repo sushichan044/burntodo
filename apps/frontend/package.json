@@ -15,17 +15,17 @@
   "dependencies": {
     "@conform-to/react": "^1.1.5",
     "@conform-to/zod": "^1.1.5",
-    "@mantine/core": "^7.10.2",
-    "@mantine/hooks": "^7.10.2",
-    "@mantine/nprogress": "^7.10.2",
-    "@remix-run/cloudflare": "^2.9.2",
-    "@remix-run/cloudflare-pages": "^2.9.2",
-    "@remix-run/react": "^2.9.2",
+    "@mantine/core": "^7.11.0",
+    "@mantine/hooks": "^7.11.0",
+    "@mantine/nprogress": "^7.11.0",
+    "@remix-run/cloudflare": "^2.10.0",
+    "@remix-run/cloudflare-pages": "^2.10.0",
+    "@remix-run/react": "^2.10.0",
     "@repo/api": "workspace:^",
     "@repo/module": "workspace:^",
     "clsx": "^2.1.1",
     "isbot": "^4.4.0",
-    "miniflare": "^3.20240610.1",
+    "miniflare": "^3.20240620.0",
     "react": "19.0.0-rc-915b914b3a-20240515",
     "react-dom": "19.0.0-rc-915b914b3a-20240515",
     "react-icons": "^5.2.1",
@@ -41,7 +41,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240620.0",
     "@double-great/stylelint-a11y": "^3.0.2",
-    "@remix-run/dev": "^2.9.2",
+    "@remix-run/dev": "^2.10.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@virtual-live-lab/eslint-config": "^2.0.4",
@@ -68,6 +68,6 @@
     "typescript": "^5.5.2",
     "vite": "^5.3.1",
     "vite-tsconfig-paths": "^4.3.2",
-    "wrangler": "^3.61.0"
+    "wrangler": "^3.62.0"
   }
 }
