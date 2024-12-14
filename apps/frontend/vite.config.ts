@@ -6,6 +6,13 @@ import { defineConfig } from "vite";
 import babel from "vite-plugin-babel";
 import tsconfigPaths from "vite-tsconfig-paths";
 
+declare module "@remix-run/cloudflare" {
+  // or cloudflare, deno, etc.
+  interface Future {
+    v3_singleFetch: true;
+  }
+}
+
 const ReactCompilerConfig = {};
 
 export default defineConfig({

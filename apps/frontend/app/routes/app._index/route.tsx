@@ -40,7 +40,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export default function Route() {
-  const { data: loaderData } = useLoaderData<typeof loader>();
+  const loaderData = useLoaderData<typeof loader>();
 
   return (
     <div className="space-y-8 py-8 md:space-y-12">
