@@ -89,33 +89,6 @@ export async function action({ context, request }: ActionFunctionArgs) {
   const api = getApi({ context });
 
   switch (request.method) {
-    case "POST": {
-      const formData = await request.formData();
-      const submission = parseWithZod(formData, { schema: NewTodoSchema });
-      if (submission.status !== "success") {
-        return submission.reply();
-      }
-
-      const result = await api.todo
-        .$post({ json: { ...submission.value, userName } })
-        .then(async (res) => await res.json())
-        .catch((error) => {
-          console.error(error);
-          return { data: null, error: String(error) };
-        });
-
-      if (result.error != null) {
-        return submission.reply({
-          formErrors: [result.error],
-        });
-      }
-      if (result.data == null) {
-        return submission.reply({
-          formErrors: ["Failed to Create Todo"],
-        });
-      }
-      break;
-    }
     case "DELETE": {
       const formData = await request.formData();
       const submission = parseWithZod(formData, { schema: DeleteTodoSchema });
@@ -145,6 +118,33 @@ export async function action({ context, request }: ActionFunctionArgs) {
       }
 
       return submission.reply({ formErrors: ["Success"] });
+    }
+    case "POST": {
+      const formData = await request.formData();
+      const submission = parseWithZod(formData, { schema: NewTodoSchema });
+      if (submission.status !== "success") {
+        return submission.reply();
+      }
+
+      const result = await api.todo
+        .$post({ json: { ...submission.value, userName } })
+        .then(async (res) => await res.json())
+        .catch((error) => {
+          console.error(error);
+          return { data: null, error: String(error) };
+        });
+
+      if (result.error != null) {
+        return submission.reply({
+          formErrors: [result.error],
+        });
+      }
+      if (result.data == null) {
+        return submission.reply({
+          formErrors: ["Failed to Create Todo"],
+        });
+      }
+      break;
     }
   }
 

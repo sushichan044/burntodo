@@ -2,7 +2,7 @@ import type { VariantProps } from "tailwind-variants";
 
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
-import { Button, Container, Divider, TextInput, Textarea } from "@mantine/core";
+import { Button, Container, Divider, Textarea, TextInput } from "@mantine/core";
 import { getHotkeyHandler } from "@mantine/hooks";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { useRef } from "react";

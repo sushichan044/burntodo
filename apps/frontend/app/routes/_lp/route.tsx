@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
 
-import { Outlet, json, useLoaderData } from "@remix-run/react";
+import { json, Outlet, useLoaderData } from "@remix-run/react";
 
 import Footer from "../../../components/layout/Footer";
 import Header from "../../../components/layout/Header";

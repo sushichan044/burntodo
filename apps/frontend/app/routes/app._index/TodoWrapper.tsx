@@ -3,7 +3,7 @@ import type { TB_TodoSelect } from "@repo/module/zod";
 import Todo from "./Todo";
 
 type TodoWrapperProps = {
-  todos: Pick<TB_TodoSelect, "description" | "id" | "title">[];
+  todos: Array<Pick<TB_TodoSelect, "description" | "id" | "title">>;
 };
 
 const TodoWrapper: React.FC<TodoWrapperProps> = ({ todos }) => {

@@ -6,9 +6,9 @@ import { tv } from "tailwind-variants";
 
 import { cn } from "../../../lib/cn";
 import { isInternalLink } from "./util";
-type LinkProps = {
+type LinkProps = RemixLinkProps & {
   variants?: VariantProps<typeof linkStyles> | undefined;
-} & RemixLinkProps;
+};
 
 const linkStyles = tv({
   base: "transition duration-200 ease-in-out",

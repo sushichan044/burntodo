@@ -11,7 +11,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
   const api = getApi({ context });
   return await api.hello
     .$get()
-    .then((res) => res.json())
+    .then(async (res) => res.json())
     .catch((err) => {
       console.error(err);
       return { error: "Failed to fetch data", message: null };
