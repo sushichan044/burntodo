@@ -20,7 +20,7 @@ type CreateUserInput = z.infer<typeof CreateUserSchema>;
 const GetUserSchema = TB_userInsertSchema.pick({ name: true });
 type GetUserInput = z.infer<typeof GetUserSchema>;
 type GetUserReturn = Omit<TB_UserSelect, "password">;
-type GetUserWithTodoReturn = { todos: TB_TodoSelect[] } & GetUserReturn;
+type GetUserWithTodoReturn = GetUserReturn & { todos: TB_TodoSelect[] };
 
 const VerifyUserSchema = TB_userSelectSchema.pick({
   name: true,
@@ -94,9 +94,10 @@ class UserUseCase extends BaseUseCase {
     }
   }
 
-  async getManyUsers(
-    options?: { limit: number; offset: number } | undefined,
-  ): Promise<Result<GetUserReturn[], string>> {
+  async getManyUsers(options?: {
+    limit: number;
+    offset: number;
+  }): Promise<Result<GetUserReturn[], string>> {
     options ??= { limit: 100, offset: 0 };
     try {
       const users = await this.db.query.TB_user.findMany({

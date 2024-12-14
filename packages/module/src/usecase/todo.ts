@@ -83,9 +83,10 @@ class TodoUseCase extends BaseUseCase {
     }
   }
 
-  async getAllTodo(
-    options?: { limit: number; offset: number } | undefined,
-  ): Promise<Result<TB_TodoSelect[], string>> {
+  async getAllTodo(options?: {
+    limit: number;
+    offset: number;
+  }): Promise<Result<TB_TodoSelect[], string>> {
     options ??= { limit: 100, offset: 0 };
 
     try {

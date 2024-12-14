@@ -1,8 +1,8 @@
 export {
   CreateTodoSchema,
   DeleteTodoSchema,
-  GetTodoSchema,
   GetTodosByUserNameSchema,
+  GetTodoSchema,
 } from "./todo";
 export {
   CreateUserSchema,
