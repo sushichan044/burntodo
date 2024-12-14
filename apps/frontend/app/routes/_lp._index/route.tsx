@@ -29,7 +29,7 @@ export default function Index() {
           <span className="text-blue-600">Remix</span>.
         </p>
         <p className="mt-4 text-lg font-semibold text-zinc-500">
-          Backend and Frontend is connected via Cloudflare's{" "}
+          Backend and Frontend is connected via Cloudflare&apos;s{" "}
           <Link to="https://developers.cloudflare.com/workers/runtime-apis/bindings/service-bindings">
             Service bindings!
           </Link>

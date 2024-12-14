@@ -35,7 +35,7 @@ export default function AppLayout() {
       <AuthFooter>
         {pathname === "/login" ? (
           <p className="font-semibold">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link to="/signup" variants={{ hocus: "underline" }}>
               Sign up
             </Link>
