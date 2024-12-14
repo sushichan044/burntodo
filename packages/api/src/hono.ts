@@ -25,7 +25,13 @@ const honoFactory = createFactory<HonoConfig>({
       c.set("usecase", usecase);
       await next();
     });
-    app.use(cors(), csrf(), secureHeaders(), trimTrailingSlash(), poweredBy());
+    app.use(
+      cors(),
+      csrf({ origin: ["https://burntodo.pages.dev"] }),
+      secureHeaders(),
+      trimTrailingSlash(),
+      poweredBy(),
+    );
   },
 });
 

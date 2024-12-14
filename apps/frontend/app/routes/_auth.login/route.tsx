@@ -126,7 +126,14 @@ export async function action({ context, request }: ActionFunctionArgs) {
   }
 
   const result = await api.auth.verify
-    .$post({ json: submission.value })
+    .$post(
+      { json: submission.value },
+      {
+        headers: {
+          Origin: "https://burntodo.pages.dev",
+        },
+      },
+    )
     .then(async (res) => await res.json())
     .catch((error) => {
       console.error(error);

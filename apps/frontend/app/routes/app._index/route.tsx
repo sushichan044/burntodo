@@ -97,9 +97,16 @@ export async function action({ context, request }: ActionFunctionArgs) {
       }
 
       const result = await api.todo[":id"]
-        .$delete({
-          param: { id: submission.value.id },
-        })
+        .$delete(
+          {
+            param: { id: submission.value.id },
+          },
+          {
+            headers: {
+              Origin: "https://burntodo.pages.dev",
+            },
+          },
+        )
         .then(async (res) => await res.json())
         .catch((error) => {
           console.error(error);
@@ -127,7 +134,14 @@ export async function action({ context, request }: ActionFunctionArgs) {
       }
 
       const result = await api.todo
-        .$post({ json: { ...submission.value, userName } })
+        .$post(
+          { json: { ...submission.value, userName } },
+          {
+            headers: {
+              Origin: "https://burntodo.pages.dev",
+            },
+          },
+        )
         .then(async (res) => await res.json())
         .catch((error) => {
           console.error(error);
