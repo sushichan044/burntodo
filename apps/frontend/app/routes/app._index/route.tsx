@@ -4,7 +4,7 @@ import type {
 } from "@remix-run/cloudflare";
 
 import { parseWithZod } from "@conform-to/zod";
-import { json, redirect } from "@remix-run/cloudflare";
+import { data, redirect } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
@@ -18,7 +18,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
   const name = session.get("userName");
-  if (!(name ?? "")) {
+  if (name == null || name === "") {
     // Redirect to the home page if they are already signed in.
     return redirect("/login");
   }
@@ -32,7 +32,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       return { data: null, error: String(error) };
     });
 
-  return json(res, {
+  return data(res, {
     headers: {
       "Set-Cookie": await helper.commitSession(session),
     },
@@ -40,7 +40,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export default function Route() {
-  const loaderData = useLoaderData<typeof loader>();
+  const { data: loaderData } = useLoaderData<typeof loader>();
 
   return (
     <div className="space-y-8 py-8 md:space-y-12">

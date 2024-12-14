@@ -1,7 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
 
 import { Container } from "@mantine/core";
-import { json } from "@remix-run/cloudflare";
 import { Outlet, useLoaderData } from "@remix-run/react";
 
 import Footer from "../../../components/layout/Footer";
@@ -23,9 +22,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   const session = await helper.getSession(request.headers.get("Cookie"));
   if (session.has("userName")) {
     // Redirect to the home page if they are already signed in.
-    return json({ loggedIn: true });
+    return { loggedIn: true };
   }
-  return json({ loggedIn: false });
+  return { loggedIn: false };
 }
 
 export default function AppLayout() {

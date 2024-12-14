@@ -8,8 +8,8 @@ import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
 import {
+  data,
   Form,
-  json,
   redirect,
   useActionData,
   useNavigation,
@@ -36,7 +36,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     return redirect("/app");
   }
 
-  return json(
+  return data(
     {},
     {
       headers: {

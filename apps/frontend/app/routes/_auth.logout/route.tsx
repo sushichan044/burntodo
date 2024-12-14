@@ -5,7 +5,7 @@ import type {
 } from "@remix-run/cloudflare";
 
 import { Button } from "@mantine/core";
-import { json, redirect, useFetcher } from "@remix-run/react";
+import { data, redirect, useFetcher } from "@remix-run/react";
 import { FiLogOut } from "react-icons/fi";
 
 import { getSessionCookieHelper } from "../../../lib/session";
@@ -26,7 +26,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     return redirect("/app");
   }
 
-  return json(
+  return data(
     {},
     {
       headers: {
