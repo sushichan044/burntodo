@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [
     // 改行対策
     remixCloudflareDevProxy(),
-    remix({ future: { v3_singleFetch: true } }),
+    remix({ future: { v3_fetcherPersist: true, v3_singleFetch: true } }),
     babel({
       babelConfig: {
         plugins: [["babel-plugin-react-compiler", ReactCompilerConfig]],
