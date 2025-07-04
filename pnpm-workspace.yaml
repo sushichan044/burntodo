@@ -1,3 +1,10 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'
+  - es5-ext
+  - esbuild
+  - sharp
+  - workerd

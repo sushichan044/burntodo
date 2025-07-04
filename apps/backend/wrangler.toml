@@ -1,6 +1,6 @@
 name = "burntodo-backend"
 main = "src/index.ts"
-compatibility_date = "2024-04-03"
+compatibility_date = "2025-07-04"
 compatibility_flags = ["nodejs_compat"]
 upload_source_maps = true
 
