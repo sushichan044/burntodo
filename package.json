@@ -9,15 +9,13 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "@virtual-live-lab/eslint-config": "^2.2.14",
-    "@virtual-live-lab/prettier-config": "^2.0.13",
-    "@virtual-live-lab/tsconfig": "^2.1.14",
-    "prettier": "^3.4.2",
-    "turbo": "^2.3.3",
-    "typescript": "^5.7.2"
+    "@virtual-live-lab/eslint-config": "catalog:eslint",
+    "@virtual-live-lab/prettier-config": "catalog:prettier",
+    "@virtual-live-lab/tsconfig": "catalog:typescript",
+    "eslint": "catalog:eslint",
+    "prettier": "catalog:prettier",
+    "turbo": "2.5.4",
+    "typescript": "catalog:typescript"
   },
-  "packageManager": "pnpm@9.15.0",
-  "engines": {
-    "node": ">=20 <21"
-  }
+  "packageManager": "pnpm@10.12.4"
 }

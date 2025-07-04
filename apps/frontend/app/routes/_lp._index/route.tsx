@@ -1,4 +1,4 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import type { Route } from "./+types/route";
 
 import { Button, Container } from "@mantine/core";
 import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import { FaBolt, FaFigma, FaGithub } from "react-icons/fa6";
 import Link from "../../../components/element/Link";
 import { REPO_URL } from "../../const";
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "BurnTodo" },
     {

@@ -9,16 +9,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.4.2",
+    "@hono/zod-validator": "0.7.0",
     "@repo/module": "workspace:^",
-    "hono": "^4.6.13",
-    "zod": "^3.24.1"
+    "hono": "4.8.3",
+    "zod": "3.25.72"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241205.0",
-    "@virtual-live-lab/eslint-config": "^2.2.14",
-    "@virtual-live-lab/tsconfig": "^2.1.14",
-    "eslint": "^9.17.0",
-    "typescript": "^5.7.2"
+    "@virtual-live-lab/eslint-config": "catalog:eslint",
+    "@virtual-live-lab/prettier-config": "catalog:prettier",
+    "@virtual-live-lab/tsconfig": "catalog:typescript",
+    "eslint": "catalog:eslint",
+    "prettier": "catalog:prettier",
+    "typescript": "catalog:typescript"
   }
 }

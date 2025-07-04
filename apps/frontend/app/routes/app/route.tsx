@@ -1,13 +1,13 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/cloudflare";
-
 import { Container } from "@mantine/core";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "react-router";
+
+import type { Route } from "./+types/route";
 
 import Footer from "../../../components/layout/Footer";
 import Header from "../../../components/layout/Header";
 import { getSessionCookieHelper } from "../../../lib/session";
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "BurnTodo" },
     {
@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
+export async function loader({ context, request }: Route.LoaderArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
   if (session.has("userName")) {

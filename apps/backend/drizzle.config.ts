@@ -2,10 +2,12 @@ import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   dbCredentials: {
-    dbName: "remix-hono-turbo-example",
-    wranglerConfigPath: "./wrangler.toml",
+    accountId: "00000000000000000000000000000000",
+    databaseId: "remix-hono-turbo-example",
+    token: "00000000000000000000000000000000",
   },
-  driver: "d1",
+  dialect: "sqlite",
+  driver: "d1-http",
   out: "./migrations",
   schema: "../../packages/module/src/schema.ts",
   strict: true,

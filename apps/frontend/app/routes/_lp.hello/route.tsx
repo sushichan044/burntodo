@@ -1,11 +1,11 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
-
 import { Container } from "@mantine/core";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "react-router";
+
+import type { Route } from "./+types/route";
 
 import { getApi } from "../../../lib/api";
 
-export async function loader({ context }: LoaderFunctionArgs) {
+export async function loader({ context }: Route.LoaderArgs) {
   const api = getApi({ context });
   return await api.hello
     .$get()

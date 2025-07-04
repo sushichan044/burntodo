@@ -10,15 +10,16 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.6.13"
+    "hono": "4.8.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241205.0",
-    "@virtual-live-lab/eslint-config": "^2.2.14",
-    "@virtual-live-lab/tsconfig": "^2.1.14",
-    "drizzle-kit": "^0.20.18",
-    "eslint": "^9.17.0",
-    "typescript": "^5.7.2",
-    "wrangler": "^3.95.0"
+    "@virtual-live-lab/eslint-config": "catalog:eslint",
+    "@virtual-live-lab/prettier-config": "catalog:prettier",
+    "@virtual-live-lab/tsconfig": "catalog:typescript",
+    "drizzle-kit": "0.31.4",
+    "eslint": "catalog:eslint",
+    "prettier": "catalog:prettier",
+    "typescript": "catalog:typescript",
+    "wrangler": "catalog:cloudflare"
   }
 }

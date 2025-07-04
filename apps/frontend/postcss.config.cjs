@@ -11,6 +11,5 @@ module.exports = {
         "mantine-breakpoint-xs": "36em",
       },
     },
-    "tailwindcss": {},
   },
 };

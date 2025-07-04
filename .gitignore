@@ -27,6 +27,9 @@ out/
 build
 dist
 
+# React Router generated types
+.react-router/
+
 
 # Debug
 npm-debug.log*
