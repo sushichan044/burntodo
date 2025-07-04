@@ -4,7 +4,7 @@
     "@virtual-live-lab/tsconfig/vite"
   ],
   "compilerOptions": {
-    "types": ["vite/client"],
+    "types": ["vite/client", "./worker-configuration.d.ts"],
     "rootDirs": [".", "./.react-router/types"]
   },
   "include": [
@@ -14,7 +14,6 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx",
-    "worker-configuration.d.ts"
+    "**/.client/**/*.tsx"
   ]
 }
