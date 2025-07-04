@@ -1,10 +1,7 @@
 /* stylelint-disable-next-line import-notation */
 @import "tailwindcss";
 
-@plugin 'tailwind-scrollbar' {
-  nocompatible: true;
-  preferredstrategy: "pseudoelements";
-}
+@plugin 'tailwind-scrollbar';
 
 @layer base {
   *,

@@ -20,7 +20,7 @@ export const meta: Route.MetaFunction = ({ matches }) => {
   const parentMeta = matches
     .flatMap((match) => match?.meta ?? [])
     .filter((meta) => !("title" in meta));
-  return [...parentMeta, { title: "Logout | BurnTodo" }];
+  return [...parentMeta, { title: "Sign up | BurnTodo" }];
 };
 
 export async function loader({ context, request }: Route.LoaderArgs) {
