@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@repo/api": "workspace:^",
-    "hono": "^4.6.13"
+    "hono": "4.8.3"
   },
   "devDependencies": {
     "@virtual-live-lab/eslint-config": "2.2.22",
