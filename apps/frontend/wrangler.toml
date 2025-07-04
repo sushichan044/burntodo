@@ -1,6 +1,6 @@
 name = "remix-hono-turbo-frontend"
 pages_build_output_dir = "./build/client"
-compatibility_date = "2024-04-16"
+compatibility_date = "2025-07-04"
 compatibility_flags = [ "nodejs_compat" ]
 services = [
     { binding = "BACKEND", service = "burntodo-backend" },
