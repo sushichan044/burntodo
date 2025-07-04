@@ -2,13 +2,7 @@ import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
 import { FiLogIn } from "react-icons/fi";
-import {
-  data,
-  Form,
-  redirect,
-  useActionData,
-  useNavigation,
-} from "react-router";
+import { data, Form, redirect, useNavigation } from "react-router";
 
 import type { Route } from "./+types/route";
 
@@ -41,12 +35,11 @@ export async function loader({ context, request }: Route.LoaderArgs) {
   );
 }
 
-export default function Route() {
-  const lastResult = useActionData<typeof action>();
+export default function Route({ actionData }: Route.ComponentProps) {
   const navigation = useNavigation();
   const [form, fields] = useForm({
     constraint: getZodConstraint(signUpSchema),
-    lastResult,
+    lastResult: actionData,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: signInSchema });
     },

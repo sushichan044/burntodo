@@ -1,4 +1,4 @@
-import tailwind from "@virtual-live-lab/eslint-config/addons/tailwind";
+// import tailwind from "@virtual-live-lab/eslint-config/addons/tailwind";
 import react from "@virtual-live-lab/eslint-config/presets/react";
 import reactCompiler from "eslint-plugin-react-compiler";
 import reactRefresh from "eslint-plugin-react-refresh";
@@ -9,7 +9,7 @@ export default tseslint.config(
     ignores: [".react-router/**/*"],
   },
   ...react,
-  ...tailwind,
+  // ...tailwind,
   {
     languageOptions: {
       parser: tseslint.parser,

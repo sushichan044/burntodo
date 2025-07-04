@@ -1,9 +1,9 @@
-import type { Route } from "./+types/route";
-
 import { parseWithZod } from "@conform-to/zod";
+import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 import { data, redirect } from "react-router";
 import { useLoaderData } from "react-router";
-import { FiAlertCircle, FiCheckCircle } from "react-icons/fi";
+
+import type { Route } from "./+types/route";
 
 import { getApi } from "../../../lib/api";
 import { getSessionCookieHelper } from "../../../lib/session";

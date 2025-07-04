@@ -1,8 +1,7 @@
-import type { Route } from "./+types/route";
-
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
+import { FiLogIn } from "react-icons/fi";
 import {
   data,
   Form,
@@ -10,7 +9,8 @@ import {
   useActionData,
   useNavigation,
 } from "react-router";
-import { FiLogIn } from "react-icons/fi";
+
+import type { Route } from "./+types/route";
 
 import { getApi } from "../../../lib/api";
 import { getSessionCookieHelper } from "../../../lib/session";

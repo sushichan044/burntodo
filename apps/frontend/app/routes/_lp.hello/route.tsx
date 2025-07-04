@@ -1,7 +1,7 @@
-import type { Route } from "./+types/route";
-
 import { Container } from "@mantine/core";
 import { useLoaderData } from "react-router";
+
+import type { Route } from "./+types/route";
 
 import { getApi } from "../../../lib/api";
 

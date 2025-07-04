@@ -1,8 +1,8 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  appDirectory: "app",
-  buildDirectory: "build",
-  serverBuildFile: "index.js",
+  future: {
+    unstable_viteEnvironmentApi: true,
+  },
   ssr: true,
 } satisfies Config;

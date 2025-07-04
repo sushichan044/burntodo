@@ -1,7 +1,10 @@
 {
-  "extends": "@virtual-live-lab/tsconfig/remix",
+  "extends": [
+    "@virtual-live-lab/tsconfig/react",
+    "@virtual-live-lab/tsconfig/vite"
+  ],
   "compilerOptions": {
-    "types": ["react-router", "vite/client"],
+    "types": ["vite/client"],
     "rootDirs": [".", "./.react-router/types"]
   },
   "include": [
@@ -11,6 +14,7 @@
     "**/.server/**/*.ts",
     "**/.server/**/*.tsx",
     "**/.client/**/*.ts",
-    "**/.client/**/*.tsx"
+    "**/.client/**/*.tsx",
+    "worker-configuration.d.ts"
   ]
 }

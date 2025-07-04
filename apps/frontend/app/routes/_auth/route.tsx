@@ -1,8 +1,8 @@
-import type { Route } from "./+types/route";
-
 import { Container } from "@mantine/core";
 import { Outlet } from "react-router";
 import { useLocation } from "react-router";
+
+import type { Route } from "./+types/route";
 
 import Link from "../../../components/element/Link";
 import Header from "../../../components/layout/Header";
