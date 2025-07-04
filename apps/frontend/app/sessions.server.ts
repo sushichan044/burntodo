@@ -1,7 +1,7 @@
 // app/sessions.ts
-import type { SessionStorage } from "@remix-run/cloudflare";
+import type { SessionStorage } from "react-router";
 
-import { createCookieSessionStorage as _createCookieSessionStorage } from "@remix-run/cloudflare"; // or cloudflare/deno
+import { createCookieSessionStorage as _createCookieSessionStorage } from "react-router";
 
 type SessionData = {
   userName: string;

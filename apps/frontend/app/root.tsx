@@ -2,6 +2,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { NavigationProgress, nprogress } from "@mantine/nprogress";
 import "@mantine/nprogress/styles.css";
+import { useLayoutEffect } from "react";
 import {
   Links,
   Meta,
@@ -9,8 +10,7 @@ import {
   Scripts,
   ScrollRestoration,
   useNavigation,
-} from "@remix-run/react";
-import { useLayoutEffect } from "react";
+} from "react-router";
 
 import "./style.css";
 

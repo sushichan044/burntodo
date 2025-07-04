@@ -1,14 +1,14 @@
-import type { MetaFunction } from "@remix-run/cloudflare";
+import type { Route } from "./+types/route";
 
 import { Container } from "@mantine/core";
-import { Outlet } from "@remix-run/react";
-import { useLocation } from "@remix-run/react";
+import { Outlet } from "react-router";
+import { useLocation } from "react-router";
 
 import Link from "../../../components/element/Link";
 import Header from "../../../components/layout/Header";
 import AuthFooter from "./AuthFooter";
 
-export const meta: MetaFunction = () => {
+export const meta: Route.MetaFunction = () => {
   return [
     { title: "BurnTodo" },
     {

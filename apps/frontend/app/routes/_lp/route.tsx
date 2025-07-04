@@ -1,12 +1,12 @@
-import type { LoaderFunctionArgs } from "@remix-run/cloudflare";
+import type { Route } from "./+types/route";
 
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "react-router";
 
 import Footer from "../../../components/layout/Footer";
 import Header from "../../../components/layout/Header";
 import { getSessionCookieHelper } from "../../../lib/session";
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
+export async function loader({ context, request }: Route.LoaderArgs) {
   const helper = getSessionCookieHelper(context);
 
   const session = await helper.getSession(request.headers.get("Cookie"));

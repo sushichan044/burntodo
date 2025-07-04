@@ -1,33 +1,29 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/cloudflare";
-
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { Alert, Button, TextInput } from "@mantine/core";
+import { FiLogIn } from "react-icons/fi";
 import {
   data,
   Form,
   redirect,
   useActionData,
   useNavigation,
-} from "@remix-run/react";
-import { FiLogIn } from "react-icons/fi";
+} from "react-router";
+
+import type { Route } from "./+types/route";
 
 import { getApi } from "../../../lib/api";
 import { getSessionCookieHelper } from "../../../lib/session";
 import { signInSchema, signUpSchema } from "../_auth/form";
 
-export const meta: MetaFunction = ({ matches }) => {
+export const meta: Route.MetaFunction = ({ matches }) => {
   const parentMeta = matches
-    .flatMap((match) => match.meta ?? [])
+    .flatMap((match) => match?.meta ?? [])
     .filter((meta) => !("title" in meta));
   return [...parentMeta, { title: "Login | BurnTodo" }];
 };
 
-export async function loader({ context, request }: LoaderFunctionArgs) {
+export async function loader({ context, request }: Route.LoaderArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
   if (session.has("userName")) {
@@ -115,7 +111,7 @@ export default function Route() {
   );
 }
 
-export async function action({ context, request }: ActionFunctionArgs) {
+export async function action({ context, request }: Route.ActionArgs) {
   const helper = getSessionCookieHelper(context);
   const session = await helper.getSession(request.headers.get("Cookie"));
   const api = getApi({ context });

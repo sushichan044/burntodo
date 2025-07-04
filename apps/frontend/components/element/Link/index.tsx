@@ -1,12 +1,12 @@
-import type { RemixLinkProps } from "@remix-run/react/dist/components";
+import type { LinkProps as ReactRouterLinkProps } from "react-router";
 import type { VariantProps } from "tailwind-variants";
 
-import { Link as RemixLink } from "@remix-run/react";
+import { Link as ReactRouterLink } from "react-router";
 import { tv } from "tailwind-variants";
 
 import { cn } from "../../../lib/cn";
 import { isInternalLink } from "./util";
-type LinkProps = RemixLinkProps & {
+type LinkProps = ReactRouterLinkProps & {
   variants?: VariantProps<typeof linkStyles> | undefined;
 };
 
@@ -60,7 +60,7 @@ const Link: React.FC<LinkProps> = ({
   })();
 
   return (
-    <RemixLink
+    <ReactRouterLink
       className={cn(linkStyles(variants), className)}
       rel={rel}
       target={target}
@@ -68,7 +68,7 @@ const Link: React.FC<LinkProps> = ({
       {...rest}
     >
       {children}
-    </RemixLink>
+    </ReactRouterLink>
   );
 };
 
